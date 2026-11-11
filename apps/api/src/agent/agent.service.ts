@@ -212,10 +212,25 @@ export class AgentService {
 
   async submitCancellation(
     orderId: string,
-    body: { previewId: string; confirmation: boolean; reasonCode?: string }
+    body: { previewId: string; confirmation: boolean; reasonCode?: string },
+    idempotencyKey?: string
   ) {
     if (!body.confirmation) {
       throw new BadRequestException('Confirmation boolean must be explicitly true');
+    }
+
+    const key = idempotencyKey || `agentforce-cancellation-${body.previewId}`;
+
+    // Concurrency / Idempotency Check: Guard against duplicate refund submissions
+    const existing = await this.prisma.idempotencyRecord.findUnique({
+      where: { key }
+    });
+    if (existing) {
+      try {
+        return JSON.parse(existing.responseBody);
+      } catch {
+        return { success: true, message: 'Cancellation already processed' };
+      }
     }
 
     const preview = this.previews.get(body.previewId);
@@ -238,13 +253,30 @@ export class AgentService {
     );
 
     this.previews.delete(body.previewId);
-    return {
+
+    const responsePayload = {
       success: true,
       orderId: preview.orderId,
       status: 'CANCELLED',
       refundAmount: preview.refundAmount,
       message: `Order successfully cancelled with ${preview.refundPercentage}% refund ($${preview.refundAmount.toFixed(2)})`
     };
+
+    // Store in IdempotencyRecord table to prevent duplicate refunds
+    try {
+      await this.prisma.idempotencyRecord.create({
+        data: {
+          key,
+          scope: 'AGENTFORCE_CANCELLATION',
+          responseBody: JSON.stringify(responsePayload),
+          statusCode: 202
+        }
+      });
+    } catch {
+      // If concurrent insert occurred, response is still valid
+    }
+
+    return responsePayload;
   }
 
   async createSupportCase(body: {

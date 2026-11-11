@@ -35,10 +35,26 @@ async function bootstrap() {
     .setDescription('Full REST and Event API contracts powering Mylapore Express culinary commerce, Agentforce AI, Stripe, and Salesforce')
     .setVersion('2.0')
     .addBearerAuth()
+    .addApiKey(
+      {
+        type: 'apiKey',
+        name: 'x-agentforce-api-key',
+        in: 'header',
+        description: 'Salesforce Agentforce Named Credential Secret Key'
+      },
+      'agentforce-key'
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
+
+  // Serve raw OpenAPI JSON schema directly for Salesforce External Services schema import
+  const httpAdapter = app.getHttpAdapter();
+  httpAdapter.get('/api/docs-json', (req: any, res: any) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(document);
+  });
 
   const port = process.env.PORT || 4000;
   await app.listen(port, '0.0.0.0');
