@@ -2,6 +2,10 @@
 
 This repository contains the architecture, specifications, backend services, frontend applications, and Salesforce Agentforce AI agents powering the **Mylapore Express Enterprise Restaurant E-commerce Platform**.
 
+> 📖 **Comprehensive Developer & Implementation Guide**:  
+> For the complete, end-to-end architectural documentation, REST API contracts, database schema, and step-by-step Salesforce Agentforce setup, refer to:  
+> [`SALESFORCE_AGENTFORCE_DEVELOPER_GUIDE.md`](./SALESFORCE_AGENTFORCE_DEVELOPER_GUIDE.md)
+
 ## Autonomous AI Agent Network
 The platform integrates 5 purpose-built AI agents:
 
@@ -12,6 +16,7 @@ The platform integrates 5 purpose-built AI agents:
 5. **Restaurant Business Insights Agent**: Delivers real-time executive analytics, dish re-order rates, peak ordering windows, and customer retention metrics.
 
 ## Architectural Boundary & Security Guardrails
-- **Zero Hallucination Actions**: All transactional operations (rescheduling, cancellations, refunds, inventory reservations) require cryptographic execution through authenticated backend REST APIs (`/api/v1/orders/:id/reschedule`, `/api/v1/orders/:id/cancel`).
+- **Zero Hallucination Actions**: All transactional operations (rescheduling, cancellations, refunds, inventory reservations) require cryptographic execution through authenticated backend REST APIs (`/api/v1/orders/:id/reschedule`, `/api/v1/orders/:id/cancel`, `/api/v1/agent/*`).
 - **No Direct DB Access**: AI agents are grounded strictly via structured OpenAPI tools and read-only schema contexts.
 - **Audit Logging**: Every agent-invoked tool execution is captured in the backend `AuditLog` and `IntegrationEvent` tables with timestamp, agent persona, and caller user ID.
+
