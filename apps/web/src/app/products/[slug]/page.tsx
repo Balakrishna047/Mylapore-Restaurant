@@ -118,12 +118,12 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left Column: Image & Grandmother Heritage Quote */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="relative rounded-2xl overflow-hidden border border-[#E7DFD5] bg-white shadow-sm aspect-square">
+            <div className="relative rounded-2xl overflow-hidden border border-[#E7DFD5] bg-[#FAF4E8] shadow-sm aspect-[3/2]">
               <img
                 src={dish.image}
                 alt={dish.name}
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/images/dishes/potato-kara-kari.jpg';
+                  (e.target as HTMLImageElement).src = '/images/dishes/potato-kara-kari.webp';
                 }}
                 className="w-full h-full object-cover"
               />

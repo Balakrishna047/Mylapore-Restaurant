@@ -126,10 +126,10 @@ export default function CartDrawer() {
                 >
                   <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#FAF4E8] shrink-0 border border-[#E7DFD5]">
                     <img
-                      src={item.image || '/images/dishes/potato-kara-kari.jpg'}
+                      src={item.image || '/images/dishes/potato-kara-kari.webp'}
                       alt={item.name}
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/images/dishes/potato-kara-kari.jpg';
+                        (e.target as HTMLImageElement).src = '/images/dishes/potato-kara-kari.webp';
                       }}
                       className="w-full h-full object-cover"
                     />

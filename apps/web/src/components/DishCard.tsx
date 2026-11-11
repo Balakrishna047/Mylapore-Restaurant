@@ -27,7 +27,7 @@ interface DishCardProps {
 
 export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   const { addItem, cart, updateQuantity } = useCart();
-  const [imgSrc, setImgSrc] = useState(dish.image || '/images/dishes/potato-kara-kari.jpg');
+  const [imgSrc, setImgSrc] = useState(dish.image || '/images/dishes/potato-kara-kari.webp');
   const [isAdding, setIsAdding] = useState(false);
 
   const cartItem = cart?.items?.find((i: any) => i.menuItemId === dish.id);
@@ -86,12 +86,12 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   if (viewMode === 'list') {
     return (
       <div className="group bg-white rounded-2xl border border-[#E7DFD5] p-4 hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center">
-        <div className="relative w-full sm:w-44 h-36 shrink-0 rounded-xl overflow-hidden bg-[#FAF4E8]">
+        <div className="relative w-full sm:w-44 aspect-[3/2] sm:h-auto shrink-0 rounded-xl overflow-hidden bg-[#FAF4E8]">
           <Link href={`/products/${dish.slug}`}>
             <img
               src={imgSrc}
               alt={dish.name}
-              onError={() => setImgSrc('/images/dishes/potato-kara-kari.jpg')}
+              onError={() => setImgSrc('/images/dishes/potato-kara-kari.webp')}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </Link>
@@ -163,13 +163,13 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   // Grid View (Default)
   return (
     <div className="group bg-white rounded-2xl border border-[#E7DFD5] overflow-hidden hover:shadow-md transition-all duration-300 flex flex-col h-full">
-      {/* Image Container with Badges */}
-      <div className="relative aspect-4/3 overflow-hidden bg-[#FAF4E8]">
+      {/* Image Container with Badges - 3:2 aspect ratio matching authentic 448x298 photo dimensions */}
+      <div className="relative aspect-[3/2] overflow-hidden bg-[#FAF4E8]">
         <Link href={`/products/${dish.slug}`}>
           <img
             src={imgSrc}
             alt={dish.name}
-            onError={() => setImgSrc('/images/dishes/potato-kara-kari.jpg')}
+            onError={() => setImgSrc('/images/dishes/potato-kara-kari.webp')}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </Link>

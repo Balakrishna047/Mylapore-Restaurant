@@ -75,6 +75,9 @@ export default function CategoryNav({
                     <img
                       src={cat.icon}
                       alt={cat.name}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/dishes/potato-kara-kari.webp';
+                      }}
                       className="w-full h-full object-cover"
                     />
                   </div>
