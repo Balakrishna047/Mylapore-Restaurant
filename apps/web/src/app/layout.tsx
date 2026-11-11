@@ -6,6 +6,7 @@ import { LocationProvider } from '@/context/LocationContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
+import MobileCartBar from '@/components/MobileCartBar';
 import ChatWidget from '@/components/ChatWidget';
 import LocationModal from '@/components/LocationModal';
 
@@ -31,6 +32,7 @@ export default function RootLayout({
               </main>
               <Footer />
               <CartDrawer />
+              <MobileCartBar />
               <ChatWidget />
               <LocationModal />
             </CartProvider>

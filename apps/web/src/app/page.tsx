@@ -53,7 +53,7 @@ function HomeContent() {
   const breakfastTiffin = dishes.filter((d) => d.categoryName === 'Batters' || d.slug.includes('pongal') || d.slug.includes('khichdi') || d.slug.includes('batter'));
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden">
       {/* Category Pills Bar */}
       <CategoryNav
         categories={categories}

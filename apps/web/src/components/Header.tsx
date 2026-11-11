@@ -28,19 +28,19 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 gap-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-11 h-11 rounded-xl bg-transparent flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105">
+            <Link href="/" className="flex items-center gap-2 sm:gap-2.5 shrink min-w-0 group">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-transparent flex items-center justify-center overflow-hidden shrink-0 transition-transform group-hover:scale-105">
                 <img
                   src="/images/logo.png"
                   alt="Mylapore Express Emblem"
                   className="w-full h-full object-contain filter drop-shadow-xs"
                 />
               </div>
-              <div className="flex flex-col">
-                <span className="font-serif font-bold text-xl sm:text-2xl tracking-tight text-[#1C1917] leading-none">
+              <div className="flex flex-col min-w-0">
+                <span className="font-serif font-bold text-lg sm:text-2xl tracking-tight text-[#1C1917] leading-none truncate">
                   Mylapore Express
                 </span>
-                <span className="text-[10px] tracking-widest uppercase font-semibold text-[#C8851A] mt-0.5">
+                <span className="text-[9px] sm:text-[10px] tracking-widest uppercase font-semibold text-[#C8851A] mt-0.5 truncate">
                   Authentic South Indian
                 </span>
               </div>
@@ -118,32 +118,35 @@ export default function Header() {
 
               {/* Auth Buttons */}
               {user ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <Link
                     href="/profile"
-                    className="flex items-center gap-1.5 text-xs font-semibold text-[#1C1917] hover:text-[#C8851A]"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-[#1C1917] hover:text-[#C8851A] p-1.5"
+                    title="Profile"
                   >
-                    <UserIcon className="w-3.5 h-3.5" />
+                    <UserIcon className="w-4 h-4 text-[#1C1917]" />
                     <span className="hidden sm:inline">{user.name.split(' ')[0]}</span>
                   </Link>
                   <button
                     onClick={logout}
-                    className="text-xs text-[#78716C] hover:text-[#D95338] font-medium"
+                    className="text-xs text-[#78716C] hover:text-[#D95338] font-medium hidden sm:inline-block"
                   >
                     Sign Out
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <Link
                     href="/auth/login"
-                    className="text-xs font-semibold text-[#1C1917] hover:text-[#C8851A] transition-colors px-2 py-1"
+                    className="text-xs font-semibold text-[#1C1917] hover:text-[#C8851A] transition-colors px-2 py-1.5 flex items-center gap-1"
+                    title="Sign In"
                   >
-                    Sign In
+                    <UserIcon className="w-4 h-4 sm:hidden text-[#1C1917]" />
+                    <span className="hidden sm:inline">Sign In</span>
                   </Link>
                   <Link
                     href="/auth/register"
-                    className="px-4 py-2 bg-[#D95338] hover:bg-[#C84B31] text-white text-xs font-bold rounded-full shadow-xs transition-colors"
+                    className="hidden sm:inline-block px-4 py-2 bg-[#D95338] hover:bg-[#C84B31] text-white text-xs font-bold rounded-full shadow-xs transition-colors shrink-0"
                   >
                     Create Account
                   </Link>

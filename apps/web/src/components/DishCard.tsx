@@ -269,28 +269,31 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
           </Link>
 
           {currentQty > 0 ? (
-            <div className="flex items-center gap-1.5 bg-[#1C1917] text-white rounded-xl px-2 py-1 shadow-xs">
+            <div className="flex items-center gap-1 bg-[#1C1917] text-white rounded-xl p-0.5 shadow-xs shrink-0">
               <button
                 onClick={handleDecrement}
-                className="p-0.5 hover:text-[#D95338] transition-colors"
+                className="w-7 h-7 flex items-center justify-center rounded-lg hover:text-[#D95338] active:bg-white/10 active:scale-95 transition-all cursor-pointer"
+                aria-label="Decrease quantity"
                 title="Decrease"
               >
-                <Minus className="w-3 h-3" />
+                <Minus className="w-3.5 h-3.5" />
               </button>
-              <span className="text-xs font-bold w-3 text-center">{currentQty}</span>
+              <span className="text-xs font-bold w-5 text-center select-none">{currentQty}</span>
               <button
                 onClick={handleIncrement}
-                className="p-0.5 hover:text-[#D95338] transition-colors"
+                className="w-7 h-7 flex items-center justify-center rounded-lg hover:text-[#D95338] active:bg-white/10 active:scale-95 transition-all cursor-pointer"
+                aria-label="Increase quantity"
                 title="Increase"
               >
-                <Plus className="w-3 h-3" />
+                <Plus className="w-3.5 h-3.5" />
               </button>
             </div>
           ) : (
             <button
               onClick={handleQuickAdd}
               disabled={isAdding}
-              className="px-3 py-1.5 text-xs font-bold text-white bg-[#D95338] hover:bg-[#C84B31] rounded-xl shadow-xs transition-colors shrink-0"
+              className="min-h-[32px] px-3.5 py-1.5 text-xs font-bold text-white bg-[#D95338] hover:bg-[#C84B31] active:bg-[#B33E26] rounded-xl shadow-xs active:scale-95 transition-all shrink-0 cursor-pointer"
+              aria-label={`Add ${dish.name} to cart`}
               title="Add 1 to cart"
             >
               {isAdding ? '...' : '+ Add'}

@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { api } from '@/lib/api';
+import { useCart } from '@/context/CartContext';
 import { MessageSquare, X, Send, Bot, Sparkles, User as UserIcon } from 'lucide-react';
 
 interface ChatMessage {
@@ -12,6 +13,7 @@ interface ChatMessage {
 }
 
 export default function ChatWidget() {
+  const { itemCount, isOpen: isCartOpen } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -65,8 +67,10 @@ export default function ChatWidget() {
     }
   };
 
+  if (isCartOpen) return null;
+
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className={itemCount > 0 ? 'fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40' : 'fixed bottom-6 right-4 sm:right-6 z-40'}>
       {/* Floating Trigger Pill */}
       {!isOpen && (
         <button

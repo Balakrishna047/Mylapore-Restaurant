@@ -115,7 +115,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FBF7F0] py-8">
+    <div className="min-h-screen bg-[#FBF7F0] py-6 sm:py-8 w-full max-w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#1C1917] mb-8">
           Checkout
