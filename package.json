@@ -1,0 +1,26 @@
+{
+  "name": "mylapore-express-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mylapore Express Enterprise Restaurant E-commerce Platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter @mylapore/api dev & pnpm --filter @mylapore/web dev",
+    "dev:api": "pnpm --filter @mylapore/api dev",
+    "dev:web": "pnpm --filter @mylapore/web dev",
+    "build": "pnpm --filter \"./packages/*\" build && pnpm --filter @mylapore/api build && pnpm --filter @mylapore/web build",
+    "build:api": "pnpm --filter @mylapore/api build",
+    "build:web": "pnpm --filter @mylapore/web build",
+    "test": "pnpm --filter @mylapore/api test",
+    "test:e2e": "pnpm --filter @mylapore/web test:e2e",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r exec rimraf dist .next node_modules"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "project": "Mylapore Express",
+  "version": "1.0",
+  "created": "2026-11-11",
+  "files": [
+    "README.md",
+    "contracts/openapi-baseline.yaml",
+    "plans/implementation-roadmap.md",
+    "plans/implementation-status.csv",
+    "prompts/antigravity-master-prompt.md",
+    "prompts/vertical-slice-task-template.md",
+    "specs/00-constitution.md",
+    "specs/01-product-requirements.md",
+    "specs/02-architecture.md",
+    "specs/03-frontend-spec.md",
+    "specs/04-backend-spec.md",
+    "specs/05-data-model.md",
+    "specs/06-commerce-workflows.md",
+    "specs/07-integrations.md",
+    "specs/08-salesforce-agentforce.md",
+    "specs/09-security-privacy.md",
+    "specs/10-testing-acceptance.md",
+    "specs/11-devops-observability.md",
+    "specs/12-gap-register.md",
+    "specs/13-requirement-traceability.md"
+  ],
+  "status": "Specification baseline; implementation not audited"
+}

@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Mylapore Express API
+  version: 1.0.0
+  description: Baseline contract; extend schemas and security definitions before implementation.
+servers:
+  - url: /api/v1
+paths:
+  /outlets:
+    get:
+      operationId: listOutlets
+      summary: List published outlets
+      responses:
+        '200':
+          description: Outlet list
+  /outlets/{outletId}/menu:
+    get:
+      operationId: getOutletMenu
+      summary: Get published menu for an outlet
+      parameters:
+        - in: path
+          name: outletId
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Menu response
+  /cart:
+    get:
+      operationId: getCart
+      summary: Get current session cart
+      responses:
+        '200': { description: Cart response }
+    post:
+      operationId: addCartItem
+      summary: Add item to current session cart
+      responses:
+        '200': { description: Updated cart }
+  /cart/items/{cartItemId}:
+    patch:
+      operationId: updateCartItem
+      summary: Update cart item quantity or modifiers
+      responses:
+        '200': { description: Updated cart }
+    delete:
+      operationId: removeCartItem
+      summary: Remove cart item
+      responses:
+        '200': { description: Updated cart }
+  /quotes:
+    post:
+      operationId: createQuote
+      summary: Calculate authoritative cart quote
+      responses:
+        '201': { description: Immutable quote with expiry }
+  /checkout:
+    post:
+      operationId: createCheckout
+      summary: Validate quote and create pending order/payment attempt
+      responses:
+        '201': { description: Pending order and payment initialization }
+  /payments/{paymentAttemptId}:
+    get:
+      operationId: getPaymentStatus
+      summary: Get own payment attempt status
+      responses:
+        '200': { description: Payment projection }
+  /webhooks/stripe:
+    post:
+      operationId: receiveStripeWebhook
+      summary: Verify and persist provider webhook
+      responses:
+        '202': { description: Accepted for asynchronous processing }
+  /orders/{orderId}:
+    get:
+      operationId: getOwnOrder
+      summary: Get own order
+      responses:
+        '200': { description: Order details }
+  /orders/{orderId}/cancel-eligibility:
+    get:
+      operationId: checkCancelEligibility
+      summary: Check cancellation policy
+      responses:
+        '200': { description: Eligibility decision }
+  /orders/{orderId}/cancel-requests:
+    post:
+      operationId: requestOrderCancellation
+      summary: Submit confirmed cancellation request
+      responses:
+        '202': { description: Request accepted for processing }
+  /orders/{orderId}/reschedule-eligibility:
+    post:
+      operationId: checkRescheduleEligibility
+      summary: Check alternative slot and price impact
+      responses:
+        '200': { description: Eligibility and quote impact }
+  /orders/{orderId}/reschedule-requests:
+    post:
+      operationId: requestOrderReschedule
+      summary: Submit confirmed reschedule request
+      responses:
+        '202': { description: Request accepted for processing }
+  /support/requests:
+    post:
+      operationId: createSupportRequest
+      summary: Create support request for Salesforce synchronization
+      responses:
+        '201': { description: Persisted support request }
+  /agent/actions/menu-search:
+    post:
+      operationId: agentMenuSearch
+      summary: Restricted Agentforce menu search
+      responses:
+        '200': { description: Grounded menu results }
+  /agent/actions/order-status:
+    post:
+      operationId: agentOrderStatus
+      summary: Restricted authenticated order status
+      responses:
+        '200': { description: Own order status }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Money:
+      type: object
+      required: [amountMinor, currency]
+      properties:
+        amountMinor: { type: integer, format: int64 }
+        currency: { type: string, example: INR }
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, correlationId]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            correlationId: { type: string }
+security:
+  - bearerAuth: []

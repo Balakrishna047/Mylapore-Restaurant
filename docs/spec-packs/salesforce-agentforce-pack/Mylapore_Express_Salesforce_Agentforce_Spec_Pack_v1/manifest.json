@@ -1,0 +1,37 @@
+{
+  "name": "Mylapore Express Salesforce Agentforce Spec Pack",
+  "version": "1.0",
+  "created": "2026-11-11",
+  "status": "implementation-baseline",
+  "file_count": 21,
+  "files": [
+    "README.md",
+    "contracts/api-catalog.yaml",
+    "manifest.json",
+    "plans/release-checklist.md",
+    "plans/sprint-plan.md",
+    "prompts/antigravity-salesforce-master-prompt.md",
+    "prompts/vertical-slice-template.md",
+    "setup/org-setup-runbook.md",
+    "specs/00-constitution.md",
+    "specs/01-solution-architecture.md",
+    "specs/02-agentforce-design.md",
+    "specs/03-lightning-chat-experience.md",
+    "specs/04-service-cloud-design.md",
+    "specs/05-salesforce-data-model.md",
+    "specs/06-api-integration-contracts.md",
+    "specs/07-security-privacy-governance.md",
+    "specs/08-org-strategy-and-setup.md",
+    "specs/09-copado-devops.md",
+    "specs/10-testing-and-acceptance.md",
+    "specs/11-monitoring-and-operations.md",
+    "specs/12-gap-register-and-decisions.md"
+  ],
+  "limitations": [
+    "No Salesforce org or Copado workspace was accessed or audited.",
+    "Agentforce, Messaging, Lightning Types, Omni-Channel and API entitlements must be verified in target org.",
+    "OpenAPI is a baseline catalogue; complete schemas and contract tests are required before production.",
+    "Exact Agentforce metadata support and Copado pipeline behavior depend on org/API version and product edition.",
+    "No executable Apex/LWC production implementation is included; this pack is the specification and sprint plan."
+  ]
+}

@@ -1,0 +1,11 @@
+requirement_id,description,status,evidence,owner,notes
+FR-CX-001,Outlet selection,NOT AUDITED,,, 
+FR-CX-002,Live outlet menu,NOT AUDITED,,,
+FR-CX-004,Cart management,NOT AUDITED,,,
+FR-CX-005,Server-calculated quote,NOT AUDITED,,,
+FR-CX-006,Checkout validation,NOT AUDITED,,,
+FR-PAY-001,Idempotent payment initiation,NOT AUDITED,,,
+FR-PAY-002,Verified payment webhook,NOT AUDITED,,,
+FR-CO-005,Kitchen acceptance/rejection,NOT AUDITED,,,
+FR-SF-001,Durable support request and Case sync,NOT AUDITED,,,
+FR-AI-002,Agent identity isolation,NOT AUDITED,,,

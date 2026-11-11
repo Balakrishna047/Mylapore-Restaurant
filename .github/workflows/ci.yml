@@ -1,0 +1,50 @@
+name: Mylapore Express CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verify:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 12.18.0
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Generate Prisma Client
+        run: cd apps/api && npx prisma generate
+
+      - name: Run Backend Unit Tests
+        run: pnpm --filter @mylapore/api test
+
+      - name: Build Packages & Services
+        run: |
+          pnpm build:api
+          pnpm build:web
+
+      - name: Run Playwright E2E Tests
+        run: |
+          cd apps/web
+          npx playwright install --with-deps chromium
+          # Start backend & frontend background processes
+          node ../api/dist/main.js &
+          npx next start -p 3000 &
+          sleep 5
+          npx playwright test

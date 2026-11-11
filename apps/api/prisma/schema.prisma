@@ -1,0 +1,278 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String            @id @default(uuid())
+  email        String            @unique
+  passwordHash String
+  name         String
+  phone        String?
+  role         String            @default("CUSTOMER") // SUPER_ADMIN, RESTAURANT_ADMIN, KITCHEN_MANAGER, DELIVERY_MANAGER, CUSTOMER_SUPPORT, CUSTOMER
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  addresses    CustomerAddress[]
+  orders       Order[]
+  carts        Cart[]
+  auditLogs    AuditLog[]
+}
+
+model CustomerAddress {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  street        String
+  apt           String?
+  city          String
+  state         String
+  zipCode       String
+  deliveryNotes String?
+  isDefault     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+model Restaurant {
+  id                    String   @id @default(uuid())
+  name                  String
+  phone                 String
+  email                 String
+  address               String
+  description           String
+  openingTime           String   @default("11:00 AM")
+  closingTime           String   @default("10:00 PM")
+  minimumOrder          Float    @default(15.00)
+  deliveryFee           Float    @default(4.99)
+  freeDeliveryThreshold Float    @default(45.00)
+  taxRate               Float    @default(0.0825)
+  currency              String   @default("USD")
+  isAcceptingOrders     Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model MenuCategory {
+  id           String     @id @default(uuid())
+  name         String     @unique
+  slug         String     @unique
+  icon         String     // SVG or image path or emoji
+  description  String?
+  displayOrder Int        @default(0)
+  createdAt    DateTime   @default(now())
+  menuItems    MenuItem[]
+}
+
+model MenuItem {
+  id                    String            @id @default(uuid())
+  slug                  String            @unique
+  name                  String
+  description           String
+  categoryId            String
+  category              MenuCategory      @relation(fields: [categoryId], references: [id])
+  basePrice             Float
+  image                 String
+  orderCountBadge       String?           // e.g. "1,000+ ordered"
+  isBlastChilled        Boolean           @default(true)
+  dietaryTags           String            // JSON serialized array: ["VEGETARIAN", "VEGAN", "JAIN"]
+  spiceLevel            String            @default("MEDIUM") // MILD, MEDIUM, HOT, EXTRA_HOT
+  allergens             String            // JSON serialized array: ["Wheat", "Sesame"]
+  ingredients           String            // JSON serialized array
+  nutritionServing      String            @default("1/2 cup (80 g)")
+  reheatingInstructions String            @default("Refrigerate at <=40°F (4°C). Reheat thoroughly to 165°F before consuming.")
+  isAvailable           Boolean           @default(true)
+  rating                Float             @default(5.0)
+  reviewCount           Int               @default(0)
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  variants              MenuItemVariant[]
+  cartItems             CartItem[]
+  orderItems            OrderItem[]
+}
+
+model MenuItemVariant {
+  id          String   @id @default(uuid())
+  menuItemId  String
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  name        String   // "Regular (16 oz)", "Family (32 oz)"
+  price       Float
+  servesCount Int      @default(1)
+}
+
+model Cart {
+  id           String     @id @default(uuid())
+  userId       String?
+  user         User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionToken String?    @unique
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  items        CartItem[]
+}
+
+model CartItem {
+  id                  String   @id @default(uuid())
+  cartId              String
+  cart                Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  menuItemId          String
+  menuItem            MenuItem @relation(fields: [menuItemId], references: [id])
+  quantity            Int      @default(1)
+  unitPrice           Float
+  variantId           String?
+  spiceLevel          String?
+  specialInstructions String?
+}
+
+model Order {
+  id                    String               @id @default(uuid())
+  orderNumber           String               @unique // e.g. "MYL-2026-1001"
+  userId                String?
+  user                  User?                @relation(fields: [userId], references: [id])
+  guestName             String?
+  guestEmail            String?
+  guestPhone            String?
+  status                String               @default("PENDING_PAYMENT") // PENDING_PAYMENT, PAID, CONFIRMED, ACCEPTED, PREPARING, READY, OUT_FOR_DELIVERY, DELIVERED, COMPLETED, CANCELLED, REFUND_PENDING, REFUNDED
+  orderType             String               @default("DELIVERY") // DELIVERY, PICKUP
+  deliveryAddressText   String?
+  deliverySlot          String               // e.g. "Today, 12:30 PM - 1:30 PM"
+  subtotal              Float
+  discount              Float                @default(0.0)
+  tax                   Float                @default(0.0)
+  deliveryFee           Float                @default(0.0)
+  tip                   Float                @default(0.0)
+  total                 Float
+  paymentStatus         String               @default("REQUIRES_PAYMENT_METHOD") // REQUIRES_PAYMENT_METHOD, PROCESSING, SUCCEEDED, FAILED, REFUNDED
+  stripePaymentIntentId String?              @unique
+  notes                 String?
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  items                 OrderItem[]
+  history               OrderStatusHistory[]
+  payments              Payment[]
+  refunds               Refund[]
+  supportTickets        SupportTicket[]
+}
+
+model OrderItem {
+  id             String   @id @default(uuid())
+  orderId        String
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId     String
+  menuItem       MenuItem @relation(fields: [menuItemId], references: [id])
+  name           String
+  quantity       Int
+  unitPrice      Float
+  totalPrice     Float
+  optionsSummary String?
+}
+
+model OrderStatusHistory {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    String
+  note      String?
+  createdBy String?  @default("SYSTEM")
+  createdAt DateTime @default(now())
+}
+
+model Payment {
+  id                    String   @id @default(uuid())
+  orderId               String
+  order                 Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  stripePaymentIntentId String   @unique
+  amount                Float
+  currency              String   @default("USD")
+  status                String   @default("SUCCEEDED")
+  paymentMethod         String   @default("CARD")
+  rawEventId           String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  refunds               Refund[]
+}
+
+model Refund {
+  id             String   @id @default(uuid())
+  orderId        String
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  paymentId      String?
+  payment        Payment? @relation(fields: [paymentId], references: [id])
+  stripeRefundId String?  @unique
+  amount         Float
+  reason         String
+  status         String   @default("SUCCEEDED") // PENDING, SUCCEEDED, FAILED
+  createdAt      DateTime @default(now())
+}
+
+model Coupon {
+  id              String   @id @default(uuid())
+  code            String   @unique
+  description     String
+  discountPercent Float?   @default(0) // e.g. 15%
+  discountAmount  Float?   @default(0) // e.g. $5.00
+  minOrderAmount  Float    @default(20.00)
+  maxDiscount     Float?
+  validFrom       DateTime @default(now())
+  validUntil      DateTime
+  isActive        Boolean  @default(true)
+  usageCount      Int      @default(0)
+}
+
+model SupportTicket {
+  id               String   @id @default(uuid())
+  orderId          String?
+  order            Order?   @relation(fields: [orderId], references: [id])
+  customerName     String
+  customerEmail    String
+  customerPhone    String?
+  subject          String
+  description      String
+  priority         String   @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  status           String   @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED, CLOSED
+  salesforceCaseId String?
+  sentiment        String?  // POSITIVE, NEUTRAL, NEGATIVE
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  payload   String?  // JSON string
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
+
+model IdempotencyRecord {
+  id           String   @id @default(uuid())
+  key          String   @unique
+  scope        String
+  responseBody String   // Cached JSON response
+  statusCode   Int
+  createdAt    DateTime @default(now())
+}
+
+model IntegrationEvent {
+  id            String    @id @default(uuid())
+  eventType     String    // ORDER_CREATED, ORDER_STATUS_CHANGED, PAYMENT_CAPTURED, REFUND_ISSUED, SUPPORT_CASE_CREATED
+  aggregateType String    // ORDER, PAYMENT, REFUND, TICKET
+  aggregateId   String
+  payload       String    // JSON stringified event payload
+  status        String    @default("PENDING") // PENDING, PROCESSING, PUBLISHED, FAILED, DEAD_LETTER
+  retryCount    Int       @default(0)
+  maxRetries    Int       @default(5)
+  lastError     String?
+  nextRetryAt   DateTime  @default(now())
+  processedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status, nextRetryAt])
+  @@index([aggregateType, aggregateId])
+}

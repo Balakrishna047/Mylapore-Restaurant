@@ -1,0 +1,68 @@
+services:
+  # ===============================================
+  # Mylapore Express - NestJS Backend Web Service
+  # ===============================================
+  - type: web
+    name: mylapore-express-api
+    env: node
+    plan: starter
+    region: oregon
+    buildCommand: pnpm install && pnpm build:api && npx prisma migrate deploy --schema=./apps/api/prisma/schema.postgresql.prisma
+    startCommand: node apps/api/dist/main.js
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mylapore-express-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: mylapore-express-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 1d
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: SALESFORCE_ENABLED
+        value: "false"
+
+  # ===============================================
+  # Mylapore Express - Next.js Frontend Web Service
+  # ===============================================
+  - type: web
+    name: mylapore-express-web
+    env: node
+    plan: starter
+    region: oregon
+    buildCommand: pnpm install && pnpm build:web
+    startCommand: pnpm --filter @mylapore/web start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: API_URL
+        fromService:
+          type: web
+          name: mylapore-express-api
+          property: url
+
+# ===============================================
+# Databases & Infrastructure
+# ===============================================
+databases:
+  - name: mylapore-express-db
+    plan: starter
+    region: oregon
+    databaseName: mylapore_express
+    user: mylapore_admin
+    postgresMajorVersion: 16

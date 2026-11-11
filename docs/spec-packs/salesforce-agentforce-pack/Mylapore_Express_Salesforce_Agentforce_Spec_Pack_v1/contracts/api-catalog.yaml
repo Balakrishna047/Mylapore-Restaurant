@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: Mylapore Express Agent Gateway API
+  version: 1.0.0
+  description: Baseline contract for restricted Agentforce actions. Complete schemas before implementation.
+servers:
+  - url: https://api.example.com
+security:
+  - AgentSessionBearer: []
+paths:
+  /api/v1/agent/menu/search:
+    post:
+      operationId: searchMenu
+      summary: Search menu for the verified session outlet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                outletId: { type: string, format: uuid }
+                query: { type: string, maxLength: 120 }
+                dietaryTags:
+                  type: array
+                  items: { type: string, enum: [VEGETARIAN, VEGAN, GLUTEN_FREE] }
+                limit: { type: integer, minimum: 1, maximum: 12, default: 6 }
+              additionalProperties: false
+      responses:
+        "200":
+          description: Menu search results
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MenuSearchResponse" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+  /api/v1/agent/menu/items/{itemId}:
+    get:
+      operationId: getMenuItemDetails
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Item details
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MenuItem" }
+        "404": { $ref: "#/components/responses/NotFound" }
+  /api/v1/agent/orders/{orderId}:
+    get:
+      operationId: getOwnOrderStatus
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Own order status only
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrderStatus" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+  /api/v1/agent/orders/{orderId}/cancellation-preview:
+    post:
+      operationId: previewCancellation
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Current cancellation eligibility and consequences
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ActionPreview" }
+  /api/v1/agent/orders/{orderId}/cancellation:
+    post:
+      operationId: submitCancellationRequest
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string, minLength: 16, maxLength: 128 }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [previewId, confirmation]
+              properties:
+                previewId: { type: string }
+                confirmation: { type: boolean, const: true }
+                reasonCode: { type: string, maxLength: 50 }
+              additionalProperties: false
+      responses:
+        "202":
+          description: Request accepted for processing
+        "409":
+          description: State conflict or expired preview
+  /api/v1/agent/support/cases:
+    post:
+      operationId: createSupportCase
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [category, summary]
+              properties:
+                orderId: { type: string, format: uuid }
+                category: { type: string, maxLength: 50 }
+                summary: { type: string, minLength: 10, maxLength: 2000 }
+                preferredContactChannel: { type: string, enum: [EMAIL, PHONE, CHAT] }
+              additionalProperties: false
+      responses:
+        "202":
+          description: Case creation/sync request accepted
+components:
+  securitySchemes:
+    AgentSessionBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    MenuItem:
+      type: object
+      required: [id, name, price, availability]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string }
+        imageUrl: { type: string, format: uri }
+        imageAlt: { type: string }
+        price:
+          type: object
+          required: [amountMinor, currency]
+          properties:
+            amountMinor: { type: integer, minimum: 0 }
+            currency: { type: string, pattern: "^[A-Z]{3}$" }
+        availability: { type: string, enum: [AVAILABLE, UNAVAILABLE, LIMITED, UNKNOWN] }
+        dietaryTags:
+          type: array
+          items: { type: string }
+    MenuSearchResponse:
+      type: object
+      required: [success, items, correlationId]
+      properties:
+        success: { type: boolean }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/MenuItem" }
+        correlationId: { type: string }
+    OrderStatus:
+      type: object
+      required: [orderId, status, lastUpdatedAt]
+      properties:
+        orderId: { type: string, format: uuid }
+        status: { type: string }
+        lastUpdatedAt: { type: string, format: date-time }
+        customerMessage: { type: string }
+    ActionPreview:
+      type: object
+      required: [previewId, eligible, expiresAt]
+      properties:
+        previewId: { type: string }
+        eligible: { type: boolean }
+        explanation: { type: string }
+        expiresAt: { type: string, format: date-time }
+  responses:
+    Unauthorized:
+      description: Missing or invalid session
+    Forbidden:
+      description: Action not permitted
+    NotFound:
+      description: Resource not found or not accessible
+    RateLimited:
+      description: Request rate limited
