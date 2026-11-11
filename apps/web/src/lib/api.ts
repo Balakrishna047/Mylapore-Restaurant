@@ -1,5 +1,6 @@
 const rawApiUrl = process.env.API_URL || 'http://localhost:4000';
-const serverApiBase = rawApiUrl.endsWith('/api/v1') ? rawApiUrl : `${rawApiUrl.replace(/\/+$/, '')}/api/v1`;
+const normalizedUrl = rawApiUrl.startsWith('http') ? rawApiUrl : `http://${rawApiUrl}:4000`;
+const serverApiBase = normalizedUrl.endsWith('/api/v1') ? normalizedUrl : `${normalizedUrl.replace(/\/+$/, '')}/api/v1`;
 
 const API_BASE = typeof window === 'undefined'
   ? serverApiBase

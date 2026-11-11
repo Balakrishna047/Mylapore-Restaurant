@@ -8,8 +8,7 @@ services:
     plan: free
     region: oregon
     buildCommand: pnpm install && pnpm build:api
-    preDeployCommand: pnpm db:push:pg && pnpm db:seed
-    startCommand: node apps/api/dist/main.js
+    startCommand: pnpm db:push:pg && pnpm db:seed && node apps/api/dist/main.js
     healthCheckPath: /api/v1/health
     envVars:
       - key: NODE_ENV
@@ -50,4 +49,4 @@ services:
         fromService:
           type: web
           name: mylapore-express-api
-          property: url
+          property: host
