@@ -312,7 +312,7 @@ export default function CategoryPage() {
                 {categoryTitle}
               </h1>
               <span className="px-2.5 py-0.5 rounded-full bg-[#FAF4E8] border border-[#E7DFD5] text-xs font-bold text-[#78716C]">
-                {filteredDishes.length} {filteredDishes.length === 1 ? 'item' : 'items'}
+                {loading ? '...' : `${filteredDishes.length} ${filteredDishes.length === 1 ? 'item' : 'items'}`}
               </span>
             </div>
             <p className="text-xs text-[#78716C] mt-1 max-w-xl">

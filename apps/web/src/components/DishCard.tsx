@@ -91,6 +91,8 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
             <img
               src={imgSrc}
               alt={dish.name}
+              loading="lazy"
+              decoding="async"
               onError={() => setImgSrc('/images/dishes/potato-kara-kari.webp')}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -169,6 +171,8 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
           <img
             src={imgSrc}
             alt={dish.name}
+            loading="lazy"
+            decoding="async"
             onError={() => setImgSrc('/images/dishes/potato-kara-kari.webp')}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />

@@ -108,9 +108,10 @@ function HomeContent() {
             </Link>
             <div className="absolute right-3 top-3 bottom-3 w-28 rounded-xl overflow-hidden shadow-xs border border-white/60">
               <img
-                src="/images/dishes/511415509_1374314997614101_7602792443250423325_n.jpg"
+                src="/images/dishes/mylapore-weekend-thali.webp"
                 alt="Fresh South Indian Dish"
                 className="w-full h-full object-cover"
+                loading="eager"
               />
             </div>
           </div>
@@ -346,11 +347,11 @@ function HomeContent() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { title: 'Best Sellers', count: '8 products', img: '/images/dishes/511054322_1373711734341094_1158214090116208885_n.jpg' },
-              { title: 'Paneer Favourites', count: '8 products', img: '/images/dishes/746394675_1723920752653522_3914330541499949213_n.jpg' },
-              { title: 'Rice Bowls', count: '7 products', img: '/images/dishes/632957096_1578708453841420_9048763688794308567_n.jpg' },
-              { title: 'Tea-time Snacks', count: '6 products', img: '/images/dishes/511415509_1374314997614101_7602792443250423325_n.jpg' },
-              { title: 'Breakfast & Tiffin', count: '6 products', img: '/images/dishes/769318075_1746253997086864_1880948280456409055_n.jpg' }
+              { title: 'Best Sellers', count: '8 products', img: '/images/dishes/south-indian-veg-kurma.webp' },
+              { title: 'Paneer Favourites', count: '8 products', img: '/images/dishes/saag-paneer.webp' },
+              { title: 'Rice Bowls', count: '7 products', img: '/images/dishes/puliyodarai.webp' },
+              { title: 'Tea-time Snacks', count: '6 products', img: '/images/dishes/idli-milagai-podi.webp' },
+              { title: 'Breakfast & Tiffin', count: '6 products', img: '/images/dishes/crispy-dosa-batter.webp' }
             ].map((col, idx) => (
               <div
                 key={idx}
