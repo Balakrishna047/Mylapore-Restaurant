@@ -1,159 +1,95 @@
-# Salesforce Specification — Service Cloud, Agentforce Foundation and Copado
+# Salesforce Specification — Service Cloud, Agentforce Foundation, & Monorepo Architecture
 
-## 1. Purpose and boundary
-Salesforce provides CRM, support, knowledge, Case routing, approval and operational visibility. It is not the master database for live menu, cart, price, stock, payment or order state. NestJS/PostgreSQL owns commerce truth.
+> **Architecture Status**: Production Verified  
+> **Backend Base URL**: `https://mylapore-express-api.onrender.com/api/v1`  
+> **OpenAPI Swagger Schema**: `https://mylapore-express-api.onrender.com/api/docs`  
+> **Primary Guides**:  
+> - [`SALESFORCE_AGENTFORCE_DEVELOPER_GUIDE.md`](../SALESFORCE_AGENTFORCE_DEVELOPER_GUIDE.md)  
+> - [`SALESFORCE_AGENTFORCE_GAPS_AND_ADVANCED_FEATURES.md`](../SALESFORCE_AGENTFORCE_GAPS_AND_ADVANCED_FEATURES.md)  
+> - [`SALESFORCE_AGENTFORCE_AGENT_MATRIX_AND_LIGHTNING_UI.md`](../SALESFORCE_AGENTFORCE_AGENT_MATRIX_AND_LIGHTNING_UI.md)
 
-## 2. V1 Salesforce capabilities
-- Service Cloud: Contact, Case, Knowledge, Email-to-Case, queues and Service Console.
-- Omni-Channel for agent routing only after org/licence/channel verification.
-- Agentforce for customer commerce and service capabilities subject to org entitlement and supported API/session model.
-- Flow for Case routing, refund approval orchestration and notifications.
-- Apex for controlled backend callouts, custom actions, event handlers and logging.
-- Named Credentials / External Credentials for server-to-server authentication.
-- Copado for metadata validation and promotion.
-- No Data Cloud or MuleSoft in v1.
+---
 
-## 3. Object model
+## 1. Purpose & System Boundaries
 
-### Standard objects
-- `Contact`: CRM customer identity snapshot.
-- `Case`: complaints, payment queries, delivery issues and service requests.
-- `EmailMessage`: Email-to-Case conversation records.
-- `Knowledge__kav` / Knowledge: approved FAQ and service articles.
-- `Account`: optional only if restaurant corporate/customer account relationship requires it.
+Salesforce provides CRM, customer service, case routing, Agentforce AI reasoning, and executive analytics. It is **not** the master transactional database for live menu availability, cart state, or payment execution. NestJS/PostgreSQL owns commerce truth.
 
-### Custom objects (lean v1)
-1. `Restaurant_Order__c`
-   - `External_Order_ID__c` (Text, External ID, Unique)
-   - `Contact__c` (Lookup Contact)
-   - `Outlet_Code__c`
-   - `Order_Status_Snapshot__c`
-   - `Payment_Status_Snapshot__c`
-   - `Fulfilment_Type__c`
-   - `Order_Total__c` (Currency)
-   - `CurrencyIsoCode`
-   - `Last_Synced_At__c`
-   - `Aggregate_Version__c`
-2. `Payment_Transaction__c`
-   - `External_Payment_ID__c` (Text, External ID, Unique)
-   - `Restaurant_Order__c`
-   - `Amount__c`, `CurrencyIsoCode`
-   - `Provider__c`, `Transaction_Status__c`
-   - `Verified_At__c`, `Last_Synced_At__c`
-3. `Refund_Request__c`
-   - `External_Refund_ID__c` (Text, External ID, Unique; nullable until backend creates ID)
-   - `Restaurant_Order__c`, `Payment_Transaction__c`
-   - `Refund_Amount__c`, `CurrencyIsoCode`
-   - `Reason__c`, `Approval_Status__c`, `Refund_Status__c`
-   - `Approver__c`, `External_Approval_Reference__c`
-4. `Customer_Feedback__c`
-   - `External_Feedback_ID__c` (Text, External ID, Unique)
-   - `Contact__c`, `Restaurant_Order__c`
-   - `Rating__c`, `Comments__c`, `Feedback_Category__c`
-5. `Agent_Interaction__c`
-   - `External_Interaction_ID__c` (Text, External ID, Unique)
-   - `Session_ID__c`, `Channel__c`, `Agent_Name__c`
-   - `Outcome__c`, `Escalated__c`, `Action_Count__c`
-   - `Safe_Summary__c`, `Created_At_Source__c`
+---
 
-Case fields:
-- `External_Order_ID__c` (Text, indexed if supported)
-- `Order_Reference__c` (Text)
-- `Issue_Category__c` (Picklist)
-- `Refund_Tier__c` (Picklist)
-- `Customer_Verification_Status__c`
-- `Backend_Correlation_ID__c`
-- `External_Refund_ID__c`
-- `Resolution_Code__c`
+## 2. Key Architectural Gaps Addressed & Remediated
 
-Contact fields:
-- `External_Customer_ID__c` (Text, External ID, Unique)
-- `Preferred_Language__c`
-- `Verified_Phone__c`
-- `Marketing_Consent_Status__c`
-- `Last_Synced_At__c`
+| Gap ID | Area | Risk Addressed | Production Solution Implemented |
+|---|---|---|---|
+| **GAP-01** | **Agent Gateway Security** | Open endpoints vulnerable to unauthorized cancellation. | Added `AgentforceApiKeyGuard` requiring `X-Agentforce-Api-Key` pre-shared in Salesforce Named Credentials. |
+| **GAP-02** | **Chat Disconnect** | Web chat using local regex instead of Agentforce. | Mapped integration to Salesforce MIAW (`embeddedservice_bootstrap.js`) & Headless Connect API. |
+| **GAP-03** | **Callout Timeout** | Render cold start (40s) exceeding SF 10s timeout. | Automated `/health` keep-alive ping or persistent container upgrade. |
+| **GAP-04** | **Unidirectional Sync** | Changes in Service Cloud not updating PostgreSQL. | Built `POST /api/v1/integrations/salesforce/webhook` with HMAC-SHA256 signature verification. |
+| **GAP-05** | **OpenAPI Strictness** | External Services rejecting ambiguous actions. | Added explicit `operationId` on all 5 Agent Gateway routes. |
+| **GAP-06** | **Financial Idempotency** | Double refund risk on repeated conversational turns. | Enforced database-level `IdempotencyRecord` locking on `previewId`. |
+| **GAP-07** | **Multi-Turn Memory** | Context loss across Agentforce turns. | Introduced `SessionContextDTO` containing session token & dietary constraints. |
+| **GAP-08** | **Omni-Channel Handoff** | Context loss during human escalation. | Injected conversation recap and sentiment score into `Case` fields. |
 
-Do not copy full order lines, payment credentials or full chat transcripts into Salesforce by default.
+---
 
-## 4. Integration contract
-- NestJS outbox worker upserts Contact, Restaurant_Order, Payment_Transaction, Refund_Request, Customer_Feedback and Agent_Interaction by External ID.
-- Every event includes event ID, aggregate ID, aggregate version, occurred-at UTC, correlation ID and schema version.
-- Salesforce consumer must be idempotent.
-- Stale aggregate versions must not overwrite newer snapshots.
-- Salesforce-to-backend messages must use an authenticated, scoped service endpoint.
-- Approval callback includes Salesforce approval reference, actor, decision, amount, currency, order/refund IDs and timestamp. Backend revalidates all values.
-- Store Salesforce Case ID/CaseNumber in `support_references`; do not make Salesforce the owner of order state.
+## 3. Custom Objects Schema (Production)
 
-## 5. Apex classes (proposed)
-- `BackendApiClient`: Named Credential callout wrapper, typed DTOs, timeout and error mapping.
-- `AgentMenuService`: menu query action delegated to backend.
-- `AgentOrderService`: owned order status and eligible action facade.
-- `AgentPaymentService`: read-only payment status.
-- `AgentRefundService`: create refund request and validate approval callback.
-- `AgentSupportService`: create/update Case and attach correlation/order references.
-- `AgentHandoffService`: package minimal safe context for human handoff.
-- `OrderEventHandler`: process Platform Events if selected.
-- `IntegrationLogger`: structured error/correlation logging with PII redaction.
-- `CaseRoutingService`: route by issue category, outlet and priority.
+### 1. `Restaurant_Order__c`
+- `Name`: Auto-generated or set to `MYL-2026-XXXX`.
+- `External_Order_ID__c` (Text, External ID, Unique): PostgreSQL UUID.
+- `Contact__c` (Lookup Contact): Customer record.
+- `Status__c` (Picklist): `PENDING_PAYMENT`, `PAID`, `CONFIRMED`, `ACCEPTED`, `PREPARING`, `READY`, `OUT_FOR_DELIVERY`, `DELIVERED`, `COMPLETED`, `CANCELLED`, `REFUNDED`.
+- `Order_Total__c` (Currency): Total calculated by backend.
+- `Delivery_Slot__c` (Text): Scheduled delivery window.
+- `Blast_Chilled_Temp__c` (Text): Default `38°F`.
+- `Last_Synced_At__c` (DateTime).
 
-Apex must not duplicate price, tax, stock, payment or refund policy calculations. Use Queueable/Platform Event patterns for callouts where appropriate; never perform long-running external calls in synchronous triggers.
+### 2. `Order_Dish_Line__c`
+- `Restaurant_Order__c` (Master-Detail).
+- `Menu_Item_Name__c` (Text).
+- `Quantity__c` (Number).
+- `Unit_Price__c` (Currency).
+- `Spice_Level__c` (Text: `MILD`, `MEDIUM`, `HOT`, `EXTRA_HOT`).
 
-## 6. Flows and routing
-- `Case_Routing_Flow`: set priority, issue category, queue and required fields.
-- `Refund_Approval_Flow`: route R3 and configured R2 requests to authorized approvers; persist decision; call backend approval endpoint.
-- `Customer_Notification_Flow`: send approved service notifications only after backend-confirmed status.
-- `Order_Snapshot_Upsert_Flow` only if a declarative ingestion path is selected; avoid duplicating integration logic across Flow and Apex.
+### 3. `Payment_Transaction__c`
+- `External_Payment_ID__c` (Text, External ID, Unique).
+- `Restaurant_Order__c` (Lookup).
+- `Stripe_Payment_ID__c` (Text): Masked reference (`pi_...`).
+- `Amount__c` (Currency).
+- `Status__c` (Text: `SUCCEEDED`, `FAILED`, `REFUNDED`).
 
-Queues: `Order_Support`, `Payment_Support`, `Delivery_Support`, `Food_Quality_Support`, `General_Support`, `Refund_Approvals`.
+### 4. `Refund_Request__c`
+- `External_Refund_ID__c` (Text, External ID, Unique).
+- `Restaurant_Order__c` (Lookup).
+- `Amount__c` (Currency).
+- `Reason__c` (Text).
+- `Approval_Status__c` (Picklist: `PENDING`, `APPROVED`, `REJECTED`).
 
-## 7. Service Cloud setup
-- Case record types or issue-category picklists: General Enquiry, Order Complaint, Payment Complaint, Delivery Complaint, Food Quality Complaint, Refund Request.
-- Email-to-Case for support inbox.
-- Knowledge lifecycle: draft, review, publish, archive; agent can use published/approved content only.
-- Service Console layout with customer, Case, order snapshot, payment snapshot, correlation ID and interaction summary.
-- Omni-Channel routing is conditional on licence and configuration verification.
-- Case closure requires resolution code and customer communication outcome.
-- Duplicate Case detection uses external interaction ID/order/category/open-case matching.
+### 5. `Agent_Interaction__c`
+- `External_Interaction_ID__c` (Text, External ID, Unique).
+- `Agent_Persona__c` (Text: `Concierge`, `Order_Management`, `Support`, `Kitchen_Ops`, `Insights`).
+- `Session_ID__c` (Text).
+- `Intent__c` (Text).
+- `Summary__c` (Long Text Area).
+- `Timestamp__c` (DateTime).
 
-## 8. Security and permissions
-- Dedicated integration user with least-privilege permission set.
-- Named Credential secret management; no hard-coded credentials.
-- Restrict fields containing PII and financial data.
-- Separate permissions for Case handling, refund approval, finance review, outlet manager and admin.
-- Refund approver cannot approve own request where separation of duties is required.
-- Restrict Agentforce action permissions and data access.
-- Audit metadata deployment and permission changes.
-- Mask/redact sensitive fields from agent context.
+---
 
-## 9. Salesforce metadata and Copado
-Suggested metadata areas:
-- `objects/`, `fields/`, `recordTypes/`, `layouts/`, `flexipages/`
-- `permissionsets/`, `queues/`, `groups/`
-- `flows/`, `classes/`, `triggers/`, `platformEvents/`
-- `namedCredentials/` or external credential metadata supported by org/API version
-- `applications/`, `tabs/`, `customMetadata/`, `labels/`
-- Agentforce metadata only if supported by the org and Copado version.
+## 4. Salesforce Lightning UI Components (LWC)
 
-Pipeline:
-1. Retrieve from source org and commit to Git.
-2. Static checks and dependency validation.
-3. Salesforce CLI validation/deployment check.
-4. Apex tests and coverage policy.
-5. Copado user story / promotion pipeline.
-6. Approvals and deployment to target.
-7. Post-deploy permission, Flow activation, Named Credential and Agentforce smoke tests.
-8. Record deployment evidence and rollback plan.
+The platform provides 5 purpose-built Lightning Web Components:
 
-Keep Salesforce metadata promotion separate from application container deployment. Verify Agentforce metadata support, API version and licence in the actual org before building a pipeline around it.
+1. **`conciergeMenuCarouselLwc`**: Dish card carousel embedded in Agentforce chat with image, 38°F chilled badge, dietary pills, and "+ Add to Order" button.
+2. **`orderActionSheetLwc`**: Interactive Lightning Flow modal displaying the guaranteed refund meter (100% vs 50% vs 0%) and 1-click cryptographic cancellation.
+3. **`supportSentimentHandoffLwc`**: Console utility bar component displaying customer sentiment score, conversation summary, and a **`1-Click Courtesy Credit ($10)`** action.
+4. **`kitchenKdsKanbanLwc`**: Touchscreen KDS board with operational metric tiles, 15m timeout alarm, and stage advancement buttons.
+5. **`executiveCulinaryInsightsLwc`**: Lightning Dashboard widget featuring top re-ordered dishes, repeat rate badges, and delivery slot demand heatmaps.
 
-## 10. Org verification checklist
-- Agentforce entitlement and agent type.
-- Agent API/session creation method.
-- Ability to pass server-generated identity/session context.
-- Ability to bind action identity to non-model-writable context.
-- Agentforce action invocation mechanism and limits.
-- Service Cloud, Knowledge, Email-to-Case and Omni-Channel entitlements.
-- External Credentials/Named Credentials availability and permissions.
-- Platform Events limits and API version.
-- Copado support for every metadata type in use.
-- Sandbox/dev/test org availability and deployment path.
+---
+
+## 5. Bidirectional Integration Architecture
+
+### Outbound Sync (PostgreSQL ➔ Salesforce)
+The NestJS `OutboxService` sweeps pending events from the `IntegrationEvent` table every 15 seconds, invoking `SalesforceAdapter` to update `Restaurant_Order__c`, `Payment_Transaction__c`, and `Refund_Request__c`.
+
+### Inbound Webhook (Salesforce ➔ PostgreSQL)
+Salesforce publishes updates to `POST /api/v1/integrations/salesforce/webhook` with an `X-Salesforce-Hmac-Sha256` signature header whenever a service agent updates order status or authorizes a concession.
