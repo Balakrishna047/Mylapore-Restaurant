@@ -46,7 +46,4 @@ services:
       - key: PORT
         value: 3000
       - key: API_URL
-        fromService:
-          type: web
-          name: mylapore-express-api
-          property: host
+        value: https://mylapore-express-api.onrender.com

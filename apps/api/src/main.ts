@@ -41,8 +41,8 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
 
   const port = process.env.PORT || 4000;
-  await app.listen(port);
-  console.log(`🚀 Mylapore Express API listening on http://localhost:${port}/api/v1`);
+  await app.listen(port, '0.0.0.0');
+  console.log(`🚀 Mylapore Express API listening on http://0.0.0.0:${port}/api/v1`);
   console.log(`📑 OpenAPI Swagger documentation live on http://localhost:${port}/api/docs`);
 }
 
