@@ -257,3 +257,22 @@ model IdempotencyRecord {
   statusCode   Int
   createdAt    DateTime @default(now())
 }
+
+model IntegrationEvent {
+  id            String    @id @default(uuid())
+  eventType     String    // ORDER_CREATED, ORDER_STATUS_CHANGED, PAYMENT_CAPTURED, REFUND_ISSUED, SUPPORT_CASE_CREATED
+  aggregateType String    // ORDER, PAYMENT, REFUND, TICKET
+  aggregateId   String
+  payload       String    // JSON stringified event payload
+  status        String    @default("PENDING") // PENDING, PROCESSING, PUBLISHED, FAILED, DEAD_LETTER
+  retryCount    Int       @default(0)
+  maxRetries    Int       @default(5)
+  lastError     String?
+  nextRetryAt   DateTime  @default(now())
+  processedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status, nextRetryAt])
+  @@index([aggregateType, aggregateId])
+}

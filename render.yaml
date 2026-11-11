@@ -7,7 +7,8 @@ services:
     env: node
     plan: starter
     region: oregon
-    buildCommand: pnpm install && pnpm build:api && npx prisma migrate deploy --schema=./apps/api/prisma/schema.postgresql.prisma
+    buildCommand: pnpm install && pnpm build:api
+    preDeployCommand: pnpm db:push:pg && pnpm db:seed
     startCommand: node apps/api/dist/main.js
     healthCheckPath: /api/v1/health
     envVars:
@@ -18,11 +19,6 @@ services:
       - key: DATABASE_URL
         fromDatabase:
           name: mylapore-express-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: mylapore-express-redis
           property: connectionString
       - key: JWT_SECRET
         generateValue: true

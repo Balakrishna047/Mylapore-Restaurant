@@ -1,5 +1,8 @@
+const rawApiUrl = process.env.API_URL || 'http://localhost:4000';
+const serverApiBase = rawApiUrl.endsWith('/api/v1') ? rawApiUrl : `${rawApiUrl.replace(/\/+$/, '')}/api/v1`;
+
 const API_BASE = typeof window === 'undefined'
-  ? (process.env.API_URL || 'http://localhost:4000/api/v1')
+  ? serverApiBase
   : '/api/v1';
 
 function getAuthHeader(): Record<string, string> {

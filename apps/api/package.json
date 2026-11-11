@@ -9,6 +9,8 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "prisma:generate": "prisma generate",
+    "prisma:generate:pg": "prisma generate --schema=./prisma/schema.postgresql.prisma",
+    "prisma:push:pg": "prisma db push --schema=./prisma/schema.postgresql.prisma",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:seed": "node dist/prisma/seed.js",
