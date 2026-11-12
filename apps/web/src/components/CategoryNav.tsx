@@ -76,7 +76,14 @@ export default function CategoryNav({
                       src={cat.icon}
                       alt={cat.name}
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/images/dishes/potato-kara-kari.webp';
+                        const target = e.target as HTMLImageElement;
+                        if (target.src.endsWith('.jpg')) {
+                          target.src = target.src.replace(/\.jpg$/, '.webp');
+                        } else if (target.src.includes('/images/dishes/')) {
+                          target.src = target.src.replace('/images/dishes/', '/dish-photos/');
+                        } else {
+                          target.src = '/images/dishes/potato-kara-kari.webp';
+                        }
                       }}
                       className="w-full h-full object-cover"
                     />

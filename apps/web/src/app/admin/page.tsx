@@ -208,7 +208,19 @@ export default function AdminKdsPage() {
                 className="flex items-center justify-between p-3 rounded-xl border border-[#E7DFD5] bg-[#FFFDF9]"
               >
                 <div className="flex items-center gap-3">
-                  <img src={dish.image} alt={dish.name} className="w-10 h-10 rounded-lg object-cover" />
+                  <img
+                    src={dish.image}
+                    alt={dish.name}
+                    className="w-10 h-10 rounded-lg object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target.src.endsWith('.jpg')) {
+                        target.src = target.src.replace(/\.jpg$/, '.webp');
+                      } else {
+                        target.src = '/images/dishes/potato-kara-kari.webp';
+                      }
+                    }}
+                  />
                   <div>
                     <h5 className="font-bold text-xs text-[#1C1917]">{dish.name}</h5>
                     <span className="text-[10px] text-[#78716C]">${dish.basePrice.toFixed(2)}</span>

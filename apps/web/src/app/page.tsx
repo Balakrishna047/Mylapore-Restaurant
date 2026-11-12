@@ -112,6 +112,14 @@ function HomeContent() {
                 alt="Fresh South Indian Dish"
                 className="w-full h-full object-cover"
                 loading="eager"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  if (target.src.endsWith('.webp')) {
+                    target.src = '/images/dishes/mylapore-weekend-thali.jpg';
+                  } else {
+                    target.src = '/images/dishes/potato-kara-kari.webp';
+                  }
+                }}
               />
             </div>
           </div>
@@ -361,6 +369,14 @@ function HomeContent() {
                   src={col.img}
                   alt={col.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.endsWith('.webp')) {
+                      target.src = target.src.replace(/\.webp$/, '.jpg');
+                    } else {
+                      target.src = '/images/dishes/potato-kara-kari.webp';
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-3.5 text-white">
                   <h4 className="font-serif font-bold text-sm leading-tight">{col.title}</h4>

@@ -30,6 +30,32 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   const [imgSrc, setImgSrc] = useState(dish.image || '/images/dishes/potato-kara-kari.webp');
   const [isAdding, setIsAdding] = useState(false);
 
+  // Sync image source whenever dish prop updates (e.g. category filter or search)
+  React.useEffect(() => {
+    if (dish?.image) {
+      setImgSrc(dish.image);
+    } else {
+      setImgSrc('/images/dishes/potato-kara-kari.webp');
+    }
+  }, [dish?.image]);
+
+  // Resilient multi-tier fallback for images
+  const handleImageError = () => {
+    if (imgSrc && imgSrc.endsWith('.jpg')) {
+      // 1. Try webp format of same dish
+      setImgSrc(imgSrc.replace(/\.jpg$/, '.webp'));
+    } else if (imgSrc && imgSrc.startsWith('/images/dishes/')) {
+      // 2. Try alternative static directory /dish-photos/
+      setImgSrc(imgSrc.replace('/images/dishes/', '/dish-photos/'));
+    } else if (imgSrc && imgSrc.startsWith('/dish-photos/') && imgSrc.endsWith('.jpg')) {
+      // 3. Try webp in /dish-photos/
+      setImgSrc(imgSrc.replace(/\.jpg$/, '.webp'));
+    } else if (imgSrc !== '/images/dishes/potato-kara-kari.webp') {
+      // 4. Fallback to resilient default dish
+      setImgSrc('/images/dishes/potato-kara-kari.webp');
+    }
+  };
+
   const cartItem = cart?.items?.find((i: any) => i.menuItemId === dish.id);
   const currentQty = cartItem?.quantity || 0;
 
@@ -93,7 +119,7 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
               alt={dish.name}
               loading="lazy"
               decoding="async"
-              onError={() => setImgSrc('/images/dishes/potato-kara-kari.webp')}
+              onError={handleImageError}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </Link>
@@ -173,7 +199,7 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
             alt={dish.name}
             loading="lazy"
             decoding="async"
-            onError={() => setImgSrc('/images/dishes/potato-kara-kari.webp')}
+            onError={handleImageError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </Link>
