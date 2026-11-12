@@ -43,7 +43,7 @@ export default function SupportPage() {
             Customer Support & Service Cloud
           </h1>
           <p className="text-xs sm:text-sm text-[#78716C] max-w-xl mx-auto">
-            Need assistance with a delivery, dietary inquiries, or order adjustments? Our AI Concierge and human representatives are here to help.
+            Need assistance with a delivery, dietary inquiries, or order adjustments? Our Service Cloud team and dedicated representatives are here to help.
           </p>
         </div>
 

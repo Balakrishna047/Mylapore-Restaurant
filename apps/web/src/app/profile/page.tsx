@@ -84,7 +84,7 @@ export default function ProfilePage() {
             </div>
             <div>
               <h4 className="font-bold text-xs text-[#1C1917]">Customer Care & FAQs</h4>
-              <p className="text-[11px] text-[#78716C]">Talk to AI Concierge or open Service Cloud Case</p>
+              <p className="text-[11px] text-[#78716C]">Salesforce Service Cloud Support & Case History</p>
             </div>
           </Link>
         </div>
