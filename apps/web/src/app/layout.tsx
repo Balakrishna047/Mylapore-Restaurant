@@ -7,8 +7,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import MobileCartBar from '@/components/MobileCartBar';
-import ChatWidget from '@/components/ChatWidget';
 import LocationModal from '@/components/LocationModal';
+import SalesforceChatEmbed from '@/components/SalesforceChatEmbed';
 
 export const metadata: Metadata = {
   title: 'Mylapore Express | Authentic Fresh South Indian Culinary E-Commerce',
@@ -22,6 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+      </head>
       <body className="min-h-screen flex flex-col bg-[#FBF7F0] text-[#1C1917] selection:bg-[#D95338] selection:text-white">
         <AuthProvider>
           <LocationProvider>
@@ -33,8 +36,10 @@ export default function RootLayout({
               <Footer />
               <CartDrawer />
               <MobileCartBar />
-              <ChatWidget />
               <LocationModal />
+
+              {/* Official Salesforce Agentforce Embedded Messaging (MIAW) Live Deployment */}
+              <SalesforceChatEmbed />
             </CartProvider>
           </LocationProvider>
         </AuthProvider>
