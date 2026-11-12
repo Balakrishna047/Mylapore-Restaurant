@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mylapore Express — Salesforce Agentforce Live Storefront Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FBF7F0; color: #1C1917; }
+    h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#FAF4E8]/95 backdrop-blur-md border-b border-[#E7DFD5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#C8851A] flex items-center justify-center text-white font-bold text-xl">
+          M
+        </div>
+        <div>
+          <span class="font-serif font-bold text-2xl text-[#1C1917] block leading-none">Mylapore Express</span>
+          <span class="text-[10px] tracking-widest uppercase font-semibold text-[#C8851A]">Authentic South Indian · Agentforce Live</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Salesforce Agentforce MIAW Connected
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8 w-full">
+    <div class="rounded-3xl bg-[#1C1917] text-white p-8 sm:p-12 relative overflow-hidden shadow-xl border border-[#C8851A]/40 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-3 max-w-xl z-10">
+        <span class="text-xs uppercase tracking-widest text-[#C8851A] font-bold">Autonomous Culinary Concierge</span>
+        <h1 class="font-serif font-bold text-3xl sm:text-5xl leading-tight">
+          Fresh from Mylapore, Delivered to Your Door.
+        </h1>
+        <p class="text-xs sm:text-sm text-[#D6D3D1] leading-relaxed">
+          Blast-chilled to 38°F with zero chemical preservatives. Click the floating chat button on the bottom right to talk with our live Salesforce Agentforce Concierge.
+        </p>
+      </div>
+      <div class="z-10 bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center space-y-1">
+        <span class="text-2xl">🤖</span>
+        <h3 class="font-bold text-sm">Agentforce Active</h3>
+        <p class="text-[11px] text-[#E7DFD5]">Org ID: 00Dg700000Oo6fV</p>
+        <p class="text-[10px] text-emerald-300">Deployment: Mylapore_Concierge_Web</p>
+      </div>
+    </div>
+
+    <!-- Featured Dishes -->
+    <section class="space-y-4">
+      <h2 class="font-serif font-bold text-2xl text-[#1C1917]">Customer Favorites</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-[#E7DFD5] overflow-hidden shadow-xs p-4 space-y-2">
+          <div class="aspect-[3/2] rounded-xl overflow-hidden bg-[#FAF4E8]">
+            <img src="https://mylapore-express-web.onrender.com/images/dishes/south-indian-veg-kurma.jpg" alt="Kurma" class="w-full h-full object-cover">
+          </div>
+          <div class="flex justify-between items-center">
+            <h4 class="font-serif font-bold text-base">South Indian Veg Kurma</h4>
+            <span class="font-bold text-sm text-[#D95338]">$12.99</span>
+          </div>
+          <p class="text-xs text-[#78716C]">Slow-cooked coconut and aromatic whole spices with seasonal vegetables.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-[#E7DFD5] overflow-hidden shadow-xs p-4 space-y-2">
+          <div class="aspect-[3/2] rounded-xl overflow-hidden bg-[#FAF4E8]">
+            <img src="https://mylapore-express-web.onrender.com/images/dishes/puliyodarai.jpg" alt="Puliyodarai" class="w-full h-full object-cover">
+          </div>
+          <div class="flex justify-between items-center">
+            <h4 class="font-serif font-bold text-base">Temple Puliyodarai</h4>
+            <span class="font-bold text-sm text-[#D95338]">$11.99</span>
+          </div>
+          <p class="text-xs text-[#78716C]">Traditional tamarind rice tempered with crunchy peanuts, curry leaves & sesame oil.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-[#E7DFD5] overflow-hidden shadow-xs p-4 space-y-2">
+          <div class="aspect-[3/2] rounded-xl overflow-hidden bg-[#FAF4E8]">
+            <img src="https://mylapore-express-web.onrender.com/images/dishes/mylapore-weekend-thali.jpg" alt="Thali" class="w-full h-full object-cover">
+          </div>
+          <div class="flex justify-between items-center">
+            <h4 class="font-serif font-bold text-base">Grand Weekend Thali</h4>
+            <span class="font-bold text-sm text-[#D95338]">$24.99</span>
+          </div>
+          <p class="text-xs text-[#78716C]">The complete South Indian festive thali experience with 7 curated dishes.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 border-t border-[#E7DFD5] bg-[#FAF4E8] py-6 text-center text-xs text-[#78716C]">
+    © 2026 Mylapore Express • Connected to Salesforce Agentforce Service Cloud.
+  </footer>
+
+  <!-- Official Salesforce Agentforce Embedded Messaging (MIAW) Bootstrap -->
+  <script type='text/javascript'>
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'en_US';
+        embeddedservice_bootstrap.init(
+          '00Dg700000Oo6fV',
+          'Mylapore_Concierge_Web',
+          'https://orgfarm-b2714d8f72-dev-ed.develop.my.site.com/ESWMylaporeConci1794475036498',
+          {
+            scrt2URL: 'https://orgfarm-b2714d8f72-dev-ed.develop.my.salesforce-scrt.com'
+          }
+        );
+        console.log('[Salesforce Agentforce] MIAW live bootstrap initialized successfully.');
+      } catch (err) {
+        console.error('Error loading Salesforce Embedded Messaging: ', err);
+      }
+    };
+  </script>
+  <script type='text/javascript' 
+          src='https://orgfarm-b2714d8f72-dev-ed.develop.my.site.com/ESWMylaporeConci1794475036498/assets/js/bootstrap.min.js' 
+          onload='initEmbeddedMessaging()'>
+  </script>
+
+</body>
+</html>
