@@ -283,11 +283,11 @@ function HomeContent() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { title: 'Best Sellers', count: '8 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794547963/mylapore-express/dishes/curries-south-indian-vegetable-kurma.webp' },
-              { title: 'Paneer Favourites', count: '8 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794547963/mylapore-express/dishes/curries-palak-saag-paneer.webp' },
+              { title: 'Best Sellers', count: '8 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-coconut-spiced-south-indian-veg-kurma.webp' },
+              { title: 'Paneer Favourites', count: '8 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546808/mylapore-express/dishes/curries-spinach-greens-cottage-cheese-saag-paneer.webp' },
               { title: 'Rice Bowls', count: '7 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549448/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg' },
               { title: 'Tea-time Snacks', count: '6 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549448/mylapore-express/dishes/podis-gunpowder-idli-milagai-podi.jpg' },
-              { title: 'Breakfast & Tiffin', count: '6 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794547963/mylapore-express/dishes/batters-stone-ground-crispy-dosa-batter.webp' }
+              { title: 'Breakfast & Tiffin', count: '6 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546780/mylapore-express/dishes/batters-crispy-fermented-dosa-batter.webp' }
             ].map((col, idx) => (
               <div
                 key={idx}
