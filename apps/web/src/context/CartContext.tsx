@@ -8,12 +8,15 @@ interface CartContextType {
   itemCount: number;
   subtotal: number;
   isOpen: boolean;
+  appliedCoupon: string | null;
   openCart: () => void;
   closeCart: () => void;
   refreshCart: () => Promise<void>;
   addItem: (item: { menuItemId: string; quantity: number; variantId?: string; spiceLevel?: string; specialInstructions?: string }) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeItem: (itemId: string) => Promise<void>;
+  applyCoupon: (code: string) => boolean;
+  removeCoupon: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -21,6 +24,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<any>({ items: [], subtotal: 0, itemCount: 0 });
   const [isOpen, setIsOpen] = useState(false);
+  const [appliedCoupon, setAppliedCouponState] = useState<string | null>(null);
 
   const refreshCart = async () => {
     try {
@@ -32,10 +36,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    // 1. Immediately warm up free-tier backend in background so cart adds never hit cold start
     warmUpApi();
-    // 2. Fetch active session cart
     refreshCart();
+
+    // Restore persistent coupon if any
+    try {
+      const savedCoupon = localStorage.getItem('mylapore_coupon');
+      if (savedCoupon && ['MYLAPORE15', 'WELCOME5'].includes(savedCoupon)) {
+        setAppliedCouponState(savedCoupon);
+      }
+    } catch {}
   }, []);
 
   const openCart = () => setIsOpen(true);
@@ -48,6 +58,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setIsOpen(true);
     } catch (err: any) {
       console.error('Failed to add item to cart:', err);
+      throw err;
     }
   };
 
@@ -69,6 +80,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const applyCoupon = (code: string): boolean => {
+    const formatted = code.toUpperCase().trim();
+    if (formatted === 'MYLAPORE15' || formatted === 'WELCOME5') {
+      setAppliedCouponState(formatted);
+      try {
+        localStorage.setItem('mylapore_coupon', formatted);
+      } catch {}
+      return true;
+    }
+    return false;
+  };
+
+  const removeCoupon = () => {
+    setAppliedCouponState(null);
+    try {
+      localStorage.removeItem('mylapore_coupon');
+    } catch {}
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -76,12 +106,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
         itemCount: cart?.itemCount || 0,
         subtotal: cart?.subtotal || 0,
         isOpen,
+        appliedCoupon,
         openCart,
         closeCart,
         refreshCart,
         addItem,
         updateQuantity,
-        removeItem
+        removeItem,
+        applyCoupon,
+        removeCoupon,
       }}
     >
       {children}

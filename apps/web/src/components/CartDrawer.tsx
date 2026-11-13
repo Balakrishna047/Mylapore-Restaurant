@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useLocation } from '@/context/LocationContext';
@@ -8,11 +8,32 @@ import { useToast } from '@/context/ToastContext';
 import { X, Trash2, Plus, Minus, ArrowRight, Snowflake, MapPin, Tag } from 'lucide-react';
 
 export default function CartDrawer() {
-  const { cart, isOpen, closeCart, updateQuantity, removeItem } = useCart();
+  const {
+    cart,
+    isOpen,
+    closeCart,
+    updateQuantity,
+    removeItem,
+    appliedCoupon,
+    applyCoupon,
+    removeCoupon,
+  } = useCart();
+
   const { location, openModal: openLocationModal } = useLocation();
   const toast = useToast();
   const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+
+  // When cart drawer is open, add class to body to prevent cross-origin widgets from occluding the checkout CTA
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('cart-open');
+    } else {
+      document.body.classList.remove('cart-open');
+    }
+    return () => {
+      document.body.classList.remove('cart-open');
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -34,18 +55,18 @@ export default function CartDrawer() {
 
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
-    const code = couponCode.toUpperCase().trim();
-    if (code === 'MYLAPORE15' || code === 'WELCOME5') {
-      setAppliedCoupon(code);
+    if (!couponCode.trim()) return;
+    const ok = applyCoupon(couponCode);
+    if (ok) {
       setCouponCode('');
-      toast.success('Promo Code Applied', `Discount of $${discount > 0 ? discount : 5} deducted.`);
+      toast.success('Promo Code Applied', `Discount activated across cart and checkout.`);
     } else {
       toast.error('Invalid Coupon Code', 'Try MYLAPORE15 (15% off) or WELCOME5 ($5 off).');
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[99999] overflow-hidden animate-in fade-in duration-200">
       {/* Backdrop */}
       <div
         onClick={closeCart}
@@ -53,8 +74,8 @@ export default function CartDrawer() {
         aria-label="Close cart overlay"
       />
 
-      {/* Drawer Container: Responsive bottom-sheet on mobile (< 640px), right slide-over on desktop (>= 640px) */}
-      <div className="fixed inset-x-0 bottom-0 sm:inset-y-0 sm:right-0 sm:left-auto max-w-full flex">
+      {/* Drawer Container */}
+      <div className="fixed inset-x-0 bottom-0 sm:inset-y-0 sm:right-0 sm:left-auto max-w-full flex z-[99999]">
         <div className="w-full sm:w-[420px] lg:w-[460px] bg-surface border-t sm:border-t-0 sm:border-l border-border rounded-t-3xl sm:rounded-none shadow-2xl flex flex-col justify-between max-h-[92vh] sm:max-h-screen sm:h-screen">
           {/* Mobile Swipe Handle Indicator */}
           <div className="sm:hidden flex justify-center pt-2.5 pb-0.5">
@@ -217,7 +238,7 @@ export default function CartDrawer() {
 
           {/* Footer & Checkout Breakdown */}
           {items.length > 0 && (
-            <div className="border-t border-border p-4 sm:p-5 bg-surface-muted space-y-3 shrink-0">
+            <div className="border-t border-border p-4 sm:p-5 bg-surface-muted space-y-3 shrink-0 pb-6">
               {/* Freshness Callout */}
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-300 text-[11px]">
                 <Snowflake className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
@@ -243,8 +264,19 @@ export default function CartDrawer() {
 
               {appliedCoupon && (
                 <div className="text-xs text-success flex items-center justify-between font-medium">
-                  <span>Coupon {appliedCoupon} applied</span>
-                  <span>-${discount.toFixed(2)}</span>
+                  <span className="flex items-center gap-1">
+                    <Tag className="w-3 h-3" /> Coupon {appliedCoupon} applied
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span>-${discount.toFixed(2)}</span>
+                    <button
+                      type="button"
+                      onClick={removeCoupon}
+                      className="text-[10px] text-muted-foreground hover:text-destructive underline cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -254,6 +286,12 @@ export default function CartDrawer() {
                   <span>Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
+                {discount > 0 && (
+                  <div className="flex justify-between text-success">
+                    <span>Discount</span>
+                    <span>-${discount.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span>Sales Tax (8.25%)</span>
                   <span>${tax.toFixed(2)}</span>
@@ -269,14 +307,16 @@ export default function CartDrawer() {
               </div>
 
               {/* Checkout Button */}
-              <Link
-                href="/checkout"
-                onClick={closeCart}
-                className="w-full py-3.5 bg-primary hover:bg-primary-hover active:scale-[0.98] text-primary-foreground font-bold text-xs uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-2 transition-all min-h-[44px]"
-              >
-                <span>Proceed to Checkout</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="pt-1">
+                <Link
+                  href="/checkout"
+                  onClick={closeCart}
+                  className="w-full py-3.5 bg-primary hover:bg-primary-hover active:scale-[0.98] text-primary-foreground font-bold text-xs uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-2 transition-all min-h-[46px]"
+                >
+                  <span>Proceed to Checkout</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           )}
         </div>

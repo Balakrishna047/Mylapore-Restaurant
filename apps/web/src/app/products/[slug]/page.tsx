@@ -28,7 +28,7 @@ export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
 
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const toast = useToast();
   const [dish, setDish] = useState<MenuItemDto | null>(null);
   const [loading, setLoading] = useState(true);
@@ -101,6 +101,7 @@ export default function ProductDetailPage() {
         spiceLevel: selectedSpice as any,
       });
       setAddedNotice(true);
+      openCart();
       toast.success('Added to Cart', `${dish.name} added to your order.`);
       setTimeout(() => setAddedNotice(false), 2500);
     } catch {
@@ -117,7 +118,7 @@ export default function ProductDetailPage() {
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <Link href="/" className="hover:text-foreground">Shop</Link>
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
-          <Link href={`/?category=${dish.categoryId || 'curries'}`} className="hover:text-foreground">
+          <Link href={dish.categoryName ? `/category/${dish.categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}` : '/'} className="hover:text-foreground">
             {dish.categoryName || 'Categories'}
           </Link>
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
@@ -195,6 +196,7 @@ export default function ProductDetailPage() {
                   {dish.variants.map((v) => (
                     <button
                       key={v.id}
+                      type="button"
                       onClick={() => setSelectedVariant(v.id)}
                       className={`p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                         selectedVariant === v.id
@@ -212,6 +214,43 @@ export default function ProductDetailPage() {
                 </div>
               </div>
             )}
+
+            {/* Spice Level Selector */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wider">
+                  Spice Level
+                </label>
+                <span className="text-[11px] font-semibold text-primary">
+                  {selectedSpice === 'MILD' && '🌶️ Mild (Subtle & gentle)'}
+                  {selectedSpice === 'MEDIUM' && '🌶️🌶️ Medium (Authentic South Indian)'}
+                  {selectedSpice === 'HOT' && '🌶️🌶️🌶️ Hot (Traditional heat)'}
+                  {selectedSpice === 'EXTRA_HOT' && '🔥 Extra Hot (Chettinad fiery)'}
+                </span>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { level: 'MILD', label: 'Mild', icon: '🌶️' },
+                  { level: 'MEDIUM', label: 'Medium', icon: '🌶️🌶️' },
+                  { level: 'HOT', label: 'Hot', icon: '🌶️🌶️🌶️' },
+                  { level: 'EXTRA_HOT', label: 'Extra', icon: '🔥' },
+                ].map(({ level, label, icon }) => (
+                  <button
+                    key={level}
+                    type="button"
+                    onClick={() => setSelectedSpice(level)}
+                    className={`py-2 px-1 text-center rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+                      selectedSpice === level
+                        ? 'border-primary bg-primary/10 text-primary ring-1 ring-primary'
+                        : 'border-border bg-surface text-foreground hover:border-accent'
+                    }`}
+                  >
+                    <span className="block text-xs">{label}</span>
+                    <span className="block text-[10px] text-muted-foreground mt-0.5">{icon}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Quantity and Add to Cart Button */}
             <div className="flex items-center gap-3 pt-2">
@@ -266,7 +305,7 @@ export default function ProductDetailPage() {
               )}
 
               <Badge variant="destructive" size="sm">
-                🌶️🌶️🌶️ {dish.spiceLevel || 'Hot'}
+                🌶️ {selectedSpice.replace('_', ' ')}
               </Badge>
             </div>
 

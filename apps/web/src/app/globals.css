@@ -79,3 +79,15 @@ body {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Hide floating chat widgets when cart drawer is active to prevent blocking checkout CTAs */
+body.cart-open .embeddedServiceHelpButton,
+body.cart-open #esw-chat-container,
+body.cart-open iframe[title="Chat Window"],
+body.cart-open .embeddedServiceSidebar {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+

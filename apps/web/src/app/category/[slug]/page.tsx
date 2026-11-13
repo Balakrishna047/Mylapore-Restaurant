@@ -804,7 +804,7 @@ export default function CategoryPage() {
           </aside>
 
           {/* Right Product Grid / List */}
-          <main className="md:col-span-3">
+          <section className="md:col-span-3" aria-label="Dishes list">
             {loading ? (
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {[...Array(6)].map((_, i) => (
@@ -845,7 +845,7 @@ export default function CategoryPage() {
                 ))}
               </div>
             )}
-          </main>
+          </section>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ import { CheckoutQuoteDto } from '@mylapore/shared-types';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, refreshCart } = useCart();
+  const { cart, refreshCart, appliedCoupon, applyCoupon, removeCoupon } = useCart();
   const { user } = useAuth();
   const { location, orderType: defaultOrderType } = useLocation();
   const toast = useToast();
@@ -29,7 +29,6 @@ export default function CheckoutPage() {
   const [deliverySlot, setDeliverySlot] = useState('Today, 6:00 PM - 7:00 PM');
   const [tip, setTip] = useState(3.0);
   const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
   const [specialInstructions, setSpecialInstructions] = useState('');
   const [guestName, setGuestName] = useState(user?.name || '');
   const [guestEmail, setGuestEmail] = useState(user?.email || '');
@@ -69,8 +68,8 @@ export default function CheckoutPage() {
     e.preventDefault();
     const code = couponCode.toUpperCase().trim();
     if (!code) return;
-    if (code === 'MYLAPORE15' || code === 'WELCOME5') {
-      setAppliedCoupon(code);
+    const ok = applyCoupon(code);
+    if (ok) {
       setCouponCode('');
       toast.success('Promo Code Applied', `Discount activated.`);
     } else {
@@ -393,9 +392,16 @@ export default function CheckoutPage() {
                   </Button>
                 </div>
                 {appliedCoupon && (
-                  <span className="block text-[11px] text-success font-semibold mt-1">
-                    ✓ Promo "{appliedCoupon}" applied
-                  </span>
+                  <div className="flex items-center justify-between mt-1.5 text-[11px] text-success font-semibold">
+                    <span>✓ Promo "{appliedCoupon}" active</span>
+                    <button
+                      type="button"
+                      onClick={removeCoupon}
+                      className="text-[10px] text-muted-foreground hover:text-destructive underline cursor-pointer font-normal"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 )}
               </div>
 

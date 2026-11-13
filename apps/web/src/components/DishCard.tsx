@@ -37,7 +37,7 @@ const optimizeCloudinaryUrl = (url?: string) => {
 };
 
 export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
-  const { addItem, cart, updateQuantity } = useCart();
+  const { addItem, cart, updateQuantity, openCart } = useCart();
   const toast = useToast();
   const [imgSrc, setImgSrc] = useState(optimizeCloudinaryUrl(dish.image));
   const [isAdding, setIsAdding] = useState(false);
@@ -64,6 +64,7 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
         menuItemId: dish.id || dish.slug,
         quantity: 1,
       });
+      openCart();
       toast.success('Added to Cart', `${dish.name} added to your order.`);
     } catch {
       toast.error('Could not add dish', 'Please try again in a moment.');
