@@ -39,19 +39,17 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
     }
   }, [dish?.image]);
 
-  // Resilient multi-tier fallback for images
+  // Resilient multi-tier fallback for images (Cloudinary CDN -> Local WebP -> JPG -> Default)
   const handleImageError = () => {
-    if (imgSrc && imgSrc.endsWith('.jpg')) {
-      // 1. Try webp format of same dish
+    if (imgSrc && imgSrc.startsWith('https://res.cloudinary.com/')) {
+      setImgSrc(`/images/dishes/${dish.slug || 'potato-kara-kari'}.webp`);
+    } else if (imgSrc && imgSrc.endsWith('.jpg')) {
       setImgSrc(imgSrc.replace(/\.jpg$/, '.webp'));
     } else if (imgSrc && imgSrc.startsWith('/images/dishes/')) {
-      // 2. Try alternative static directory /dish-photos/
       setImgSrc(imgSrc.replace('/images/dishes/', '/dish-photos/'));
     } else if (imgSrc && imgSrc.startsWith('/dish-photos/') && imgSrc.endsWith('.jpg')) {
-      // 3. Try webp in /dish-photos/
       setImgSrc(imgSrc.replace(/\.jpg$/, '.webp'));
     } else if (imgSrc !== '/images/dishes/potato-kara-kari.webp') {
-      // 4. Fallback to resilient default dish
       setImgSrc('/images/dishes/potato-kara-kari.webp');
     }
   };

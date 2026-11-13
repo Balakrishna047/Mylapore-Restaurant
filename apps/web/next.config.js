@@ -6,7 +6,13 @@ const apiUrl = normalizedUrl.endsWith('/api/v1') ? normalizedUrl : `${normalized
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com'
+      }
+    ]
   },
   async headers() {
     return [

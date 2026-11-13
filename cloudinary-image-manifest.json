@@ -1,0 +1,296 @@
+{
+  "idly-batter": {
+    "matureId": "batters-stoneground-fresh-idly-batter",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+    "bytes": 11738
+  },
+  "crispy-dosa-batter": {
+    "matureId": "batters-crispy-fermented-dosa-batter",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546780/mylapore-express/dishes/batters-crispy-fermented-dosa-batter.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546780/mylapore-express/dishes/batters-crispy-fermented-dosa-batter.webp",
+    "bytes": 11172
+  },
+  "adai-batter": {
+    "matureId": "batters-multigrain-protein-adai-batter",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546781/mylapore-express/dishes/batters-multigrain-protein-adai-batter.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546781/mylapore-express/dishes/batters-multigrain-protein-adai-batter.webp",
+    "bytes": 23442
+  },
+  "idli-milagai-podi": {
+    "matureId": "podis-gunpowder-idli-milagai-podi",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549168/mylapore-express/dishes/podis-gunpowder-idli-milagai-podi.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549168/mylapore-express/dishes/podis-gunpowder-idli-milagai-podi.jpg",
+    "verifiedAuthentic": true
+  },
+  "mylapore-filter-coffee": {
+    "matureId": "beverages-authentic-mylapore-degree-filter-coffee",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+    "verifiedAuthentic": true
+  },
+  "spiced-buttermilk": {
+    "matureId": "beverages-tempered-neer-moru-spiced-buttermilk",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546783/mylapore-express/dishes/beverages-tempered-neer-moru-spiced-buttermilk.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546783/mylapore-express/dishes/beverages-tempered-neer-moru-spiced-buttermilk.webp",
+    "bytes": 15762
+  },
+  "rose-milk": {
+    "matureId": "beverages-chilled-cardamom-rose-milk",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546783/mylapore-express/dishes/beverages-chilled-cardamom-rose-milk.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546783/mylapore-express/dishes/beverages-chilled-cardamom-rose-milk.webp",
+    "bytes": 9822
+  },
+  "mango-lassi": {
+    "matureId": "beverages-alphonso-mango-yogurt-lassi",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546784/mylapore-express/dishes/beverages-alphonso-mango-yogurt-lassi.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546784/mylapore-express/dishes/beverages-alphonso-mango-yogurt-lassi.webp",
+    "bytes": 16458
+  },
+  "mylapore-murungakkai-sambar": {
+    "matureId": "sambar-traditional-drumstick-murungakkai-sambar",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+    "bytes": 27422
+  },
+  "arachuvitta-sambar": {
+    "matureId": "sambar-fresh-roasted-spice-arachuvitta-sambar",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-fresh-roasted-spice-arachuvitta-sambar.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546785/mylapore-express/dishes/sambar-fresh-roasted-spice-arachuvitta-sambar.webp",
+    "bytes": 17884
+  },
+  "chinna-vengayam-sambar": {
+    "matureId": "sambar-shallots-pearl-onion-sambar",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546786/mylapore-express/dishes/sambar-shallots-pearl-onion-sambar.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546786/mylapore-express/dishes/sambar-shallots-pearl-onion-sambar.webp",
+    "bytes": 19196
+  },
+  "mysore-rasam": {
+    "matureId": "rasam-mysore-aromatic-lentil-rasam",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546786/mylapore-express/dishes/rasam-mysore-aromatic-lentil-rasam.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546786/mylapore-express/dishes/rasam-mysore-aromatic-lentil-rasam.webp",
+    "bytes": 13492
+  },
+  "thakkali-rasam": {
+    "matureId": "rasam-tangy-temple-tomato-thakkali-rasam",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+    "bytes": 40500
+  },
+  "poondu-milagu-rasam": {
+    "matureId": "rasam-garlic-black-pepper-poondu-milagu-rasam",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546788/mylapore-express/dishes/rasam-garlic-black-pepper-poondu-milagu-rasam.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546788/mylapore-express/dishes/rasam-garlic-black-pepper-poondu-milagu-rasam.webp",
+    "bytes": 32450
+  },
+  "puliyodarai": {
+    "matureId": "rice-temple-style-tamarind-puliyodarai",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+    "verifiedAuthentic": true
+  },
+  "bisi-bele-bath": {
+    "matureId": "rice-mysore-spiced-vegetable-bisi-bele-bath",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546789/mylapore-express/dishes/rice-mysore-spiced-vegetable-bisi-bele-bath.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546789/mylapore-express/dishes/rice-mysore-spiced-vegetable-bisi-bele-bath.webp",
+    "bytes": 20562
+  },
+  "lemon-rice": {
+    "matureId": "rice-citrus-tempered-elamichai-lemon-rice",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549177/mylapore-express/dishes/rice-citrus-tempered-elamichai-lemon-rice.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549177/mylapore-express/dishes/rice-citrus-tempered-elamichai-lemon-rice.jpg",
+    "verifiedAuthentic": true
+  },
+  "thayir-sadam": {
+    "matureId": "rice-tempered-curd-thayir-sadam",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546790/mylapore-express/dishes/rice-tempered-curd-thayir-sadam.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546790/mylapore-express/dishes/rice-tempered-curd-thayir-sadam.webp",
+    "bytes": 12754
+  },
+  "venn-pongal": {
+    "matureId": "breakfast-ghee-cumin-pepper-venn-pongal",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546791/mylapore-express/dishes/breakfast-ghee-cumin-pepper-venn-pongal.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546791/mylapore-express/dishes/breakfast-ghee-cumin-pepper-venn-pongal.webp",
+    "bytes": 17148
+  },
+  "rava-khichdi": {
+    "matureId": "breakfast-semolina-vegetable-rava-khichdi",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546792/mylapore-express/dishes/breakfast-semolina-vegetable-rava-khichdi.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546792/mylapore-express/dishes/breakfast-semolina-vegetable-rava-khichdi.webp",
+    "bytes": 14070
+  },
+  "thengai-chutney": {
+    "matureId": "chutneys-fresh-grated-coconut-thengai-chutney",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+    "bytes": 17006
+  },
+  "thakkali-chutney": {
+    "matureId": "chutneys-spicy-roasted-tomato-thakkali-chutney",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546794/mylapore-express/dishes/chutneys-spicy-roasted-tomato-thakkali-chutney.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546794/mylapore-express/dishes/chutneys-spicy-roasted-tomato-thakkali-chutney.webp",
+    "bytes": 15290
+  },
+  "kothamalli-pudina-chutney": {
+    "matureId": "chutneys-coriander-mint-kothamalli-pudina-chutney",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546796/mylapore-express/dishes/chutneys-coriander-mint-kothamalli-pudina-chutney.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546796/mylapore-express/dishes/chutneys-coriander-mint-kothamalli-pudina-chutney.webp",
+    "bytes": 14954
+  },
+  "potato-kara-kari": {
+    "matureId": "curries-spicy-roasted-potato-kara-kari",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+    "bytes": 19082
+  },
+  "south-indian-veg-kurma": {
+    "matureId": "curries-coconut-spiced-south-indian-veg-kurma",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-coconut-spiced-south-indian-veg-kurma.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546797/mylapore-express/dishes/curries-coconut-spiced-south-indian-veg-kurma.webp",
+    "bytes": 19226
+  },
+  "traditional-avial": {
+    "matureId": "curries-kerala-coconut-vegetable-traditional-avial",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546798/mylapore-express/dishes/curries-kerala-coconut-vegetable-traditional-avial.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546798/mylapore-express/dishes/curries-kerala-coconut-vegetable-traditional-avial.webp",
+    "bytes": 41466
+  },
+  "vathal-kuzhambu": {
+    "matureId": "curries-turkey-berry-tamarind-vathal-kuzhambu",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549171/mylapore-express/dishes/curries-turkey-berry-tamarind-vathal-kuzhambu.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549171/mylapore-express/dishes/curries-turkey-berry-tamarind-vathal-kuzhambu.jpg",
+    "verifiedAuthentic": true
+  },
+  "beans-usili": {
+    "matureId": "curries-steamed-lentil-crumble-beans-usili",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546799/mylapore-express/dishes/curries-steamed-lentil-crumble-beans-usili.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546799/mylapore-express/dishes/curries-steamed-lentil-crumble-beans-usili.webp",
+    "bytes": 34178
+  },
+  "beans-poriyal": {
+    "matureId": "curries-coconut-tempered-french-beans-poriyal",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546800/mylapore-express/dishes/curries-coconut-tempered-french-beans-poriyal.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546800/mylapore-express/dishes/curries-coconut-tempered-french-beans-poriyal.webp",
+    "bytes": 31808
+  },
+  "chow-chow-kootu": {
+    "matureId": "curries-chayote-moong-dal-chow-chow-kootu",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546801/mylapore-express/dishes/curries-chayote-moong-dal-chow-chow-kootu.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546801/mylapore-express/dishes/curries-chayote-moong-dal-chow-chow-kootu.webp",
+    "bytes": 19574
+  },
+  "murungai-keerai-kootu": {
+    "matureId": "curries-drumstick-leaves-lentil-murungai-keerai-kootu",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546802/mylapore-express/dishes/curries-drumstick-leaves-lentil-murungai-keerai-kootu.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546802/mylapore-express/dishes/curries-drumstick-leaves-lentil-murungai-keerai-kootu.webp",
+    "bytes": 30162
+  },
+  "guttivankaya-kura": {
+    "matureId": "curries-andhra-stuffed-baby-brinjal-guttivankaya-kura",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546802/mylapore-express/dishes/curries-andhra-stuffed-baby-brinjal-guttivankaya-kura.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546802/mylapore-express/dishes/curries-andhra-stuffed-baby-brinjal-guttivankaya-kura.webp",
+    "bytes": 23950
+  },
+  "black-channa-masala": {
+    "matureId": "curries-kala-chana-black-channa-masala",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546803/mylapore-express/dishes/curries-kala-chana-black-channa-masala.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546803/mylapore-express/dishes/curries-kala-chana-black-channa-masala.webp",
+    "bytes": 21058
+  },
+  "punjabi-chole": {
+    "matureId": "curries-north-indian-punjabi-chole",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546804/mylapore-express/dishes/curries-north-indian-punjabi-chole.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546804/mylapore-express/dishes/curries-north-indian-punjabi-chole.webp",
+    "bytes": 18130
+  },
+  "rajma": {
+    "matureId": "curries-slow-simmered-kashmiri-rajma",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546805/mylapore-express/dishes/curries-slow-simmered-kashmiri-rajma.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546805/mylapore-express/dishes/curries-slow-simmered-kashmiri-rajma.webp",
+    "bytes": 36804
+  },
+  "matar-paneer": {
+    "matureId": "curries-cottage-cheese-peas-matar-paneer",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546806/mylapore-express/dishes/curries-cottage-cheese-peas-matar-paneer.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546806/mylapore-express/dishes/curries-cottage-cheese-peas-matar-paneer.webp",
+    "bytes": 39394
+  },
+  "methi-paneer": {
+    "matureId": "curries-fenugreek-cottage-cheese-methi-paneer",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546807/mylapore-express/dishes/curries-fenugreek-cottage-cheese-methi-paneer.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546807/mylapore-express/dishes/curries-fenugreek-cottage-cheese-methi-paneer.webp",
+    "bytes": 20486
+  },
+  "saag-paneer": {
+    "matureId": "curries-spinach-greens-cottage-cheese-saag-paneer",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546808/mylapore-express/dishes/curries-spinach-greens-cottage-cheese-saag-paneer.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546808/mylapore-express/dishes/curries-spinach-greens-cottage-cheese-saag-paneer.webp",
+    "bytes": 20424
+  },
+  "paal-payasam": {
+    "matureId": "desserts-traditional-slow-simmered-paal-payasam",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+    "verifiedAuthentic": true
+  },
+  "asoka-halwa": {
+    "matureId": "desserts-thiruvaiyaru-asoka-halwa",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549178/mylapore-express/dishes/desserts-thiruvaiyaru-asoka-halwa.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549178/mylapore-express/dishes/desserts-thiruvaiyaru-asoka-halwa.jpg",
+    "verifiedAuthentic": true
+  },
+  "ghee-mysore-pak": {
+    "matureId": "desserts-pure-desi-ghee-mysore-pak",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549173/mylapore-express/dishes/desserts-pure-desi-ghee-mysore-pak.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549173/mylapore-express/dishes/desserts-pure-desi-ghee-mysore-pak.jpg",
+    "verifiedAuthentic": true
+  },
+  "saffron-rava-kesari": {
+    "matureId": "desserts-aromatic-saffron-rava-kesari",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549172/mylapore-express/dishes/desserts-aromatic-saffron-rava-kesari.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549172/mylapore-express/dishes/desserts-aromatic-saffron-rava-kesari.jpg",
+    "verifiedAuthentic": true
+  },
+  "avakkai-mango-pickle": {
+    "matureId": "pickles-spicy-andhra-avakkai-mango-pickle",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+    "verifiedAuthentic": true
+  },
+  "elumichai-oorugai": {
+    "matureId": "pickles-sun-cured-salted-lemon-elumichai-oorugai",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546813/mylapore-express/dishes/pickles-sun-cured-salted-lemon-elumichai-oorugai.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546813/mylapore-express/dishes/pickles-sun-cured-salted-lemon-elumichai-oorugai.webp",
+    "bytes": 19168
+  },
+  "puli-inji": {
+    "matureId": "pickles-sweet-tangy-ginger-tamarind-puli-inji",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546813/mylapore-express/dishes/pickles-sweet-tangy-ginger-tamarind-puli-inji.webp",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546813/mylapore-express/dishes/pickles-sweet-tangy-ginger-tamarind-puli-inji.webp",
+    "bytes": 15880
+  },
+  "mylapore-weekend-thali": {
+    "matureId": "specials-grand-festive-mylapore-weekend-thali",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549179/mylapore-express/dishes/specials-grand-festive-mylapore-weekend-thali.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794549179/mylapore-express/dishes/specials-grand-festive-mylapore-weekend-thali.jpg",
+    "verifiedAuthentic": true
+  },
+  "logo": {
+    "matureId": "brand-mylapore-express-official-logo",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546815/mylapore-express/brand/brand-mylapore-express-official-logo.png",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546815/mylapore-express/brand/brand-mylapore-express-official-logo.png",
+    "bytes": 81374
+  },
+  "dosa-hero": {
+    "matureId": "brand-crispy-golden-dosa-hero-banner",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546815/mylapore-express/brand/brand-crispy-golden-dosa-hero-banner.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546815/mylapore-express/brand/brand-crispy-golden-dosa-hero-banner.jpg",
+    "bytes": 511105
+  },
+  "temple-watermark": {
+    "matureId": "brand-kapaleeshwarar-temple-watermark",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546816/mylapore-express/brand/brand-kapaleeshwarar-temple-watermark.jpg",
+    "rawUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/v1794546816/mylapore-express/brand/brand-kapaleeshwarar-temple-watermark.jpg",
+    "bytes": 15549
+  }
+}
