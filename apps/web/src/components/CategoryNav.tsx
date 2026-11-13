@@ -12,19 +12,19 @@ interface CategoryNavProps {
 export default function CategoryNav({
   categories,
   activeCategory,
-  onSelectCategory
+  onSelectCategory,
 }: CategoryNavProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -240, behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: -260, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 240, behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: 260, behavior: 'smooth' });
     }
   };
 
@@ -32,19 +32,20 @@ export default function CategoryNav({
     id: 'all',
     name: 'All Dishes',
     slug: 'all',
-    icon: ''
+    icon: '',
   };
 
   const fullList = [allCategory, ...categories];
 
   return (
-    <div className="relative bg-[#FAF4E8] border-b border-[#E7DFD5] py-2.5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center">
-        {/* Scroll Left Button matching PDF Screenshot */}
+    <div className="relative bg-surface-muted border-b border-border py-2.5 transition-colors duration-200">
+      <div className="max-w-7xl 3xl:max-w-ultrawide mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center">
+        {/* Scroll Left Button */}
         <button
           onClick={scrollLeft}
-          className="hidden sm:flex absolute left-2 z-10 w-7 h-7 rounded-full bg-white/95 border border-[#E7DFD5] shadow-xs items-center justify-center text-[#78716C] hover:text-[#1C1917] hover:scale-105 transition-all"
-          title="Scroll left"
+          className="hidden sm:flex absolute left-2 z-10 w-8 h-8 rounded-full bg-surface/95 border border-border shadow-xs items-center justify-center text-muted-foreground hover:text-foreground hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          title="Scroll categories left"
+          aria-label="Scroll left"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -52,7 +53,9 @@ export default function CategoryNav({
         {/* Scrollable Categories List */}
         <div
           ref={scrollRef}
-          className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar scroll-smooth px-2 sm:px-8 w-full"
+          tabIndex={0}
+          aria-label="Dishes category selector"
+          className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar scroll-smooth px-1 sm:px-8 w-full"
         >
           {fullList.map((cat) => {
             const isActive = activeCategory === cat.slug;
@@ -60,18 +63,24 @@ export default function CategoryNav({
               <button
                 key={cat.slug}
                 onClick={() => onSelectCategory(cat.slug)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-all ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-all cursor-pointer min-h-[40px] sm:min-h-[36px] active:scale-[0.98] ${
                   isActive
-                    ? 'bg-[#1C1917] text-white shadow-xs'
-                    : 'bg-white hover:bg-[#F5EFE6] text-[#44403C] border border-[#E7DFD5]'
+                    ? 'bg-foreground text-background shadow-xs ring-2 ring-accent/30'
+                    : 'bg-surface hover:bg-surface-subtle text-foreground border border-border hover:border-accent/40'
                 }`}
               >
                 {cat.slug === 'all' ? (
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center ${isActive ? 'bg-white/20 text-white' : 'bg-[#E7DFD5] text-[#1C1917]'}`}>
+                  <div
+                    className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                      isActive
+                        ? 'bg-background/20 text-background'
+                        : 'bg-surface-muted text-foreground'
+                    }`}
+                  >
                     <Grid className="w-3 h-3" />
                   </div>
                 ) : (
-                  <div className="w-5 h-5 rounded-full overflow-hidden bg-neutral-200 shrink-0 border border-white">
+                  <div className="w-5 h-5 rounded-full overflow-hidden bg-surface-muted shrink-0 border border-border">
                     <img
                       src={cat.icon}
                       alt={cat.name}
@@ -89,11 +98,12 @@ export default function CategoryNav({
           })}
         </div>
 
-        {/* Scroll Right Button matching PDF Screenshot */}
+        {/* Scroll Right Button */}
         <button
           onClick={scrollRight}
-          className="hidden sm:flex absolute right-2 z-10 w-7 h-7 rounded-full bg-white/95 border border-[#E7DFD5] shadow-xs items-center justify-center text-[#78716C] hover:text-[#1C1917] hover:scale-105 transition-all"
-          title="Scroll right"
+          className="hidden sm:flex absolute right-2 z-10 w-8 h-8 rounded-full bg-surface/95 border border-border shadow-xs items-center justify-center text-muted-foreground hover:text-foreground hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          title="Scroll categories right"
+          aria-label="Scroll right"
         >
           <ChevronRight className="w-4 h-4" />
         </button>

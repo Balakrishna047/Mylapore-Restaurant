@@ -1,5 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { ThemeProvider } from '@/context/ThemeContext';
+import { ToastProvider } from '@/context/ToastContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { CartProvider } from '@/context/CartContext';
 import { LocationProvider } from '@/context/LocationContext';
@@ -21,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
@@ -34,24 +36,28 @@ export default function RootLayout({
           fetchPriority="high"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#FBF7F0] text-[#1C1917] selection:bg-[#D95338] selection:text-white">
-        <AuthProvider>
-          <LocationProvider>
-            <CartProvider>
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-              <CartDrawer />
-              <MobileCartBar />
-              <LocationModal />
+      <body className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-200 selection:bg-primary selection:text-white">
+        <ThemeProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <LocationProvider>
+                <CartProvider>
+                  <Header />
+                  <main className="flex-1">
+                    {children}
+                  </main>
+                  <Footer />
+                  <CartDrawer />
+                  <MobileCartBar />
+                  <LocationModal />
 
-              {/* Official Salesforce Agentforce Embedded Messaging (MIAW) Live Deployment */}
-              <SalesforceChatEmbed />
-            </CartProvider>
-          </LocationProvider>
-        </AuthProvider>
+                  {/* Official Salesforce Agentforce Embedded Messaging (MIAW) Live Deployment */}
+                  <SalesforceChatEmbed />
+                </CartProvider>
+              </LocationProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
