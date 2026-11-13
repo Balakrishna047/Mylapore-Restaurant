@@ -1,0 +1,29 @@
+[
+  {
+    "id": "banner-freshly-cooked",
+    "title": "Freshly cooked, every day",
+    "subtitle": "Authentic South Indian • no preservatives",
+    "ctaText": "Browse the menu",
+    "ctaLink": "/?category=all",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794550079/mylapore-express/banners/banner-freshly-cooked-dosa-idli-breakfast.jpg",
+    "localUrl": "/images/banners/banner-freshly-cooked-dosa-idli.jpg"
+  },
+  {
+    "id": "banner-favourites",
+    "title": "Choose from your favourites",
+    "subtitle": "Everything you can order for your day, in one place",
+    "ctaText": "Order now",
+    "ctaLink": "/?category=curries",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794550080/mylapore-express/banners/banner-festive-south-indian-thali-favourites.jpg",
+    "localUrl": "/images/banners/banner-choose-from-favourites.jpg"
+  },
+  {
+    "id": "banner-pay-it-forward",
+    "title": "Pay it forward",
+    "subtitle": "Sponsor a meal for someone in need",
+    "ctaText": "Sponsor a meal",
+    "ctaLink": "/support",
+    "cloudinaryUrl": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794550080/mylapore-express/banners/banner-pay-it-forward-tiffin-meals-charity.jpg",
+    "localUrl": "/images/banners/banner-pay-it-forward-tiffin-meals.jpg"
+  }
+]

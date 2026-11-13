@@ -7,6 +7,7 @@ import { api } from '@/lib/api';
 import { useLocation } from '@/context/LocationContext';
 import CategoryNav from '@/components/CategoryNav';
 import DishCard from '@/components/DishCard';
+import HeroCarousel from '@/components/HeroCarousel';
 import { ArrowRight, MapPin, Sparkles, Utensils } from 'lucide-react';
 
 function HomeContent() {
@@ -68,82 +69,9 @@ function HomeContent() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
-        {/* Hero 3-Card Banner from PDF Screenshot */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Card 1: Where should we deliver? */}
-          <div className="relative overflow-hidden rounded-2xl bg-[#262422] text-white p-6 flex flex-col justify-between min-h-[170px] shadow-sm">
-            <div className="space-y-1.5 z-10">
-              <h2 className="font-serif font-bold text-lg leading-snug">Where should we deliver?</h2>
-              <p className="text-xs text-[#A8A29E] leading-relaxed max-w-[220px]">
-                Set your address to see what we can bring to your door.
-              </p>
-            </div>
-            <button
-              onClick={openModal}
-              className="z-10 inline-flex items-center gap-1.5 text-xs font-bold text-[#E7DFD5] hover:text-[#D97706] transition-colors mt-4 text-left cursor-pointer"
-            >
-              <span>Set delivery location</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-            <div className="absolute -bottom-6 -right-6 text-7xl opacity-10 select-none">
-              🛵
-            </div>
-          </div>
-
-          {/* Card 2: Freshly cooked, every day */}
-          <div className="relative overflow-hidden rounded-2xl bg-[#F0ECE1] text-[#1C1917] p-6 flex flex-col justify-between min-h-[170px] border border-[#E7DFD5] shadow-sm">
-            <div className="space-y-1.5 z-10">
-              <h2 className="font-serif font-bold text-lg leading-snug">Freshly cooked, every day</h2>
-              <p className="text-xs text-[#78716C] leading-relaxed max-w-[220px]">
-                Authentic South Indian · no preservatives
-              </p>
-            </div>
-            <Link
-              href="/?category=curries"
-              className="z-10 inline-flex items-center gap-1.5 text-xs font-bold text-[#D95338] hover:text-[#C84B31] transition-colors mt-4"
-            >
-              <span>Browse the menu</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <div className="absolute right-3 top-3 bottom-3 w-28 rounded-xl overflow-hidden shadow-xs border border-white/60">
-              <img
-                src="/images/dishes/mylapore-weekend-thali.webp"
-                alt="Fresh South Indian Dish"
-                className="w-full h-full object-cover"
-                loading="eager"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  if (target.src.endsWith('.webp')) {
-                    target.src = '/images/dishes/mylapore-weekend-thali.jpg';
-                  } else {
-                    target.src = '/images/dishes/potato-kara-kari.webp';
-                  }
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Card 3: Choose & Order */}
-          <div className="relative overflow-hidden rounded-2xl bg-[#FAF4E8] text-[#1C1917] p-6 flex flex-col justify-between min-h-[170px] border border-[#E7DFD5] shadow-sm">
-            <div className="space-y-1.5 z-10">
-              <h2 className="font-serif font-bold text-lg leading-snug">Choose & Order</h2>
-              <p className="text-xs text-[#78716C] leading-relaxed max-w-[220px]">
-                Everything you crave. Authentic comfort meals.
-              </p>
-            </div>
-            <Link
-              href="/?category=rice"
-              className="z-10 inline-flex items-center gap-1.5 text-xs font-bold text-[#C8851A] hover:text-[#B37414] transition-colors mt-4"
-            >
-              <span>Order now</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <div className="absolute -bottom-6 -right-6 text-7xl opacity-15 select-none">
-              🍱
-            </div>
-          </div>
-        </section>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-10">
+        {/* Top Hero Banner Carousel from Cloudinary */}
+        <HeroCarousel />
 
         {/* Section 1: Customer favorites */}
         <section className="space-y-4">
