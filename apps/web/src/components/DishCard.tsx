@@ -25,18 +25,23 @@ interface DishCardProps {
   viewMode?: 'grid' | 'list';
 }
 
+// Helper to inject Cloudinary on-the-fly thumbnail scaling (resizes to 500px, cutting payload from 200KB down to ~15KB for immediate display)
+const optimizeCloudinaryUrl = (url?: string) => {
+  if (!url) return '/images/placeholder-dish.svg';
+  if (url.includes('res.cloudinary.com') && !url.includes('w_')) {
+    return url.replace('/upload/', '/upload/w_500,c_scale/');
+  }
+  return url;
+};
+
 export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   const { addItem, cart, updateQuantity } = useCart();
-  const [imgSrc, setImgSrc] = useState(dish.image || '/images/placeholder-dish.svg');
+  const [imgSrc, setImgSrc] = useState(optimizeCloudinaryUrl(dish.image));
   const [isAdding, setIsAdding] = useState(false);
 
   // Sync image source whenever dish prop updates (e.g. category filter or search)
   React.useEffect(() => {
-    if (dish?.image) {
-      setImgSrc(dish.image);
-    } else {
-      setImgSrc('/images/placeholder-dish.svg');
-    }
+    setImgSrc(optimizeCloudinaryUrl(dish?.image));
   }, [dish?.image]);
 
   // Graceful fallback: If Cloudinary fails or is offline, show styled SVG placeholder

@@ -82,10 +82,13 @@ export default function HeroCarousel() {
             className="flex-none w-[88vw] sm:w-[68vw] md:w-[48vw] lg:w-[44vw] max-w-[620px] snap-start"
           >
             <div className="relative h-[200px] sm:h-[220px] md:h-[230px] rounded-2xl overflow-hidden border border-[#E7DFD5] shadow-xs group bg-[#F5EFE6]">
-              {/* Full background food image */}
+              {/* Full background food image with high-priority eager load on first slide */}
               <img
                 src={banner.cloudinaryUrl}
                 alt={banner.title}
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                fetchPriority={idx === 0 ? 'high' : 'auto'}
+                decoding={idx === 0 ? 'sync' : 'async'}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;

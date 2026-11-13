@@ -24,6 +24,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        {/* Preload the Hero Carousel LCP image for instantaneous visual paint */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto,w_1000/v1794550079/mylapore-express/banners/banner-freshly-cooked-dosa-idli-breakfast.jpg"
+          fetchPriority="high"
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-[#FBF7F0] text-[#1C1917] selection:bg-[#D95338] selection:text-white">
         <AuthProvider>

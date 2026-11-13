@@ -1,0 +1,122 @@
+[
+  {
+    "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "name": "Curries",
+    "slug": "curries",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+    "description": "Traditional dry curries, kootus, and rich lentil stews",
+    "displayOrder": 1,
+    "createdAt": "2026-11-13T07:06:33.894Z",
+    "_count": {
+      "menuItems": 14
+    }
+  },
+  {
+    "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "name": "Rice",
+    "slug": "rice",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+    "description": "Aromatic variety rice, pongal, and flavored dishes",
+    "displayOrder": 2,
+    "createdAt": "2026-11-13T07:06:34.242Z",
+    "_count": {
+      "menuItems": 6
+    }
+  },
+  {
+    "id": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+    "name": "Sambar",
+    "slug": "sambar",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+    "description": "Freshly tempered spiced lentil sambar with drumsticks and pearl onions",
+    "displayOrder": 3,
+    "createdAt": "2026-11-13T07:06:34.417Z",
+    "_count": {
+      "menuItems": 3
+    }
+  },
+  {
+    "id": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+    "name": "Rasam",
+    "slug": "rasam",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+    "description": "Tangy, peppery tomato, pepper, and mysore rasam brews",
+    "displayOrder": 4,
+    "createdAt": "2026-11-13T07:06:34.592Z",
+    "_count": {
+      "menuItems": 3
+    }
+  },
+  {
+    "id": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+    "name": "Chutneys",
+    "slug": "chutneys",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+    "description": "Fresh coconut, tomato thakkali, and spicy coriander pachadis",
+    "displayOrder": 5,
+    "createdAt": "2026-11-13T07:06:34.767Z",
+    "_count": {
+      "menuItems": 4
+    }
+  },
+  {
+    "id": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+    "name": "Desserts",
+    "slug": "desserts",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+    "description": "Traditional payasam, badam halwa, and mysore pak",
+    "displayOrder": 6,
+    "createdAt": "2026-11-13T07:06:34.943Z",
+    "_count": {
+      "menuItems": 4
+    }
+  },
+  {
+    "id": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+    "name": "Beverages",
+    "slug": "beverages",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+    "description": "Authentic South Indian Degree Filter Coffee and spiced buttermilk",
+    "displayOrder": 7,
+    "createdAt": "2026-11-13T07:06:35.118Z",
+    "_count": {
+      "menuItems": 4
+    }
+  },
+  {
+    "id": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+    "name": "Batters",
+    "slug": "batters",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+    "description": "Naturally stone-ground idly, dosa, and adai batters",
+    "displayOrder": 8,
+    "createdAt": "2026-11-13T07:06:35.293Z",
+    "_count": {
+      "menuItems": 3
+    }
+  },
+  {
+    "id": "2d8e7e8c-91ac-4459-bf4f-f4146e9a46f1",
+    "name": "Specials",
+    "slug": "specials",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549179/mylapore-express/dishes/specials-grand-festive-mylapore-weekend-thali.jpg",
+    "description": "Festive weekend meals and curated kitchen specials",
+    "displayOrder": 9,
+    "createdAt": "2026-11-13T07:06:35.467Z",
+    "_count": {
+      "menuItems": 2
+    }
+  },
+  {
+    "id": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+    "name": "Pickles",
+    "slug": "pickles",
+    "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+    "description": "Sun-cured avakkai mango, lemon, and green chili pickles",
+    "displayOrder": 10,
+    "createdAt": "2026-11-13T07:06:35.642Z",
+    "_count": {
+      "menuItems": 3
+    }
+  }
+]

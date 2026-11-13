@@ -1,0 +1,2637 @@
+[
+  {
+    "id": "d2cd6a89-43de-41af-a217-538876fb7cde",
+    "slug": "south-indian-veg-kurma",
+    "name": "South Indian Veg Kurma",
+    "description": "South Indian Veg Kurma for Parotta · Vegan, has coconut and rich spices.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 12.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-coconut-spiced-south-indian-veg-kurma.webp",
+    "orderCountBadge": "1,000+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Carrots",
+      "Beans",
+      "Potatoes",
+      "Green Peas",
+      "Fresh Coconut",
+      "Poppy Seeds",
+      "Fennel",
+      "Cloves",
+      "Cinnamon",
+      "Cardamom"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Refrigerate at <=40°F (4°C). Simmer on low heat in a saucepan for 3 minutes.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 112,
+    "createdAt": "2026-11-13T07:06:35.818Z",
+    "updatedAt": "2026-11-13T07:06:35.818Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "2208cb2b-648a-4033-bfd0-f300bb3d0b8a",
+        "menuItemId": "d2cd6a89-43de-41af-a217-538876fb7cde",
+        "name": "Regular (16 oz)",
+        "price": 12.49,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "b0603a91-3392-4e36-9136-aa408b3bc9a0",
+    "slug": "murungai-keerai-kootu",
+    "name": "Murungai Keerai Kootu",
+    "description": "Murungai Keerai (Drumstick leaves) Kootu with yellow lentils and mild tempering.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 11.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546802/mylapore-express/dishes/curries-drumstick-leaves-lentil-murungai-keerai-kootu.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [],
+    "ingredients": [
+      "Fresh Drumstick Leaves",
+      "Moong Dal",
+      "Fresh Coconut Paste",
+      "Cumin Seeds",
+      "Mustard Seeds",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1 cup (200 g)",
+    "reheatingInstructions": "Microwave for 2 minutes or warm in a pot over medium flame.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 64,
+    "createdAt": "2026-11-13T07:06:37.208Z",
+    "updatedAt": "2026-11-13T07:06:37.208Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "a21e1fe4-5e8b-48f0-b69b-e5e48187d048",
+        "menuItemId": "b0603a91-3392-4e36-9136-aa408b3bc9a0",
+        "name": "Regular (16 oz)",
+        "price": 11.49,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "535c4f18-7748-409f-a211-508736924612",
+    "slug": "puliyodarai",
+    "name": "Puliyodarai",
+    "description": "Puliyodarai has peanuts. Temple-style Tamarind rice with roasted peanuts and fragrant spice powder.",
+    "categoryId": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "basePrice": 9.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Peanuts",
+      "Sesame"
+    ],
+    "ingredients": [
+      "Sona Masoori Rice",
+      "Tamarind Pulp",
+      "Peanuts",
+      "Sesame Oil",
+      "Fenugreek Powder",
+      "Curry Leaves",
+      "Mustard"
+    ],
+    "nutritionServing": "1 cup (180 g)",
+    "reheatingInstructions": "Best enjoyed warm or at room temperature. Microwave for 60 seconds.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 95,
+    "createdAt": "2026-11-13T07:06:38.078Z",
+    "updatedAt": "2026-11-13T07:06:38.078Z",
+    "category": {
+      "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+      "name": "Rice",
+      "slug": "rice",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+      "description": "Aromatic variety rice, pongal, and flavored dishes",
+      "displayOrder": 2,
+      "createdAt": "2026-11-13T07:06:34.242Z"
+    },
+    "variants": [
+      {
+        "id": "1100b1ea-06c9-40c1-b3b2-443cd929cf17",
+        "menuItemId": "535c4f18-7748-409f-a211-508736924612",
+        "name": "Portion (16 oz)",
+        "price": 9.99,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Rice"
+  },
+  {
+    "id": "cbd6343d-132c-4bd4-9720-27e8d2a0a371",
+    "slug": "vathal-kuzhambu",
+    "name": "Vathal Kuzhambu",
+    "description": "Tangy, spicy stew made with sun dried turkey berries and tamarind gravy.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 11.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549171/mylapore-express/dishes/curries-turkey-berry-tamarind-vathal-kuzhambu.jpg",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN"
+    ],
+    "spiceLevel": "EXTRA_HOT",
+    "allergens": [
+      "Sesame"
+    ],
+    "ingredients": [
+      "Sundakkai Vathal",
+      "Tamarind Juice",
+      "Cold Pressed Gingelly Oil",
+      "Sambar Masala",
+      "Asafoetida",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1/2 cup (120 g)",
+    "reheatingInstructions": "Heat thoroughly in pan until bubbling hot. Serve with steamed rice and ghee.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 88,
+    "createdAt": "2026-11-13T07:06:38.948Z",
+    "updatedAt": "2026-11-13T07:06:38.948Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "6b3a6bbf-e406-4dff-a2bf-617119d8b51d",
+        "menuItemId": "cbd6343d-132c-4bd4-9720-27e8d2a0a371",
+        "name": "Regular (16 oz)",
+        "price": 11.99,
+        "servesCount": 3
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "d13ab67a-8a3b-4705-95ff-2dc9474bae87",
+    "slug": "bisi-bele-bath",
+    "name": "Bisi Bele Bath",
+    "description": "Bisi Bele Bath with spiced aromatic ghee tempering and fresh vegetables.",
+    "categoryId": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "basePrice": 10.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546789/mylapore-express/dishes/rice-mysore-spiced-vegetable-bisi-bele-bath.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "HOT",
+    "allergens": [
+      "Milk",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Rice",
+      "Toor Dal",
+      "French Beans",
+      "Carrots",
+      "Bisi Bele Bath Podi",
+      "Pure Desi Ghee",
+      "Cashews",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1 cup (220 g)",
+    "reheatingInstructions": "Microwave for 2 minutes or stir on low flame with a spoonful of ghee.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 130,
+    "createdAt": "2026-11-13T07:06:39.819Z",
+    "updatedAt": "2026-11-13T07:06:39.819Z",
+    "category": {
+      "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+      "name": "Rice",
+      "slug": "rice",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+      "description": "Aromatic variety rice, pongal, and flavored dishes",
+      "displayOrder": 2,
+      "createdAt": "2026-11-13T07:06:34.242Z"
+    },
+    "variants": [
+      {
+        "id": "ee96c080-3cf1-4599-9f17-2bdd2788a5c6",
+        "menuItemId": "d13ab67a-8a3b-4705-95ff-2dc9474bae87",
+        "name": "Regular (16 oz)",
+        "price": 10.99,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Rice"
+  },
+  {
+    "id": "ca3b99ed-22e4-4ba4-aae1-726b22d3aa00",
+    "slug": "potato-kara-kari",
+    "name": "Potato Kara Kari",
+    "description": "A South Indian potato fry. Authentic South Indian flavors, made the way our grandmothers did.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 10.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN"
+    ],
+    "spiceLevel": "HOT",
+    "allergens": [
+      "Wheat",
+      "Sesame"
+    ],
+    "ingredients": [
+      "Potatoes",
+      "Cold-pressed Sesame Oil",
+      "Mustard Seeds",
+      "Curry Leaves",
+      "Red Chili Powder",
+      "Asafoetida",
+      "Himalayan Pink Salt",
+      "Turmeric"
+    ],
+    "nutritionServing": "1/2 cup (80 g)",
+    "reheatingInstructions": "Refrigerate at <=40°F (4°C). Empty into a stovetop pan and crisp for 3-4 minutes on medium heat, or microwave 90 seconds.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 48,
+    "createdAt": "2026-11-13T07:06:40.690Z",
+    "updatedAt": "2026-11-13T07:06:40.690Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "405321d9-12fa-4d04-82b3-06846e160233",
+        "menuItemId": "ca3b99ed-22e4-4ba4-aae1-726b22d3aa00",
+        "name": "Regular (16 oz)",
+        "price": 10.99,
+        "servesCount": 2
+      },
+      {
+        "id": "d170bdb6-8eff-432e-a381-763d97750701",
+        "menuItemId": "ca3b99ed-22e4-4ba4-aae1-726b22d3aa00",
+        "name": "Family (32 oz)",
+        "price": 19.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "8d5bd625-ad0e-4d03-9bf1-b6d6bdbeb503",
+    "slug": "chow-chow-kootu",
+    "name": "Chow Chow Kootu",
+    "description": "Chayote kootu, a South Indian vegetable stew with moong dal and coconut.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 10.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546801/mylapore-express/dishes/curries-chayote-moong-dal-chow-chow-kootu.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [],
+    "ingredients": [
+      "Chow Chow (Chayote)",
+      "Moong Dal",
+      "Coconut",
+      "Cumin Seeds",
+      "Mustard Seeds",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1 cup (200 g)",
+    "reheatingInstructions": "Warm in pot for 2-3 minutes.",
+    "isAvailable": true,
+    "rating": 4.7,
+    "reviewCount": 35,
+    "createdAt": "2026-11-13T07:06:41.733Z",
+    "updatedAt": "2026-11-13T07:06:41.733Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "bcb5625a-544a-44bb-b4e5-c54322f732d3",
+        "menuItemId": "8d5bd625-ad0e-4d03-9bf1-b6d6bdbeb503",
+        "name": "Regular (16 oz)",
+        "price": 10.49,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "4cf792e9-d614-4e0b-a456-8899628601ee",
+    "slug": "beans-usili",
+    "name": "Beans Usili",
+    "description": "A Tamil dry curry of green beans and lentils.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 11.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546799/mylapore-express/dishes/curries-steamed-lentil-crumble-beans-usili.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Green Beans",
+      "Toor Dal",
+      "Chana Dal",
+      "Dry Red Chilies",
+      "Asafoetida",
+      "Mustard Seeds"
+    ],
+    "nutritionServing": "1/2 cup (90 g)",
+    "reheatingInstructions": "Heat in a flat skillet for 2 minutes to restore the fluffy lentil texture.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 52,
+    "createdAt": "2026-11-13T07:06:42.602Z",
+    "updatedAt": "2026-11-13T07:06:42.602Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "fd624c12-4289-49a2-b9da-64dce3e66991",
+        "menuItemId": "4cf792e9-d614-4e0b-a456-8899628601ee",
+        "name": "Regular (16 oz)",
+        "price": 11.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "889eae78-e212-418d-9060-b34a317bc3b3",
+    "slug": "guttivankaya-kura",
+    "name": "Guttivankaya Kura",
+    "description": "Guttivankaya Kura - Baby Eggplant Curry - Andhra Style",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 12.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546802/mylapore-express/dishes/curries-andhra-stuffed-baby-brinjal-guttivankaya-kura.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": "HOT",
+    "allergens": [
+      "Peanuts",
+      "Sesame"
+    ],
+    "ingredients": [
+      "Baby Purple Eggplants",
+      "Roasted Peanuts",
+      "Sesame Seeds",
+      "Coriander Seeds",
+      "Tamarind",
+      "Red Chilies"
+    ],
+    "nutritionServing": "1 cup (220 g)",
+    "reheatingInstructions": "Simmer on low in a covered saucepan for 3-4 minutes.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 46,
+    "createdAt": "2026-11-13T07:06:43.471Z",
+    "updatedAt": "2026-11-13T07:06:43.471Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "7fba7b6f-ec3e-4f66-8d97-93f67fb86630",
+        "menuItemId": "889eae78-e212-418d-9060-b34a317bc3b3",
+        "name": "Regular (16 oz)",
+        "price": 12.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "d898cc8c-6424-43a0-82d2-8c0d90559ad5",
+    "slug": "beans-poriyal",
+    "name": "Beans Poriyal",
+    "description": "A South Indian green bean fry with freshly grated coconut.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 9.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546800/mylapore-express/dishes/curries-coconut-tempered-french-beans-poriyal.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [],
+    "ingredients": [
+      "Green Beans",
+      "Fresh Grated Coconut",
+      "Urad Dal",
+      "Mustard Seeds",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1/2 cup (80 g)",
+    "reheatingInstructions": "Warm on pan for 90 seconds.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 29,
+    "createdAt": "2026-11-13T07:06:44.515Z",
+    "updatedAt": "2026-11-13T07:06:44.515Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "248680d8-fb0e-471b-8f2c-9e5b80670340",
+        "menuItemId": "d898cc8c-6424-43a0-82d2-8c0d90559ad5",
+        "name": "Regular (16 oz)",
+        "price": 9.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "c09f1713-4769-4daa-8f2f-479d989e0673",
+    "slug": "punjabi-chole",
+    "name": "Punjabi Chole",
+    "description": "Punjabi chickpea curry, great with roti or rice.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 11.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546804/mylapore-express/dishes/curries-north-indian-punjabi-chole.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": "HOT",
+    "allergens": [],
+    "ingredients": [
+      "Kabuli Chana",
+      "Tomatoes",
+      "Onions",
+      "Amchur",
+      "Ginger",
+      "Garam Masala"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Heat in saucepan or microwave for 2 minutes.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 71,
+    "createdAt": "2026-11-13T07:06:45.385Z",
+    "updatedAt": "2026-11-13T07:06:45.385Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "abd25112-bc77-4a81-be0c-21d270ac67b5",
+        "menuItemId": "c09f1713-4769-4daa-8f2f-479d989e0673",
+        "name": "Regular (16 oz)",
+        "price": 11.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "77e8be3b-375e-4feb-9dea-0cf25a7a2e26",
+    "slug": "saag-paneer",
+    "name": "Saag Paneer",
+    "description": "Paneer in a spinach gravy.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 13.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546808/mylapore-express/dishes/curries-spinach-greens-cottage-cheese-saag-paneer.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Paneer (Cottage Cheese)",
+      "Fresh Spinach",
+      "Heavy Cream",
+      "Garlic",
+      "Ginger",
+      "Kasuri Methi"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Heat slowly on low flame to maintain soft paneer texture.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 84,
+    "createdAt": "2026-11-13T07:06:46.254Z",
+    "updatedAt": "2026-11-13T07:06:46.254Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "4e50ecd7-1b26-4f29-b51e-9c9c4151962f",
+        "menuItemId": "77e8be3b-375e-4feb-9dea-0cf25a7a2e26",
+        "name": "Regular (16 oz)",
+        "price": 13.49,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "0863c6f2-960e-43f7-a9ae-93affff8d5b2",
+    "slug": "black-channa-masala",
+    "name": "Black Channa Masala",
+    "description": "Black chickpeas in a North Indian masala.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 11.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546803/mylapore-express/dishes/curries-kala-chana-black-channa-masala.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": "HOT",
+    "allergens": [],
+    "ingredients": [
+      "Black Kala Chana",
+      "Tomatoes",
+      "Ginger",
+      "Garam Masala",
+      "Cumin"
+    ],
+    "nutritionServing": "1 cup (220 g)",
+    "reheatingInstructions": "Heat thoroughly in pan or microwave.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 42,
+    "createdAt": "2026-11-13T07:06:47.125Z",
+    "updatedAt": "2026-11-13T07:06:47.125Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "6c5a9607-b66e-4bc1-88fb-578031184974",
+        "menuItemId": "0863c6f2-960e-43f7-a9ae-93affff8d5b2",
+        "name": "Regular (16 oz)",
+        "price": 11.49,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "03239e65-702d-49df-87dc-f723c4de08c2",
+    "slug": "matar-paneer",
+    "name": "Matar Paneer",
+    "description": "Paneer and peas in a North Indian gravy.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 12.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546806/mylapore-express/dishes/curries-cottage-cheese-peas-matar-paneer.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Fresh Paneer",
+      "Green Peas",
+      "Tomato Puree",
+      "Cashew Paste",
+      "Garam Masala"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Warm gently in pot for 3 minutes.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 55,
+    "createdAt": "2026-11-13T07:06:47.995Z",
+    "updatedAt": "2026-11-13T07:06:47.995Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "ec11b80c-20b6-43af-9d80-8db6ebf8cab5",
+        "menuItemId": "03239e65-702d-49df-87dc-f723c4de08c2",
+        "name": "Regular (16 oz)",
+        "price": 12.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "eb0cf5d3-ab48-4277-927f-116f2e05fff4",
+    "slug": "rajma",
+    "name": "Rajma",
+    "description": "Kidney beans in a North Indian gravy, made for rice.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 10.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546805/mylapore-express/dishes/curries-slow-simmered-kashmiri-rajma.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Red Kidney Beans",
+      "Onions",
+      "Tomatoes",
+      "Ginger",
+      "Spices"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Simmer on stovetop. Serve with steamed basmati rice.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 63,
+    "createdAt": "2026-11-13T07:06:48.865Z",
+    "updatedAt": "2026-11-13T07:06:48.865Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "a0c53514-cb2f-4c90-b69b-14f775c18dc0",
+        "menuItemId": "eb0cf5d3-ab48-4277-927f-116f2e05fff4",
+        "name": "Regular (16 oz)",
+        "price": 10.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "58dc79d7-d0db-43f1-b986-9c3380f505e7",
+    "slug": "methi-paneer",
+    "name": "Methi Paneer",
+    "description": "Paneer with fenugreek leaves in a North Indian gravy.",
+    "categoryId": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+    "basePrice": 13.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546807/mylapore-express/dishes/curries-fenugreek-cottage-cheese-methi-paneer.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Paneer",
+      "Fresh Fenugreek (Methi)",
+      "Onion-Tomato Gravy",
+      "Cream",
+      "Spices"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Warm slowly in saucepan for 2-3 minutes.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 38,
+    "createdAt": "2026-11-13T07:06:49.735Z",
+    "updatedAt": "2026-11-13T07:06:49.735Z",
+    "category": {
+      "id": "f1f6e807-d976-4edd-a6bf-9830569cd445",
+      "name": "Curries",
+      "slug": "curries",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp",
+      "description": "Traditional dry curries, kootus, and rich lentil stews",
+      "displayOrder": 1,
+      "createdAt": "2026-11-13T07:06:33.894Z"
+    },
+    "variants": [
+      {
+        "id": "8855ea90-73c7-49c2-91a9-7bdc7e8e7381",
+        "menuItemId": "58dc79d7-d0db-43f1-b986-9c3380f505e7",
+        "name": "Regular (16 oz)",
+        "price": 13.49,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Curries"
+  },
+  {
+    "id": "bf099b6e-1099-46be-a009-0a54c494b1b3",
+    "slug": "idly-batter",
+    "name": "Idly Batter",
+    "description": "Fresh Idly batter, makes 18-20 soft Idlies.",
+    "categoryId": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+    "basePrice": 7.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "JAIN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [],
+    "ingredients": [
+      "Idly Rice",
+      "Whole Urad Dal",
+      "Fenugreek Seeds",
+      "RO Water",
+      "Salt"
+    ],
+    "nutritionServing": "2 Idlies (100 g batter)",
+    "reheatingInstructions": "Steam in idly cooker for 10-12 minutes on high flame.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 210,
+    "createdAt": "2026-11-13T07:06:50.604Z",
+    "updatedAt": "2026-11-13T07:06:50.604Z",
+    "category": {
+      "id": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+      "name": "Batters",
+      "slug": "batters",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+      "description": "Naturally stone-ground idly, dosa, and adai batters",
+      "displayOrder": 8,
+      "createdAt": "2026-11-13T07:06:35.293Z"
+    },
+    "variants": [
+      {
+        "id": "e083dc89-91cf-441a-ad4d-1885724f2d6b",
+        "menuItemId": "bf099b6e-1099-46be-a009-0a54c494b1b3",
+        "name": "Tub (32 oz)",
+        "price": 7.99,
+        "servesCount": 18
+      }
+    ],
+    "categoryName": "Batters"
+  },
+  {
+    "id": "3cde2cf9-9ea8-4dce-8df1-482f0552d469",
+    "slug": "rava-khichdi",
+    "name": "Rava Khichdi",
+    "description": "Rava Khichdi made with Sooji and vegetables.",
+    "categoryId": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "basePrice": 9.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546792/mylapore-express/dishes/breakfast-semolina-vegetable-rava-khichdi.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Wheat",
+      "Milk",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Roasted Sooji",
+      "Carrots",
+      "Beans",
+      "Green Peas",
+      "Ginger",
+      "Ghee",
+      "Cashews"
+    ],
+    "nutritionServing": "1 cup (200 g)",
+    "reheatingInstructions": "Microwave for 90 seconds with a sprinkle of water and a dab of ghee.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 52,
+    "createdAt": "2026-11-13T07:06:51.474Z",
+    "updatedAt": "2026-11-13T07:06:51.474Z",
+    "category": {
+      "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+      "name": "Rice",
+      "slug": "rice",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+      "description": "Aromatic variety rice, pongal, and flavored dishes",
+      "displayOrder": 2,
+      "createdAt": "2026-11-13T07:06:34.242Z"
+    },
+    "variants": [
+      {
+        "id": "d85de9a2-70d5-4e48-a028-53d0f876531c",
+        "menuItemId": "3cde2cf9-9ea8-4dce-8df1-482f0552d469",
+        "name": "Regular (16 oz)",
+        "price": 9.49,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Rice"
+  },
+  {
+    "id": "29b70776-374f-42d4-8081-bda46dea7cb0",
+    "slug": "venn-pongal",
+    "name": "Venn Pongal",
+    "description": "Venn Pongal with crushed pepper, cumin, ginger, and cashews in cow ghee.",
+    "categoryId": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "basePrice": 9.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546791/mylapore-express/dishes/breakfast-ghee-cumin-pepper-venn-pongal.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Milk",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Raw Rice",
+      "Moong Dal",
+      "Black Peppercorns",
+      "Cumin Seeds",
+      "Ginger",
+      "Curry Leaves",
+      "Cashews",
+      "Pure Desi Ghee"
+    ],
+    "nutritionServing": "1 cup (220 g)",
+    "reheatingInstructions": "Microwave 90 seconds. Add a teaspoon of warm ghee for peak flavor.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 68,
+    "createdAt": "2026-11-13T07:06:52.344Z",
+    "updatedAt": "2026-11-13T07:06:52.344Z",
+    "category": {
+      "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+      "name": "Rice",
+      "slug": "rice",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+      "description": "Aromatic variety rice, pongal, and flavored dishes",
+      "displayOrder": 2,
+      "createdAt": "2026-11-13T07:06:34.242Z"
+    },
+    "variants": [
+      {
+        "id": "cb1823dc-65f0-46b0-8502-b87b41fa01cf",
+        "menuItemId": "29b70776-374f-42d4-8081-bda46dea7cb0",
+        "name": "Regular (16 oz)",
+        "price": 9.49,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Rice"
+  },
+  {
+    "id": "ba56d491-4020-47b6-91f7-035aa208d77d",
+    "slug": "adai-batter",
+    "name": "Adai Batter",
+    "description": "Fresh Adai batter, makes 8-10 adais.",
+    "categoryId": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+    "basePrice": 8.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546781/mylapore-express/dishes/batters-multigrain-protein-adai-batter.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Rice",
+      "Toor Dal",
+      "Chana Dal",
+      "Urad Dal",
+      "Red Chilies",
+      "Fennel",
+      "Asafoetida",
+      "Salt"
+    ],
+    "nutritionServing": "1 Adai (120 g batter)",
+    "reheatingInstructions": "Pour thick ladle onto hot tawa, drizzle gingelly oil, and cook until crisp and golden brown.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 82,
+    "createdAt": "2026-11-13T07:06:53.213Z",
+    "updatedAt": "2026-11-13T07:06:53.213Z",
+    "category": {
+      "id": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+      "name": "Batters",
+      "slug": "batters",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+      "description": "Naturally stone-ground idly, dosa, and adai batters",
+      "displayOrder": 8,
+      "createdAt": "2026-11-13T07:06:35.293Z"
+    },
+    "variants": [
+      {
+        "id": "258bd40a-dbe6-4cd2-8576-a6d7c5904478",
+        "menuItemId": "ba56d491-4020-47b6-91f7-035aa208d77d",
+        "name": "Tub (32 oz)",
+        "price": 8.49,
+        "servesCount": 10
+      }
+    ],
+    "categoryName": "Batters"
+  },
+  {
+    "id": "012480ac-8f08-426a-a15d-6cf1e4323281",
+    "slug": "spiced-buttermilk",
+    "name": "Spiced Buttermilk (Neer Mor)",
+    "description": "Cooling churned yogurt beverage tempered with mustard seeds, curry leaves, ginger, and green chilies. A quintessential South Indian refresher.",
+    "categoryId": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+    "basePrice": 5.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546783/mylapore-express/dishes/beverages-tempered-neer-moru-spiced-buttermilk.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Fresh Cultured Yogurt",
+      "Water",
+      "Fresh Ginger",
+      "Green Chilies",
+      "Cilantro",
+      "Curry Leaves",
+      "Mustard Seeds",
+      "Hing",
+      "Rock Salt"
+    ],
+    "nutritionServing": "1 bottle (16 oz)",
+    "reheatingInstructions": "Serve thoroughly chilled. Shake well before opening.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 45,
+    "createdAt": "2026-11-13T07:06:54.082Z",
+    "updatedAt": "2026-11-13T07:06:54.082Z",
+    "category": {
+      "id": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+      "name": "Beverages",
+      "slug": "beverages",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+      "description": "Authentic South Indian Degree Filter Coffee and spiced buttermilk",
+      "displayOrder": 7,
+      "createdAt": "2026-11-13T07:06:35.118Z"
+    },
+    "variants": [
+      {
+        "id": "099c331d-3278-49db-aecf-dba6b47528f2",
+        "menuItemId": "012480ac-8f08-426a-a15d-6cf1e4323281",
+        "name": "Bottle (16 oz)",
+        "price": 5.99,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Beverages"
+  },
+  {
+    "id": "e9c0fbf3-d964-4380-a141-b0c7d8221114",
+    "slug": "mango-lassi",
+    "name": "Mango Lassi",
+    "description": "Creamy, velvety Alphonso mango pulp blended with fresh homemade yogurt and a gentle hint of green cardamom.",
+    "categoryId": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+    "basePrice": 6.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546784/mylapore-express/dishes/beverages-alphonso-mango-yogurt-lassi.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Ratnagiri Alphonso Mango Pulp",
+      "Whole Milk Yogurt",
+      "Chilled Milk",
+      "Organic Raw Sugar",
+      "Green Cardamom"
+    ],
+    "nutritionServing": "1 bottle (16 oz)",
+    "reheatingInstructions": "Serve thoroughly chilled. Shake well before sipping.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 89,
+    "createdAt": "2026-11-13T07:06:54.952Z",
+    "updatedAt": "2026-11-13T07:06:54.952Z",
+    "category": {
+      "id": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+      "name": "Beverages",
+      "slug": "beverages",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+      "description": "Authentic South Indian Degree Filter Coffee and spiced buttermilk",
+      "displayOrder": 7,
+      "createdAt": "2026-11-13T07:06:35.118Z"
+    },
+    "variants": [
+      {
+        "id": "92869977-cb5d-4457-868e-3aaf11f7d08e",
+        "menuItemId": "e9c0fbf3-d964-4380-a141-b0c7d8221114",
+        "name": "Bottle (16 oz)",
+        "price": 6.49,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Beverages"
+  },
+  {
+    "id": "86ebefb0-2384-4f02-9eeb-a68896187ce7",
+    "slug": "mylapore-filter-coffee",
+    "name": "Mylapore Degree Filter Coffee Decoction",
+    "description": "Freshly brewed strong chicory-infused South Indian coffee decoction served with frothy boiled whole milk. The legendary aroma of South Mada Street.",
+    "categoryId": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+    "basePrice": 5.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Plantation A Arabica & Robusta Coffee Beans",
+      "Chicory (15%)",
+      "Fresh Organic Whole Milk",
+      "Cane Sugar"
+    ],
+    "nutritionServing": "1 flask (12 oz)",
+    "reheatingInstructions": "Warm gently in saucepan or microwave 45 seconds. Pour back and forth with a dabarah-tumbler for signature froth.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 124,
+    "createdAt": "2026-11-13T07:06:55.823Z",
+    "updatedAt": "2026-11-13T07:06:55.823Z",
+    "category": {
+      "id": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+      "name": "Beverages",
+      "slug": "beverages",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+      "description": "Authentic South Indian Degree Filter Coffee and spiced buttermilk",
+      "displayOrder": 7,
+      "createdAt": "2026-11-13T07:06:35.118Z"
+    },
+    "variants": [
+      {
+        "id": "0f076279-1c98-4e4c-9535-edf975d6ecad",
+        "menuItemId": "86ebefb0-2384-4f02-9eeb-a68896187ce7",
+        "name": "Decoction Flask (12 oz)",
+        "price": 5.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Beverages"
+  },
+  {
+    "id": "e764a808-70d0-476b-8e16-8a92ade60774",
+    "slug": "rose-milk",
+    "name": "Mylapore Rose Milk with Sabja",
+    "description": "Classic Chennai-style fragrant sweet rose milk made with pure rose petal extract syrup, chilled boiled milk, and soaked sweet basil (sabja) seeds.",
+    "categoryId": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+    "basePrice": 5.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546783/mylapore-express/dishes/beverages-chilled-cardamom-rose-milk.webp",
+    "orderCountBadge": "100+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Chilled Whole Milk",
+      "Handcrafted Rose Petal Syrup",
+      "Soaked Sabja Seeds (Sweet Basil)",
+      "Cardamom Extract"
+    ],
+    "nutritionServing": "1 bottle (16 oz)",
+    "reheatingInstructions": "Serve ice-cold. Shake gently to disperse sabja seeds.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 52,
+    "createdAt": "2026-11-13T07:06:56.693Z",
+    "updatedAt": "2026-11-13T07:06:56.693Z",
+    "category": {
+      "id": "769015b5-4fee-403f-9af5-1e08cbc8daa6",
+      "name": "Beverages",
+      "slug": "beverages",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549166/mylapore-express/dishes/beverages-authentic-mylapore-degree-filter-coffee.jpg",
+      "description": "Authentic South Indian Degree Filter Coffee and spiced buttermilk",
+      "displayOrder": 7,
+      "createdAt": "2026-11-13T07:06:35.118Z"
+    },
+    "variants": [
+      {
+        "id": "f46bdb2d-2344-49f2-8e3e-11065d96c885",
+        "menuItemId": "e764a808-70d0-476b-8e16-8a92ade60774",
+        "name": "Bottle (16 oz)",
+        "price": 5.49,
+        "servesCount": 1
+      }
+    ],
+    "categoryName": "Beverages"
+  },
+  {
+    "id": "f83c11c7-b3e2-4e07-a4e1-550752cabb4c",
+    "slug": "mylapore-murungakkai-sambar",
+    "name": "Mylapore Murungakkai Sambar",
+    "description": "Slow-simmered tender drumsticks and Madras pearl onions in slow-cooked toor dal infused with heirloom sambar podi and tamarind pulp.",
+    "categoryId": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+    "basePrice": 8.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Toor Dal",
+      "Tender Drumsticks",
+      "Shallots",
+      "Tamarind",
+      "Coriander Seeds",
+      "Byadagi Red Chilies",
+      "Curry Leaves",
+      "Asafoetida",
+      "Mustard Seeds",
+      "Fenugreek"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Microwave 90 seconds or simmer in saucepan until gently bubbling.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 142,
+    "createdAt": "2026-11-13T07:06:57.563Z",
+    "updatedAt": "2026-11-13T07:06:57.563Z",
+    "category": {
+      "id": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+      "name": "Sambar",
+      "slug": "sambar",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+      "description": "Freshly tempered spiced lentil sambar with drumsticks and pearl onions",
+      "displayOrder": 3,
+      "createdAt": "2026-11-13T07:06:34.417Z"
+    },
+    "variants": [
+      {
+        "id": "09ced1c2-d4dc-416d-82f1-138ff6f78210",
+        "menuItemId": "f83c11c7-b3e2-4e07-a4e1-550752cabb4c",
+        "name": "Regular (16 oz)",
+        "price": 8.99,
+        "servesCount": 2
+      },
+      {
+        "id": "dd4c98c0-e049-46de-8236-2bd2ed4aa4d6",
+        "menuItemId": "f83c11c7-b3e2-4e07-a4e1-550752cabb4c",
+        "name": "Family Tub (32 oz)",
+        "price": 15.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Sambar"
+  },
+  {
+    "id": "804ac913-b3c0-44b6-b413-fb98274c7c09",
+    "slug": "arachuvitta-sambar",
+    "name": "Arachuvitta Sambar",
+    "description": "Traditional festive temple sambar made with freshly roasted and stone-ground coconut, whole coriander, chana dal, and dried red chilies.",
+    "categoryId": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+    "basePrice": 9.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-fresh-roasted-spice-arachuvitta-sambar.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Coconut"
+    ],
+    "ingredients": [
+      "Yellow Pigeon Peas (Toor Dal)",
+      "Fresh Grated Coconut",
+      "White Pumpkin (Ash Gourd)",
+      "Tamarind",
+      "Roasted Coriander",
+      "Cumin",
+      "Fenugreek",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Heat on stovetop until fragrant. Drizzle a spoon of cold-pressed gingelly oil.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 98,
+    "createdAt": "2026-11-13T07:06:58.606Z",
+    "updatedAt": "2026-11-13T07:06:58.606Z",
+    "category": {
+      "id": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+      "name": "Sambar",
+      "slug": "sambar",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+      "description": "Freshly tempered spiced lentil sambar with drumsticks and pearl onions",
+      "displayOrder": 3,
+      "createdAt": "2026-11-13T07:06:34.417Z"
+    },
+    "variants": [
+      {
+        "id": "03021eeb-2e4a-4f18-ac01-e43988dc9a9f",
+        "menuItemId": "804ac913-b3c0-44b6-b413-fb98274c7c09",
+        "name": "Regular (16 oz)",
+        "price": 9.49,
+        "servesCount": 2
+      },
+      {
+        "id": "8229f8ea-bdb7-4575-bdf0-5e0b9a1baf22",
+        "menuItemId": "804ac913-b3c0-44b6-b413-fb98274c7c09",
+        "name": "Family Tub (32 oz)",
+        "price": 16.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Sambar"
+  },
+  {
+    "id": "259550b3-72a6-4c67-aee2-274dea9d5938",
+    "slug": "chinna-vengayam-sambar",
+    "name": "Chinna Vengayam (Shallot) Sambar",
+    "description": "Tender baby shallots caramelized in pure gingelly oil, stewed in velvety yellow lentils and aromatic handmade spice broth.",
+    "categoryId": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+    "basePrice": 9.29,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546786/mylapore-express/dishes/sambar-shallots-pearl-onion-sambar.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Madras Pearl Onions (Shallots)",
+      "Toor Dal",
+      "Tamarind Juice",
+      "Turmeric",
+      "Sambar Masala",
+      "Sesame Oil",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "1 cup (240 g)",
+    "reheatingInstructions": "Microwave 90 seconds. Stir well before serving with hot rice or soft idlies.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 76,
+    "createdAt": "2026-11-13T07:06:59.651Z",
+    "updatedAt": "2026-11-13T07:06:59.651Z",
+    "category": {
+      "id": "f30b0525-f58a-4ece-a870-b0fbe6675264",
+      "name": "Sambar",
+      "slug": "sambar",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546785/mylapore-express/dishes/sambar-traditional-drumstick-murungakkai-sambar.webp",
+      "description": "Freshly tempered spiced lentil sambar with drumsticks and pearl onions",
+      "displayOrder": 3,
+      "createdAt": "2026-11-13T07:06:34.417Z"
+    },
+    "variants": [
+      {
+        "id": "be826788-99ba-41c8-85ae-ed4242b84c4b",
+        "menuItemId": "259550b3-72a6-4c67-aee2-274dea9d5938",
+        "name": "Regular (16 oz)",
+        "price": 9.29,
+        "servesCount": 2
+      },
+      {
+        "id": "fb4ba3cd-bf70-4c23-9d66-2d36b5184c88",
+        "menuItemId": "259550b3-72a6-4c67-aee2-274dea9d5938",
+        "name": "Family Tub (32 oz)",
+        "price": 16.49,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Sambar"
+  },
+  {
+    "id": "be6ef970-2dd4-468c-9d5e-31003278e06e",
+    "slug": "thakkali-rasam",
+    "name": "Mylapore Thakkali (Tomato) Rasam",
+    "description": "Soothing clear broth made with country tomatoes, crushed black Tellicherry peppercorns, cumin, garlic, and fresh coriander leaves.",
+    "categoryId": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+    "basePrice": 7.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Farm Fresh Ripe Tomatoes",
+      "Tamarind Water",
+      "Crushed Black Pepper",
+      "Cumin Seeds",
+      "Garlic",
+      "Mustard Seeds",
+      "Coriander Leaves",
+      "Asafoetida"
+    ],
+    "nutritionServing": "1 cup (240 ml)",
+    "reheatingInstructions": "Bring to a gentle boil for 60 seconds on stovetop or microwave 1 minute. Sip warm like a soup.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 164,
+    "createdAt": "2026-11-13T07:07:00.900Z",
+    "updatedAt": "2026-11-13T07:07:00.900Z",
+    "category": {
+      "id": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+      "name": "Rasam",
+      "slug": "rasam",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+      "description": "Tangy, peppery tomato, pepper, and mysore rasam brews",
+      "displayOrder": 4,
+      "createdAt": "2026-11-13T07:06:34.592Z"
+    },
+    "variants": [
+      {
+        "id": "b6153d6d-7ed8-43b0-9969-a50236464a5c",
+        "menuItemId": "be6ef970-2dd4-468c-9d5e-31003278e06e",
+        "name": "Regular (16 oz)",
+        "price": 7.49,
+        "servesCount": 2
+      },
+      {
+        "id": "09d56c56-d844-4498-a3f7-e004c2ca5647",
+        "menuItemId": "be6ef970-2dd4-468c-9d5e-31003278e06e",
+        "name": "Family Flask (32 oz)",
+        "price": 13.49,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Rasam"
+  },
+  {
+    "id": "c7c35681-527d-4b39-9c03-f7868ad89ccb",
+    "slug": "mysore-rasam",
+    "name": "Mysore Lentil Rasam",
+    "description": "A richer, fragrant rasam brewed with cooked toor dal water and freshly roasted Mysore spice blend featuring coriander seeds and dry red chilies.",
+    "categoryId": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+    "basePrice": 7.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546786/mylapore-express/dishes/rasam-mysore-aromatic-lentil-rasam.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Toor Dal Broth",
+      "Tamarind Extract",
+      "Mysore Rasam Powder",
+      "Tomatoes",
+      "Curry Leaves",
+      "Cumin",
+      "Desi Ghee Tempering"
+    ],
+    "nutritionServing": "1 cup (240 ml)",
+    "reheatingInstructions": "Heat in small saucepan until frothy bubbles form on top.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 88,
+    "createdAt": "2026-11-13T07:07:01.953Z",
+    "updatedAt": "2026-11-13T07:07:01.953Z",
+    "category": {
+      "id": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+      "name": "Rasam",
+      "slug": "rasam",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+      "description": "Tangy, peppery tomato, pepper, and mysore rasam brews",
+      "displayOrder": 4,
+      "createdAt": "2026-11-13T07:06:34.592Z"
+    },
+    "variants": [
+      {
+        "id": "5cd99230-0f9d-4ff2-9606-5e2a6235ea30",
+        "menuItemId": "c7c35681-527d-4b39-9c03-f7868ad89ccb",
+        "name": "Regular (16 oz)",
+        "price": 7.99,
+        "servesCount": 2
+      },
+      {
+        "id": "63f33995-a672-46b0-b5bf-c32936f7341d",
+        "menuItemId": "c7c35681-527d-4b39-9c03-f7868ad89ccb",
+        "name": "Family Flask (32 oz)",
+        "price": 13.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Rasam"
+  },
+  {
+    "id": "507ec716-be47-48b6-a516-395cf7505033",
+    "slug": "poondu-milagu-rasam",
+    "name": "Poondu Milagu (Garlic Pepper) Rasam",
+    "description": "Traditional immunity-boosting grandmother cure made with whole roasted garlic cloves and heavy cracked black pepper.",
+    "categoryId": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+    "basePrice": 7.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546788/mylapore-express/dishes/rasam-garlic-black-pepper-poondu-milagu-rasam.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "SPICY",
+    "allergens": [],
+    "ingredients": [
+      "Roasted Garlic Cloves",
+      "Black Peppercorns",
+      "Jeera (Cumin)",
+      "Tamarind",
+      "Curry Leaves",
+      "Mustard",
+      "Hing"
+    ],
+    "nutritionServing": "1 cup (240 ml)",
+    "reheatingInstructions": "Heat thoroughly until steaming. Best enjoyed as a hot digestive soup.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 92,
+    "createdAt": "2026-11-13T07:07:02.998Z",
+    "updatedAt": "2026-11-13T07:07:02.998Z",
+    "category": {
+      "id": "e092b7de-f45a-43d5-8b82-d262aa3ca62b",
+      "name": "Rasam",
+      "slug": "rasam",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546787/mylapore-express/dishes/rasam-tangy-temple-tomato-thakkali-rasam.webp",
+      "description": "Tangy, peppery tomato, pepper, and mysore rasam brews",
+      "displayOrder": 4,
+      "createdAt": "2026-11-13T07:06:34.592Z"
+    },
+    "variants": [
+      {
+        "id": "2a642470-69d6-466d-a921-299fcfb5ddbd",
+        "menuItemId": "507ec716-be47-48b6-a516-395cf7505033",
+        "name": "Regular (16 oz)",
+        "price": 7.99,
+        "servesCount": 2
+      },
+      {
+        "id": "61cb3476-7611-40cc-8b84-bb7dc859f92d",
+        "menuItemId": "507ec716-be47-48b6-a516-395cf7505033",
+        "name": "Family Flask (32 oz)",
+        "price": 13.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Rasam"
+  },
+  {
+    "id": "8b6335be-1b94-4610-9d54-11521f410644",
+    "slug": "thengai-chutney",
+    "name": "Authentic Thengai (Coconut) Chutney",
+    "description": "Freshly grated coconut ground with roasted Bengal gram, ginger, green chilies, and tempered with crackling mustard seeds and curry leaves.",
+    "categoryId": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+    "basePrice": 4.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+    "orderCountBadge": "1,000+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Coconut"
+    ],
+    "ingredients": [
+      "Fresh Coconut",
+      "Roasted Chana Dal",
+      "Green Chilies",
+      "Ginger",
+      "Mustard Seeds",
+      "Urad Dal",
+      "Curry Leaves",
+      "Hing"
+    ],
+    "nutritionServing": "2 tbsp (40 g)",
+    "reheatingInstructions": "Serve chilled or at room temperature. Do not heat.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 210,
+    "createdAt": "2026-11-13T07:07:04.041Z",
+    "updatedAt": "2026-11-13T07:07:04.041Z",
+    "category": {
+      "id": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+      "name": "Chutneys",
+      "slug": "chutneys",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+      "description": "Fresh coconut, tomato thakkali, and spicy coriander pachadis",
+      "displayOrder": 5,
+      "createdAt": "2026-11-13T07:06:34.767Z"
+    },
+    "variants": [
+      {
+        "id": "23d7196a-ac66-40cb-a78f-1be90b17e912",
+        "menuItemId": "8b6335be-1b94-4610-9d54-11521f410644",
+        "name": "Tub (8 oz)",
+        "price": 4.99,
+        "servesCount": 4
+      },
+      {
+        "id": "7a7d1b59-70ee-4876-af90-965d4a653413",
+        "menuItemId": "8b6335be-1b94-4610-9d54-11521f410644",
+        "name": "Tub (16 oz)",
+        "price": 8.99,
+        "servesCount": 8
+      }
+    ],
+    "categoryName": "Chutneys"
+  },
+  {
+    "id": "49dc6e1f-e092-4f32-b88c-071f08d4ee47",
+    "slug": "thakkali-chutney",
+    "name": "Spicy Thakkali (Tomato Onion) Chutney",
+    "description": "Slow-caramelized country tomatoes, red onions, and red chilies stewed in gingelly oil with a fiery tangy punch.",
+    "categoryId": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+    "basePrice": 5.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546794/mylapore-express/dishes/chutneys-spicy-roasted-tomato-thakkali-chutney.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "SPICY",
+    "allergens": [],
+    "ingredients": [
+      "Ripe Tomatoes",
+      "Red Onions",
+      "Byadagi Chilies",
+      "Tamarind",
+      "Sesame Oil",
+      "Mustard Seeds",
+      "Curry Leaves"
+    ],
+    "nutritionServing": "2 tbsp (40 g)",
+    "reheatingInstructions": "Serve at room temperature. Pairs exceptionally with hot idlies and crispy dosas.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 135,
+    "createdAt": "2026-11-13T07:07:05.085Z",
+    "updatedAt": "2026-11-13T07:07:05.085Z",
+    "category": {
+      "id": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+      "name": "Chutneys",
+      "slug": "chutneys",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+      "description": "Fresh coconut, tomato thakkali, and spicy coriander pachadis",
+      "displayOrder": 5,
+      "createdAt": "2026-11-13T07:06:34.767Z"
+    },
+    "variants": [
+      {
+        "id": "ed8160ba-4fd2-4e85-9a2f-9ee9a47b09c1",
+        "menuItemId": "49dc6e1f-e092-4f32-b88c-071f08d4ee47",
+        "name": "Tub (8 oz)",
+        "price": 5.49,
+        "servesCount": 4
+      },
+      {
+        "id": "18753c32-9ebf-4b4c-8aa2-4ee15b7cbf5f",
+        "menuItemId": "49dc6e1f-e092-4f32-b88c-071f08d4ee47",
+        "name": "Tub (16 oz)",
+        "price": 9.49,
+        "servesCount": 8
+      }
+    ],
+    "categoryName": "Chutneys"
+  },
+  {
+    "id": "3871293b-999d-46c6-a392-5527b599c112",
+    "slug": "kothamalli-pudina-chutney",
+    "name": "Fresh Kothamalli Pudina (Mint-Coriander) Chutney",
+    "description": "Vibrant green chutney ground with garden mint, fresh cilantro, raw mango, and green chilies. Refreshing, digestive, and zesty.",
+    "categoryId": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+    "basePrice": 5.29,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546796/mylapore-express/dishes/chutneys-coriander-mint-kothamalli-pudina-chutney.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Fresh Mint Leaves",
+      "Coriander Leaves",
+      "Raw Mango",
+      "Green Chilies",
+      "Ginger",
+      "Roasted Cumin",
+      "Himalayan Rock Salt"
+    ],
+    "nutritionServing": "2 tbsp (40 g)",
+    "reheatingInstructions": "Serve fresh and chilled.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 78,
+    "createdAt": "2026-11-13T07:07:06.128Z",
+    "updatedAt": "2026-11-13T07:07:06.128Z",
+    "category": {
+      "id": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+      "name": "Chutneys",
+      "slug": "chutneys",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+      "description": "Fresh coconut, tomato thakkali, and spicy coriander pachadis",
+      "displayOrder": 5,
+      "createdAt": "2026-11-13T07:06:34.767Z"
+    },
+    "variants": [
+      {
+        "id": "472059e3-80e3-4502-a924-04876c5a9f05",
+        "menuItemId": "3871293b-999d-46c6-a392-5527b599c112",
+        "name": "Tub (8 oz)",
+        "price": 5.29,
+        "servesCount": 4
+      },
+      {
+        "id": "5db4d6c9-69d7-4a85-ad8c-f44b6939c2e8",
+        "menuItemId": "3871293b-999d-46c6-a392-5527b599c112",
+        "name": "Tub (16 oz)",
+        "price": 9.29,
+        "servesCount": 8
+      }
+    ],
+    "categoryName": "Chutneys"
+  },
+  {
+    "id": "0cc5b970-f231-441f-b155-8dd70af0aefd",
+    "slug": "idli-milagai-podi",
+    "name": "Mylapore Idli Milagai Podi (Gunpowder)",
+    "description": "Stone-roasted lentils, dry Guntur red chilies, white sesame, and asafoetida coarsely ground to crunchy perfection. Packed with cold-pressed sesame oil.",
+    "categoryId": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+    "basePrice": 6.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549168/mylapore-express/dishes/podis-gunpowder-idli-milagai-podi.jpg",
+    "orderCountBadge": "1,000+ ordered",
+    "isBlastChilled": false,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "SPICY",
+    "allergens": [
+      "Sesame"
+    ],
+    "ingredients": [
+      "Urad Dal",
+      "Chana Dal",
+      "White Sesame Seeds",
+      "Guntur Red Chilies",
+      "Asafoetida (Hing)",
+      "Curry Leaves",
+      "Sea Salt"
+    ],
+    "nutritionServing": "1 tbsp (15 g)",
+    "reheatingInstructions": "Mix with warm ghee or cold-pressed gingelly oil and dip hot idlies.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 312,
+    "createdAt": "2026-11-13T07:07:07.171Z",
+    "updatedAt": "2026-11-13T07:07:07.171Z",
+    "category": {
+      "id": "e8527a5c-0162-4eba-8aed-a205ba0398fe",
+      "name": "Chutneys",
+      "slug": "chutneys",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546793/mylapore-express/dishes/chutneys-fresh-grated-coconut-thengai-chutney.webp",
+      "description": "Fresh coconut, tomato thakkali, and spicy coriander pachadis",
+      "displayOrder": 5,
+      "createdAt": "2026-11-13T07:06:34.767Z"
+    },
+    "variants": [
+      {
+        "id": "15c69946-e30e-4f26-9a14-8cb8c10a262d",
+        "menuItemId": "0cc5b970-f231-441f-b155-8dd70af0aefd",
+        "name": "Pouch (250 g)",
+        "price": 6.99,
+        "servesCount": 15
+      },
+      {
+        "id": "1147154f-1d5d-4fe1-808b-ee7b426607c0",
+        "menuItemId": "0cc5b970-f231-441f-b155-8dd70af0aefd",
+        "name": "Family Jar (500 g)",
+        "price": 12.99,
+        "servesCount": 30
+      }
+    ],
+    "categoryName": "Chutneys"
+  },
+  {
+    "id": "356026c8-e754-47bc-b000-f1b7673d5034",
+    "slug": "paal-payasam",
+    "name": "Mylapore Paal Payasam",
+    "description": "Slow-simmered Govindobhog raw rice in organic rich milk for hours with pure saffron strands, green cardamom, and golden ghee-roasted cashews.",
+    "categoryId": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+    "basePrice": 6.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Whole Organic Milk",
+      "Aromatic Rice",
+      "Pure Saffron",
+      "Raw Sugar",
+      "Cardamom",
+      "Cashews",
+      "Golden Raisins",
+      "Cow Ghee"
+    ],
+    "nutritionServing": "1 cup (200 g)",
+    "reheatingInstructions": "Enjoy warm or chilled directly from refrigerator.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 180,
+    "createdAt": "2026-11-13T07:07:08.214Z",
+    "updatedAt": "2026-11-13T07:07:08.214Z",
+    "category": {
+      "id": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+      "name": "Desserts",
+      "slug": "desserts",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+      "description": "Traditional payasam, badam halwa, and mysore pak",
+      "displayOrder": 6,
+      "createdAt": "2026-11-13T07:06:34.943Z"
+    },
+    "variants": [
+      {
+        "id": "8652624b-0163-49b9-b04e-b736132984ab",
+        "menuItemId": "356026c8-e754-47bc-b000-f1b7673d5034",
+        "name": "Tub (12 oz)",
+        "price": 6.99,
+        "servesCount": 2
+      },
+      {
+        "id": "2e2bb2d0-fe47-48c4-a022-c9462c13c26d",
+        "menuItemId": "356026c8-e754-47bc-b000-f1b7673d5034",
+        "name": "Family Bowl (24 oz)",
+        "price": 12.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Desserts"
+  },
+  {
+    "id": "bc992ac7-b33c-45b1-84da-78b99881ad66",
+    "slug": "asoka-halwa",
+    "name": "Thiruvaiyaru Asoka Halwa",
+    "description": "The royal dessert of Tanjore: velvety yellow moong dal cooked with pure desi ghee, wheat extract, caramelized sugar, and cardamom.",
+    "categoryId": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+    "basePrice": 7.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549178/mylapore-express/dishes/desserts-thiruvaiyaru-asoka-halwa.jpg",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk",
+      "Wheat",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Yellow Moong Dal",
+      "Wheat Flour",
+      "Pure Desi Cow Ghee",
+      "Raw Cane Sugar",
+      "Cardamom",
+      "Roasted Cashews"
+    ],
+    "nutritionServing": "1 portion (150 g)",
+    "reheatingInstructions": "Warm in microwave for 25 seconds so the golden ghee glistens.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 84,
+    "createdAt": "2026-11-13T07:07:09.257Z",
+    "updatedAt": "2026-11-13T07:07:09.257Z",
+    "category": {
+      "id": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+      "name": "Desserts",
+      "slug": "desserts",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+      "description": "Traditional payasam, badam halwa, and mysore pak",
+      "displayOrder": 6,
+      "createdAt": "2026-11-13T07:06:34.943Z"
+    },
+    "variants": [
+      {
+        "id": "37d4fc76-9e76-4253-8ca1-22a6c5328b99",
+        "menuItemId": "bc992ac7-b33c-45b1-84da-78b99881ad66",
+        "name": "Box (250 g)",
+        "price": 7.49,
+        "servesCount": 2
+      },
+      {
+        "id": "40e37ac2-4c7d-4320-80bd-bd98f006b663",
+        "menuItemId": "bc992ac7-b33c-45b1-84da-78b99881ad66",
+        "name": "Box (500 g)",
+        "price": 13.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Desserts"
+  },
+  {
+    "id": "485a21e8-4cfc-4690-ab38-09e100ad56b5",
+    "slug": "ghee-mysore-pak",
+    "name": "Melt-in-Mouth Ghee Mysore Pak",
+    "description": "Traditional royal Mysore delicacy made with roasted besan (gram flour), pure fragrant cow ghee, and sugar syrup. Soft and decadent.",
+    "categoryId": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+    "basePrice": 7.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549173/mylapore-express/dishes/desserts-pure-desi-ghee-mysore-pak.jpg",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": false,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Pure Desi Cow Ghee",
+      "Gram Flour (Besan)",
+      "Refined Sugar",
+      "Cardamom"
+    ],
+    "nutritionServing": "2 pieces (80 g)",
+    "reheatingInstructions": "Store at room temperature. Consume within 14 days.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 145,
+    "createdAt": "2026-11-13T07:07:10.301Z",
+    "updatedAt": "2026-11-13T07:07:10.301Z",
+    "category": {
+      "id": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+      "name": "Desserts",
+      "slug": "desserts",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+      "description": "Traditional payasam, badam halwa, and mysore pak",
+      "displayOrder": 6,
+      "createdAt": "2026-11-13T07:06:34.943Z"
+    },
+    "variants": [
+      {
+        "id": "16901799-5898-49ef-8a57-29bdadf6fc6c",
+        "menuItemId": "485a21e8-4cfc-4690-ab38-09e100ad56b5",
+        "name": "Box (250 g)",
+        "price": 7.99,
+        "servesCount": 4
+      },
+      {
+        "id": "b0a667fc-8b46-4200-8e83-81e02a02c267",
+        "menuItemId": "485a21e8-4cfc-4690-ab38-09e100ad56b5",
+        "name": "Box (500 g)",
+        "price": 14.99,
+        "servesCount": 8
+      }
+    ],
+    "categoryName": "Desserts"
+  },
+  {
+    "id": "b73e1b94-9bf2-4f53-b35f-5d1019a0b78e",
+    "slug": "saffron-rava-kesari",
+    "name": "Saffron Rava Kesari",
+    "description": "Golden semolina slow-roasted in pure cow ghee with saffron infusions, cardamom essence, cashews, and plump golden sultanas.",
+    "categoryId": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+    "basePrice": 6.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549172/mylapore-express/dishes/desserts-aromatic-saffron-rava-kesari.jpg",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk",
+      "Wheat",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Roasted Sooji Rava",
+      "Desi Ghee",
+      "Sugar",
+      "Saffron",
+      "Cashews",
+      "Raisins",
+      "Cardamom"
+    ],
+    "nutritionServing": "1 cup (180 g)",
+    "reheatingInstructions": "Warm in microwave for 30 seconds for warm, heavenly aroma.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 79,
+    "createdAt": "2026-11-13T07:07:11.345Z",
+    "updatedAt": "2026-11-13T07:07:11.345Z",
+    "category": {
+      "id": "62fce613-00c1-4a24-86e5-9ac0541ac7c8",
+      "name": "Desserts",
+      "slug": "desserts",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549180/mylapore-express/dishes/desserts-traditional-slow-simmered-paal-payasam.webp",
+      "description": "Traditional payasam, badam halwa, and mysore pak",
+      "displayOrder": 6,
+      "createdAt": "2026-11-13T07:06:34.943Z"
+    },
+    "variants": [
+      {
+        "id": "fa6638b6-3a99-416c-9212-23c440229adb",
+        "menuItemId": "b73e1b94-9bf2-4f53-b35f-5d1019a0b78e",
+        "name": "Tub (12 oz)",
+        "price": 6.49,
+        "servesCount": 2
+      },
+      {
+        "id": "4faff7be-b0b8-44fd-b2ea-9fe0f6d4c3bb",
+        "menuItemId": "b73e1b94-9bf2-4f53-b35f-5d1019a0b78e",
+        "name": "Family Tub (24 oz)",
+        "price": 11.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Desserts"
+  },
+  {
+    "id": "65a2aabc-33d8-4d73-8525-dae1e2d6d70e",
+    "slug": "mylapore-weekend-thali",
+    "name": "Mylapore Grand Weekend Thali Feast",
+    "description": "The ultimate royal feast: Murungakkai Sambar, Thakkali Rasam, Chow Chow Kootu, Potato Kara Kari, Puliyodarai, White Rice, Paal Payasam, and Appalam.",
+    "categoryId": "2d8e7e8c-91ac-4459-bf4f-f4146e9a46f1",
+    "basePrice": 19.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549179/mylapore-express/dishes/specials-grand-festive-mylapore-weekend-thali.jpg",
+    "orderCountBadge": "1,000+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Milk",
+      "Tree Nuts"
+    ],
+    "ingredients": [
+      "Full traditional multi-course Tamil Brahmin wedding banquet assortment with pure ghee and temple spices"
+    ],
+    "nutritionServing": "1 Complete Platter (850 g)",
+    "reheatingInstructions": "Follow the color-coded reheating lid guide included in the meal box.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 290,
+    "createdAt": "2026-11-13T07:07:12.388Z",
+    "updatedAt": "2026-11-13T07:07:12.388Z",
+    "category": {
+      "id": "2d8e7e8c-91ac-4459-bf4f-f4146e9a46f1",
+      "name": "Specials",
+      "slug": "specials",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549179/mylapore-express/dishes/specials-grand-festive-mylapore-weekend-thali.jpg",
+      "description": "Festive weekend meals and curated kitchen specials",
+      "displayOrder": 9,
+      "createdAt": "2026-11-13T07:06:35.467Z"
+    },
+    "variants": [
+      {
+        "id": "e2d9bf31-c73e-4759-b5cf-e4dea6bb3a77",
+        "menuItemId": "65a2aabc-33d8-4d73-8525-dae1e2d6d70e",
+        "name": "Single Feast Platter",
+        "price": 19.99,
+        "servesCount": 1
+      },
+      {
+        "id": "b6be7cf6-ea92-4c8f-9105-74dde2d0c009",
+        "menuItemId": "65a2aabc-33d8-4d73-8525-dae1e2d6d70e",
+        "name": "Couples Feast (2 Platters)",
+        "price": 37.99,
+        "servesCount": 2
+      }
+    ],
+    "categoryName": "Specials"
+  },
+  {
+    "id": "d0e5121a-3c72-4fd7-ad46-f8e075532b16",
+    "slug": "traditional-avial",
+    "name": "Traditional Palakkad Avial",
+    "description": "Classic heritage medley of 7 garden vegetables (drumstick, ash gourd, raw plantain, carrots, beans, yam) stewed with coconut, cumin, yogurt, and fresh coconut oil.",
+    "categoryId": "2d8e7e8c-91ac-4459-bf4f-f4146e9a46f1",
+    "basePrice": 10.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546798/mylapore-express/dishes/curries-kerala-coconut-vegetable-traditional-avial.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk",
+      "Coconut"
+    ],
+    "ingredients": [
+      "Raw Plantain",
+      "Elephant Foot Yam",
+      "Drumstick",
+      "Ash Gourd",
+      "Carrots",
+      "French Beans",
+      "Fresh Coconut",
+      "Curd",
+      "Cumin",
+      "Green Chilies",
+      "Curry Leaves",
+      "Cold Pressed Coconut Oil"
+    ],
+    "nutritionServing": "1 cup (220 g)",
+    "reheatingInstructions": "Gently warm in microwave 60 seconds. Do not over-boil to keep yogurt silky.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 114,
+    "createdAt": "2026-11-13T07:07:13.463Z",
+    "updatedAt": "2026-11-13T07:07:13.463Z",
+    "category": {
+      "id": "2d8e7e8c-91ac-4459-bf4f-f4146e9a46f1",
+      "name": "Specials",
+      "slug": "specials",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549179/mylapore-express/dishes/specials-grand-festive-mylapore-weekend-thali.jpg",
+      "description": "Festive weekend meals and curated kitchen specials",
+      "displayOrder": 9,
+      "createdAt": "2026-11-13T07:06:35.467Z"
+    },
+    "variants": [
+      {
+        "id": "d9c619b9-9d3e-451e-bae4-153873187c1f",
+        "menuItemId": "d0e5121a-3c72-4fd7-ad46-f8e075532b16",
+        "name": "Regular (16 oz)",
+        "price": 10.99,
+        "servesCount": 2
+      },
+      {
+        "id": "4d79ebf4-a8fa-4b80-9e88-c243cda5420f",
+        "menuItemId": "d0e5121a-3c72-4fd7-ad46-f8e075532b16",
+        "name": "Family Tub (32 oz)",
+        "price": 19.99,
+        "servesCount": 4
+      }
+    ],
+    "categoryName": "Specials"
+  },
+  {
+    "id": "9cf716c0-fccc-4472-ac2c-9547a086c7a2",
+    "slug": "avakkai-mango-pickle",
+    "name": "Mylapore Heritage Avakkai Mango Pickle",
+    "description": "Crisp green raw mango chunks cured in cold-pressed gingelly oil, freshly stone-ground mustard seeds, fenugreek, and fiery Guntur chilies.",
+    "categoryId": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+    "basePrice": 7.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": false,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "SPICY",
+    "allergens": [
+      "Mustard"
+    ],
+    "ingredients": [
+      "Raw Green Ramkela Mangoes",
+      "Mustard Seed Powder",
+      "Fenugreek Powder",
+      "Red Chili Powder",
+      "Cold Pressed Gingelly Oil",
+      "Rock Salt",
+      "Turmeric"
+    ],
+    "nutritionServing": "1 tsp (10 g)",
+    "reheatingInstructions": "Store in cool dry pantry. Use a dry spoon.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 187,
+    "createdAt": "2026-11-13T07:07:14.515Z",
+    "updatedAt": "2026-11-13T07:07:14.515Z",
+    "category": {
+      "id": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+      "name": "Pickles",
+      "slug": "pickles",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+      "description": "Sun-cured avakkai mango, lemon, and green chili pickles",
+      "displayOrder": 10,
+      "createdAt": "2026-11-13T07:06:35.642Z"
+    },
+    "variants": [
+      {
+        "id": "4ff2e110-531a-4636-84da-51b008d6a5e5",
+        "menuItemId": "9cf716c0-fccc-4472-ac2c-9547a086c7a2",
+        "name": "Jar (300 g)",
+        "price": 7.99,
+        "servesCount": 30
+      },
+      {
+        "id": "374d8be6-ce90-48e4-9532-c726c61b9a24",
+        "menuItemId": "9cf716c0-fccc-4472-ac2c-9547a086c7a2",
+        "name": "Family Jar (600 g)",
+        "price": 14.99,
+        "servesCount": 60
+      }
+    ],
+    "categoryName": "Pickles"
+  },
+  {
+    "id": "00ff57e5-0585-450a-a639-24bb41e6b96d",
+    "slug": "elumichai-oorugai",
+    "name": "Sun-Cured Elumichai (Lemon) Pickle",
+    "description": "Zesty paper-thin lemons pickled in salt and aged in the Chennai sun, tempered with mustard seeds, fenugreek, and spicy red chili powder.",
+    "categoryId": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+    "basePrice": 6.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546813/mylapore-express/dishes/pickles-sun-cured-salted-lemon-elumichai-oorugai.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": false,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [
+      "Mustard"
+    ],
+    "ingredients": [
+      "Sun-cured Juicy Lemons",
+      "Mustard Powder",
+      "Methi (Fenugreek)",
+      "Asafoetida",
+      "Red Chilies",
+      "Sesame Oil",
+      "Salt"
+    ],
+    "nutritionServing": "1 tsp (10 g)",
+    "reheatingInstructions": "Store at room temperature.",
+    "isAvailable": true,
+    "rating": 4.8,
+    "reviewCount": 94,
+    "createdAt": "2026-11-13T07:07:15.561Z",
+    "updatedAt": "2026-11-13T07:07:15.561Z",
+    "category": {
+      "id": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+      "name": "Pickles",
+      "slug": "pickles",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+      "description": "Sun-cured avakkai mango, lemon, and green chili pickles",
+      "displayOrder": 10,
+      "createdAt": "2026-11-13T07:06:35.642Z"
+    },
+    "variants": [
+      {
+        "id": "498824c8-d123-4280-8832-def44a260ee5",
+        "menuItemId": "00ff57e5-0585-450a-a639-24bb41e6b96d",
+        "name": "Jar (300 g)",
+        "price": 6.99,
+        "servesCount": 30
+      },
+      {
+        "id": "a5c3d058-2dca-42a8-a955-0c287b6b2fb2",
+        "menuItemId": "00ff57e5-0585-450a-a639-24bb41e6b96d",
+        "name": "Family Jar (600 g)",
+        "price": 12.99,
+        "servesCount": 60
+      }
+    ],
+    "categoryName": "Pickles"
+  },
+  {
+    "id": "e5825945-2b6a-47e0-b76f-fedb171e7219",
+    "slug": "puli-inji",
+    "name": "Traditional Puli Inji (Ginger Tamarind Relish)",
+    "description": "Finely minced fresh ginger, green chilies, and tamarind cooked down in organic jaggery syrup and roasted fenugreek powder. A sublime feast accompaniment.",
+    "categoryId": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+    "basePrice": 7.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546813/mylapore-express/dishes/pickles-sweet-tangy-ginger-tamarind-puli-inji.webp",
+    "orderCountBadge": "250+ ordered",
+    "isBlastChilled": false,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MEDIUM",
+    "allergens": [],
+    "ingredients": [
+      "Fresh Mountain Ginger",
+      "Organic Palm Jaggery",
+      "Tamarind Pulp",
+      "Green Chilies",
+      "Mustard Seeds",
+      "Curry Leaves",
+      "Fenugreek",
+      "Sesame Oil"
+    ],
+    "nutritionServing": "1 tsp (10 g)",
+    "reheatingInstructions": "Store at room temperature.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 112,
+    "createdAt": "2026-11-13T07:07:16.777Z",
+    "updatedAt": "2026-11-13T07:07:16.777Z",
+    "category": {
+      "id": "cfaa7143-273b-47ad-aecf-addb3b468ba8",
+      "name": "Pickles",
+      "slug": "pickles",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549170/mylapore-express/dishes/pickles-spicy-andhra-avakkai-mango-pickle.jpg",
+      "description": "Sun-cured avakkai mango, lemon, and green chili pickles",
+      "displayOrder": 10,
+      "createdAt": "2026-11-13T07:06:35.642Z"
+    },
+    "variants": [
+      {
+        "id": "96acfbc6-e098-4b05-b421-0466559b5c43",
+        "menuItemId": "e5825945-2b6a-47e0-b76f-fedb171e7219",
+        "name": "Jar (300 g)",
+        "price": 7.49,
+        "servesCount": 30
+      },
+      {
+        "id": "94584995-a70a-4fbe-af7a-b60f910a8495",
+        "menuItemId": "e5825945-2b6a-47e0-b76f-fedb171e7219",
+        "name": "Family Jar (600 g)",
+        "price": 13.99,
+        "servesCount": 60
+      }
+    ],
+    "categoryName": "Pickles"
+  },
+  {
+    "id": "c30dca96-d812-4f7b-8b1e-31aceabb0243",
+    "slug": "lemon-rice",
+    "name": "Mylapore Elumichai (Lemon) Sadam",
+    "description": "Fluffy Sona Masoori rice tossed in fresh lemon juice, turmeric, crunchy roasted peanuts, split chana dal, and fragrant curry leaves.",
+    "categoryId": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "basePrice": 8.99,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549177/mylapore-express/dishes/rice-citrus-tempered-elamichai-lemon-rice.jpg",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Peanuts"
+    ],
+    "ingredients": [
+      "Sona Masoori Rice",
+      "Fresh Lemon Juice",
+      "Roasted Peanuts",
+      "Chana Dal",
+      "Urad Dal",
+      "Green Chilies",
+      "Ginger",
+      "Curry Leaves",
+      "Turmeric",
+      "Sesame Oil"
+    ],
+    "nutritionServing": "1 portion (250 g)",
+    "reheatingInstructions": "Microwave 90 seconds. Stir gently.",
+    "isAvailable": true,
+    "rating": 4.9,
+    "reviewCount": 154,
+    "createdAt": "2026-11-13T07:07:17.821Z",
+    "updatedAt": "2026-11-13T07:07:17.821Z",
+    "category": {
+      "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+      "name": "Rice",
+      "slug": "rice",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+      "description": "Aromatic variety rice, pongal, and flavored dishes",
+      "displayOrder": 2,
+      "createdAt": "2026-11-13T07:06:34.242Z"
+    },
+    "variants": [
+      {
+        "id": "31516c6d-cbfb-449a-9ad3-3c400c04be08",
+        "menuItemId": "c30dca96-d812-4f7b-8b1e-31aceabb0243",
+        "name": "Regular (16 oz)",
+        "price": 8.99,
+        "servesCount": 1
+      },
+      {
+        "id": "7a214898-56d0-4d53-be51-2886e19390bb",
+        "menuItemId": "c30dca96-d812-4f7b-8b1e-31aceabb0243",
+        "name": "Family Bowl (32 oz)",
+        "price": 15.99,
+        "servesCount": 3
+      }
+    ],
+    "categoryName": "Rice"
+  },
+  {
+    "id": "4305704e-474d-42df-b578-091be3a1d24a",
+    "slug": "thayir-sadam",
+    "name": "Mylapore Temple Thayir Sadam (Curd Rice)",
+    "description": "Cooling comfort rice mashed with thick homemade curd, whole milk, tempered with mustard, ginger, green chilies, and topped with sweet pomegranate pearls.",
+    "categoryId": "70e2fe4d-7c81-4596-abaf-77951853303a",
+    "basePrice": 8.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546790/mylapore-express/dishes/rice-tempered-curd-thayir-sadam.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [
+      "Milk"
+    ],
+    "ingredients": [
+      "Mashed Soft Rice",
+      "Homemade Fresh Curd",
+      "Whole Milk",
+      "Pomegranate Seeds",
+      "Ginger",
+      "Green Chilies",
+      "Curry Leaves",
+      "Mustard Seeds",
+      "Asafoetida"
+    ],
+    "nutritionServing": "1 portion (250 g)",
+    "reheatingInstructions": "Serve thoroughly chilled. Do not heat.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 220,
+    "createdAt": "2026-11-13T07:07:18.864Z",
+    "updatedAt": "2026-11-13T07:07:18.864Z",
+    "category": {
+      "id": "70e2fe4d-7c81-4596-abaf-77951853303a",
+      "name": "Rice",
+      "slug": "rice",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg",
+      "description": "Aromatic variety rice, pongal, and flavored dishes",
+      "displayOrder": 2,
+      "createdAt": "2026-11-13T07:06:34.242Z"
+    },
+    "variants": [
+      {
+        "id": "20675952-ad3d-45aa-8b03-64461270e4ab",
+        "menuItemId": "4305704e-474d-42df-b578-091be3a1d24a",
+        "name": "Regular (16 oz)",
+        "price": 8.49,
+        "servesCount": 1
+      },
+      {
+        "id": "3976ffff-cca9-438e-8687-14dc01861a2a",
+        "menuItemId": "4305704e-474d-42df-b578-091be3a1d24a",
+        "name": "Family Bowl (32 oz)",
+        "price": 14.99,
+        "servesCount": 3
+      }
+    ],
+    "categoryName": "Rice"
+  },
+  {
+    "id": "c2776433-fbec-4dd2-b67a-5325c17c41ec",
+    "slug": "crispy-dosa-batter",
+    "name": "Mylapore Crispy Dosa Batter",
+    "description": "Naturally stone-ground and aged fermented rice and urad dal batter formulated specifically for golden, extra-crisp paper roast dosas.",
+    "categoryId": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+    "basePrice": 8.49,
+    "image": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546780/mylapore-express/dishes/batters-crispy-fermented-dosa-batter.webp",
+    "orderCountBadge": "500+ ordered",
+    "isBlastChilled": true,
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN",
+      "GLUTEN_FREE"
+    ],
+    "spiceLevel": "MILD",
+    "allergens": [],
+    "ingredients": [
+      "Parboiled Idli Rice",
+      "Raw Ponni Rice",
+      "Whole White Urad Dal",
+      "Fenugreek Seeds",
+      "Salt",
+      "Purified RO Water"
+    ],
+    "nutritionServing": "1 Dosa (80 g batter)",
+    "reheatingInstructions": "Pour thin spiral onto hot cast-iron tawa, drizzle ghee or sesame oil, and flip once crisp.",
+    "isAvailable": true,
+    "rating": 5,
+    "reviewCount": 198,
+    "createdAt": "2026-11-13T07:07:19.907Z",
+    "updatedAt": "2026-11-13T07:07:19.907Z",
+    "category": {
+      "id": "688e2ac2-d98e-4e26-9576-ec4b99e7c149",
+      "name": "Batters",
+      "slug": "batters",
+      "icon": "https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546779/mylapore-express/dishes/batters-stoneground-fresh-idly-batter.webp",
+      "description": "Naturally stone-ground idly, dosa, and adai batters",
+      "displayOrder": 8,
+      "createdAt": "2026-11-13T07:06:35.293Z"
+    },
+    "variants": [
+      {
+        "id": "5e884c8c-61f8-4521-8544-577677105a58",
+        "menuItemId": "c2776433-fbec-4dd2-b67a-5325c17c41ec",
+        "name": "Tub (32 oz)",
+        "price": 8.49,
+        "servesCount": 12
+      },
+      {
+        "id": "c25e7fc4-96bb-4c48-97bd-8197afb83233",
+        "menuItemId": "c2776433-fbec-4dd2-b67a-5325c17c41ec",
+        "name": "Family Tub (64 oz)",
+        "price": 15.49,
+        "servesCount": 25
+      }
+    ],
+    "categoryName": "Batters"
+  }
+]

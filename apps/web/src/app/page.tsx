@@ -9,6 +9,8 @@ import CategoryNav from '@/components/CategoryNav';
 import DishCard from '@/components/DishCard';
 import HeroCarousel from '@/components/HeroCarousel';
 import { ArrowRight, MapPin, Sparkles, Utensils } from 'lucide-react';
+import initialCategories from '@/data/initialCategories.json';
+import initialDishes from '@/data/initialDishes.json';
 
 function HomeContent() {
   const router = useRouter();
@@ -17,15 +19,15 @@ function HomeContent() {
   const searchParam = searchParams.get('search') || '';
   const initialCategory = searchParams.get('category') || 'all';
 
-  const [categories, setCategories] = useState<any[]>([]);
+  // Seed with pre-rendered static catalog so images and cards render immediately without waiting for API
+  const [categories, setCategories] = useState<any[]>(initialCategories);
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
-  const [dishes, setDishes] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [dishes, setDishes] = useState<any[]>(initialDishes);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadData() {
       try {
-        setLoading(true);
         const [cats, items] = await Promise.all([
           api.getCategories(),
           api.getMenuItems({
@@ -33,12 +35,10 @@ function HomeContent() {
             search: searchParam || undefined
           })
         ]);
-        setCategories(cats);
-        setDishes(items);
+        if (cats && cats.length > 0) setCategories(cats);
+        if (items && items.length > 0) setDishes(items);
       } catch (err) {
         console.error('Failed to load menu items:', err);
-      } finally {
-        setLoading(false);
       }
     }
     loadData();
