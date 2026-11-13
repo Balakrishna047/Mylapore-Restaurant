@@ -58,18 +58,18 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   const handleQuickAdd = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsAdding(true);
+    toast.success('Added to Cart', `${dish.name} added to your order.`);
     try {
       await addItem({
         menuItemId: dish.id || dish.slug,
         quantity: 1,
+        name: dish.name,
+        image: dish.image,
+        price: dish.basePrice,
+        spiceLevel: dish.spiceLevel || 'MEDIUM',
       });
-      openCart();
-      toast.success('Added to Cart', `${dish.name} added to your order.`);
     } catch {
       toast.error('Could not add dish', 'Please try again in a moment.');
-    } finally {
-      setIsAdding(false);
     }
   };
 

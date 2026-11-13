@@ -93,17 +93,20 @@ export default function ProductDetailPage() {
   const activePrice = currentVariantObj ? currentVariantObj.price : dish.basePrice;
 
   const handleAddToCart = async () => {
+    setAddedNotice(true);
+    toast.success('Added to Cart', `${dish.name} added to your order.`);
+    setTimeout(() => setAddedNotice(false), 2500);
     try {
       await addItem({
         menuItemId: dish.id || dish.slug,
         quantity,
         variantId: selectedVariant,
         spiceLevel: selectedSpice as any,
+        name: dish.name,
+        image: dish.image,
+        price: activePrice,
+        variantName: currentVariantObj?.name,
       });
-      setAddedNotice(true);
-      openCart();
-      toast.success('Added to Cart', `${dish.name} added to your order.`);
-      setTimeout(() => setAddedNotice(false), 2500);
     } catch {
       toast.error('Failed to add item', 'Please try again.');
     }
