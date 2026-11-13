@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     addItem({
-      menuItemId: dish.id,
+      menuItemId: dish.id || dish.slug,
       quantity,
       variantId: selectedVariant,
       spiceLevel: selectedSpice

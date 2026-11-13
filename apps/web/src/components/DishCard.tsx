@@ -60,7 +60,7 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
     setIsAdding(true);
     try {
       await addItem({
-        menuItemId: dish.id,
+        menuItemId: dish.id || dish.slug,
         quantity: 1
       });
     } finally {

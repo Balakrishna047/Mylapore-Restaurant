@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { api } from '@/lib/api';
+import { api, warmUpApi } from '@/lib/api';
 
 interface CartContextType {
   cart: any;
@@ -25,13 +25,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const refreshCart = async () => {
     try {
       const data = await api.getCart();
-      setCart(data);
+      if (data) setCart(data);
     } catch (err) {
-      console.error('Failed to load cart:', err);
+      console.warn('Cart sync pending:', err);
     }
   };
 
   useEffect(() => {
+    // 1. Immediately warm up free-tier backend in background so cart adds never hit cold start
+    warmUpApi();
+    // 2. Fetch active session cart
     refreshCart();
   }, []);
 
@@ -44,7 +47,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setCart(updated);
       setIsOpen(true);
     } catch (err: any) {
-      alert(err.message || 'Failed to add item to cart');
+      console.error('Failed to add item to cart:', err);
     }
   };
 
@@ -53,7 +56,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const updated = await api.updateCartItem(itemId, quantity);
       setCart(updated);
     } catch (err: any) {
-      alert(err.message || 'Failed to update quantity');
+      console.error('Failed to update quantity:', err);
     }
   };
 
@@ -62,7 +65,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const updated = await api.removeCartItem(itemId);
       setCart(updated);
     } catch (err: any) {
-      alert(err.message || 'Failed to remove item');
+      console.error('Failed to remove item:', err);
     }
   };
 

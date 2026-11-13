@@ -71,8 +71,14 @@ export class CartService {
   }) {
     const cart = await this.getOrCreateCart(params.userId, params.sessionToken);
 
-    const menuItem = await this.prisma.menuItem.findUnique({
-      where: { id: params.menuItemId },
+    // Resilient lookup: match by primary key UUID OR by permanent dish slug
+    const menuItem = await this.prisma.menuItem.findFirst({
+      where: {
+        OR: [
+          { id: params.menuItemId },
+          { slug: params.menuItemId }
+        ]
+      },
       include: { variants: true }
     });
 
@@ -88,11 +94,11 @@ export class CartService {
       }
     }
 
-    // Check if duplicate item exists in cart
+    // Check if duplicate item exists in cart using canonical menuItem.id
     const existing = await this.prisma.cartItem.findFirst({
       where: {
         cartId: cart.id,
-        menuItemId: params.menuItemId,
+        menuItemId: menuItem.id,
         variantId: params.variantId || null,
         spiceLevel: params.spiceLevel || null
       }
@@ -110,7 +116,7 @@ export class CartService {
       await this.prisma.cartItem.create({
         data: {
           cartId: cart.id,
-          menuItemId: params.menuItemId,
+          menuItemId: menuItem.id,
           quantity: params.quantity,
           unitPrice,
           variantId: params.variantId || null,

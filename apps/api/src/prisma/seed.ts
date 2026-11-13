@@ -81,13 +81,7 @@ async function main() {
     }
   });
 
-  // 3. Menu Categories matching PDF with circular images / icons
-  await prisma.cartItem.deleteMany();
-  await prisma.orderItem.deleteMany();
-  await prisma.menuItemVariant.deleteMany();
-  await prisma.menuItem.deleteMany();
-  await prisma.menuCategory.deleteMany();
-
+  // 3. Menu Categories matching PDF with circular images / icons (Idempotent upsert)
   const categories = [
     { name: 'Curries', slug: 'curries', icon: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794546797/mylapore-express/dishes/curries-spicy-roasted-potato-kara-kari.webp', description: 'Traditional dry curries, kootus, and rich lentil stews', displayOrder: 1 },
     { name: 'Rice', slug: 'rice', icon: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549175/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg', description: 'Aromatic variety rice, pongal, and flavored dishes', displayOrder: 2 },
@@ -103,8 +97,12 @@ async function main() {
 
   const catMap = new Map<string, string>();
   for (const c of categories) {
-    const created = await prisma.menuCategory.create({ data: c });
-    catMap.set(c.slug, created.id);
+    const upserted = await prisma.menuCategory.upsert({
+      where: { slug: c.slug },
+      update: c,
+      create: c
+    });
+    catMap.set(c.slug, upserted.id);
   }
 
   // 4. All 20 dishes matching the exact PDF catalog
@@ -1069,14 +1067,26 @@ async function main() {
 
   for (const dish of dishes) {
     const { variants, ...dishData } = dish;
-    await prisma.menuItem.create({
-      data: {
-        ...dishData,
-        variants: {
-          create: variants
-        }
-      }
+    const existing = await prisma.menuItem.findUnique({
+      where: { slug: dish.slug },
+      include: { variants: true }
     });
+
+    if (existing) {
+      await prisma.menuItem.update({
+        where: { id: existing.id },
+        data: dishData
+      });
+    } else {
+      await prisma.menuItem.create({
+        data: {
+          ...dishData,
+          variants: {
+            create: variants
+          }
+        }
+      });
+    }
   }
   console.log(`✅ Seeded ${dishes.length} Authentic Dishes matching PDF catalog`);
 

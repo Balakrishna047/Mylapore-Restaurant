@@ -2,9 +2,7 @@ const rawApiUrl = process.env.API_URL || 'http://localhost:4000';
 const normalizedUrl = rawApiUrl.startsWith('http') ? rawApiUrl : `http://${rawApiUrl}:4000`;
 const serverApiBase = normalizedUrl.endsWith('/api/v1') ? normalizedUrl : `${normalizedUrl.replace(/\/+$/, '')}/api/v1`;
 
-const API_BASE = typeof window === 'undefined'
-  ? serverApiBase
-  : '/api/v1';
+const FALLBACK_API = 'https://mylapore-express-api.onrender.com/api/v1';
 
 function getAuthHeader(): Record<string, string> {
   if (typeof window === 'undefined') return {};
@@ -22,7 +20,8 @@ function getSessionToken(): string {
   return token;
 }
 
-async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+// Resilient request client with automatic cold-start retry and direct fallback
+async function request<T>(endpoint: string, options: RequestInit = {}, retries = 2): Promise<T> {
   const headers = {
     'Content-Type': 'application/json',
     'x-session-token': getSessionToken(),
@@ -30,22 +29,58 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     ...(options.headers || {})
   };
 
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    ...options,
-    headers
-  });
+  const bases = typeof window === 'undefined'
+    ? [serverApiBase]
+    : ['/api/v1', FALLBACK_API];
 
-  if (!res.ok) {
-    let errMsg = `Request failed: ${res.status}`;
-    try {
-      const errData = await res.json();
-      errMsg = errData.message || errMsg;
-      if (Array.isArray(errMsg)) errMsg = errMsg.join(', ');
-    } catch {}
-    throw new Error(errMsg);
+  let lastError: any = null;
+
+  for (const base of bases) {
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      try {
+        const res = await fetch(`${base}${endpoint}`, {
+          ...options,
+          headers
+        });
+
+        // 502 / 503 / 504 are temporary gateway/cold-start states on free-tier containers
+        if ([502, 503, 504].includes(res.status)) {
+          if (attempt < retries) {
+            await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)));
+            continue;
+          }
+          lastError = new Error(`Backend service is warming up (${res.status}). Retrying...`);
+          break; // Switch to direct API fallback
+        }
+
+        if (!res.ok) {
+          let errMsg = `Request failed: ${res.status}`;
+          try {
+            const errData = await res.json();
+            errMsg = errData.message || errMsg;
+            if (Array.isArray(errMsg)) errMsg = errMsg.join(', ');
+          } catch {}
+          throw new Error(errMsg);
+        }
+
+        return await res.json();
+      } catch (err: any) {
+        lastError = err;
+        if (attempt < retries) {
+          await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1)));
+        }
+      }
+    }
   }
 
-  return res.json();
+  throw lastError || new Error('Connection failed. Please try again.');
+}
+
+export function warmUpApi() {
+  if (typeof window === 'undefined') return;
+  try {
+    fetch('/api/v1/health').catch(() => {});
+  } catch {}
 }
 
 export const api = {
