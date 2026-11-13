@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const rawApiUrl = process.env.API_URL || 'http://localhost:4000';
+const rawApiUrl = process.env.API_URL || (process.env.NODE_ENV === 'production' ? 'https://mylapore-express-api.onrender.com' : 'http://localhost:4000');
 const normalizedUrl = rawApiUrl.startsWith('http') ? rawApiUrl : `http://${rawApiUrl}:4000`;
 const apiUrl = normalizedUrl.endsWith('/api/v1') ? normalizedUrl : `${normalizedUrl.replace(/\/+$/, '')}/api/v1`;
 

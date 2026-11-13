@@ -56,7 +56,7 @@ async function bootstrap() {
     res.send(document);
   });
 
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 10000;
   await app.listen(port, '0.0.0.0');
   console.log(`🚀 Mylapore Express API listening on http://0.0.0.0:${port}/api/v1`);
   console.log(`📑 OpenAPI Swagger documentation live on http://localhost:${port}/api/docs`);

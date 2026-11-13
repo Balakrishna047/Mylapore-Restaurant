@@ -43,6 +43,23 @@ export default function CheckoutPage() {
   const [cardExpiry, setCardExpiry] = useState('12/28');
   const [cardCvc, setCardCvc] = useState('888');
 
+  // Client-side pricing calculation fallback to guarantee instant UI reactivity
+  const cartSubtotal = cart?.subtotal || 0;
+  const isFreeDelivery = cartSubtotal >= 45.0;
+  const defaultDeliveryFee = isFreeDelivery ? 0 : 4.99;
+  const fallbackDiscount =
+    appliedCoupon === 'MYLAPORE15'
+      ? Number((cartSubtotal * 0.15).toFixed(2))
+      : appliedCoupon === 'WELCOME5'
+      ? 5.0
+      : 0;
+
+  const displaySubtotal = quote?.subtotal !== undefined ? quote.subtotal : cartSubtotal;
+  const displayDiscount = quote?.discount !== undefined ? quote.discount : fallbackDiscount;
+  const displayDeliveryFee = quote?.deliveryFee !== undefined ? quote.deliveryFee : defaultDeliveryFee;
+  const displayTax = quote?.tax !== undefined ? quote.tax : Number((Math.max(0, displaySubtotal - displayDiscount) * 0.0825).toFixed(2));
+  const displayTotal = quote?.total !== undefined ? quote.total : Number((Math.max(0, displaySubtotal - displayDiscount) + displayTax + displayDeliveryFee + tip).toFixed(2));
+
   useEffect(() => {
     async function fetchQuote() {
       if (!cart || cart.items.length === 0) return;
@@ -409,21 +426,21 @@ export default function CheckoutPage() {
               <div className="border-t border-border pt-3 space-y-1.5 text-xs text-muted-foreground">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="text-foreground">${quote?.subtotal?.toFixed(2) || cart.subtotal.toFixed(2)}</span>
+                  <span className="text-foreground">${displaySubtotal.toFixed(2)}</span>
                 </div>
-                {quote?.discount && quote.discount > 0 ? (
-                  <div className="flex justify-between text-success">
-                    <span>Discount</span>
-                    <span>-${quote.discount.toFixed(2)}</span>
+                {displayDiscount > 0 ? (
+                  <div className="flex justify-between text-success font-semibold">
+                    <span>Discount {appliedCoupon ? `(${appliedCoupon})` : ''}</span>
+                    <span>-${displayDiscount.toFixed(2)}</span>
                   </div>
                 ) : null}
                 <div className="flex justify-between">
                   <span>Sales Tax (8.25%)</span>
-                  <span className="text-foreground">${quote?.tax?.toFixed(2) || '0.00'}</span>
+                  <span className="text-foreground">${displayTax.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Delivery Fee</span>
-                  <span className="text-foreground">{quote?.deliveryFee === 0 ? 'FREE' : `$${quote?.deliveryFee?.toFixed(2) || '4.99'}`}</span>
+                  <span className="text-foreground">{displayDeliveryFee === 0 ? 'FREE' : `$${displayDeliveryFee.toFixed(2)}`}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Kitchen Tip</span>
@@ -431,7 +448,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between font-serif font-bold text-base text-foreground pt-2 border-t border-border">
                   <span>Total Amount</span>
-                  <span className="text-primary">${quote?.total?.toFixed(2) || cart.subtotal.toFixed(2)}</span>
+                  <span className="text-primary">${displayTotal.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -445,7 +462,7 @@ export default function CheckoutPage() {
                 className="w-full uppercase tracking-wider font-bold"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
-                Place Order & Pay (${quote?.total?.toFixed(2) || cart.subtotal.toFixed(2)})
+                Place Order & Pay (${displayTotal.toFixed(2)})
               </Button>
 
               <div className="text-[10px] text-muted-foreground text-center pt-2">
