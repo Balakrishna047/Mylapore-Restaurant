@@ -121,6 +121,12 @@ This monorepo includes a complete `render.yaml` blueprint:
 1. Connect this repository to your Render Dashboard.
 2. Select **New > Blueprint** and select `render.yaml`.
 3. Render provisions:
-   - `mylapore-express-api`: NestJS Web Service (`/api/v1/health`)
-   - `mylapore-express-web`: Next.js Web Service
+   - `mylapore-express-api`: NestJS Web Service on Port 10000 (`/api/v1/health`)
+   - `mylapore-express-web`: Next.js 14 Web Service
    - `mylapore-express-db`: Managed PostgreSQL 16
+
+### Live Production Endpoints:
+- **Web Storefront:** [https://mylapore-express-web.onrender.com](https://mylapore-express-web.onrender.com)
+- **REST API:** [https://mylapore-express-api.onrender.com/api/v1](https://mylapore-express-api.onrender.com/api/v1)
+- **OpenAPI Swagger UI:** [https://mylapore-express-api.onrender.com/api/docs](https://mylapore-express-api.onrender.com/api/docs)
+- **OpenAPI Schema for Salesforce External Services:** [https://mylapore-express-api.onrender.com/api/docs-json](https://mylapore-express-api.onrender.com/api/docs-json)

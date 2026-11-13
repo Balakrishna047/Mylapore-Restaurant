@@ -4,6 +4,7 @@
 > **Platform Version**: 2.0.0 (Production Live)  
 > **Live Web Application**: [https://mylapore-express-web.onrender.com](https://mylapore-express-web.onrender.com)  
 > **Live API & Swagger Docs**: [https://mylapore-express-api.onrender.com/api/docs](https://mylapore-express-api.onrender.com/api/docs)  
+> **Live OpenAPI Schema for Salesforce External Services**: [https://mylapore-express-api.onrender.com/api/docs-json](https://mylapore-express-api.onrender.com/api/docs-json)  
 > **Live API Health Check**: [https://mylapore-express-api.onrender.com/api/v1/health](https://mylapore-express-api.onrender.com/api/v1/health)
 
 ---
@@ -27,7 +28,7 @@ The platform is designed around **Spec-Driven Development (SDD)** with a decoupl
                             ▼
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                           API GATEWAY & BUSINESS ENGINE                                │
-│                     NestJS Framework on Node.js 20 (Port 4000)                         │
+│                     NestJS Framework on Node.js 20 (Port 10000)                        │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────────────────────────┐  │
 │  │ Menu & Outlet│  │ Cart & Order │  │ Payment & Tax│  │ Agent Gateway (/api/v1/...)│  │
 │  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  └─────────────┬──────────────┘  │

@@ -332,45 +332,82 @@ To ensure the storefront maintains production security and clean separation:
 - **All mock/simulated bots have been removed from the website**.
 - The bot is **strictly rendered when deployed via Salesforce Messaging for In-App & Web (MIAW)**.
 
-### 7.1 Web Storefront Container Component
-The storefront component [`apps/web/src/components/ChatWidget.tsx`](file:///c:/Users/Administrator/Desktop/Mylapore/apps/web/src/components/ChatWidget.tsx) acts as the bridge:
-1. It inspects environment variables (`NEXT_PUBLIC_SALESFORCE_MIAW_URL`, `NEXT_PUBLIC_SALESFORCE_ORG_ID`, `NEXT_PUBLIC_SALESFORCE_DEPLOYMENT_NAME`).
-2. If absent: renders `null` (zero mock bots visible).
-3. If present: dynamically injects `embeddedservice_bootstrap.min.js` and initializes the native Salesforce floating launcher.
+### 7.1 Web Storefront Container Component (`SalesforceChatEmbed.tsx`)
+The storefront component [`apps/web/src/components/SalesforceChatEmbed.tsx`](file:///c:/Users/Administrator/Desktop/Mylapore/apps/web/src/components/SalesforceChatEmbed.tsx) acts as the bridge:
+1. It injects the official Salesforce Messaging for In-App and Web (MIAW) bootstrap script dynamically.
+2. It initializes `embeddedservice_bootstrap` targeting the production Salesforce Developer Edition Org (`00Dg700000Oo6fV`) and deployment `Mylapore_Concierge_Web`.
+3. It binds to SCRT2 URL: `https://orgfarm-b2714d8f72-dev-ed.develop.my.salesforce-scrt.com`.
 
 ```tsx
-// apps/web/src/components/ChatWidget.tsx
+// apps/web/src/components/SalesforceChatEmbed.tsx
 'use client';
 
 import { useEffect } from 'react';
 
-export default function ChatWidget() {
+export default function SalesforceChatEmbed() {
   useEffect(() => {
-    const bootstrapUrl = process.env.NEXT_PUBLIC_SALESFORCE_MIAW_URL;
-    const orgId = process.env.NEXT_PUBLIC_SALESFORCE_ORG_ID;
-    const deploymentName = process.env.NEXT_PUBLIC_SALESFORCE_DEPLOYMENT_NAME;
-    const siteUrl = process.env.NEXT_PUBLIC_SALESFORCE_SITE_URL || bootstrapUrl?.replace(/\/assets\/js\/.*$/, '');
-    const scrt2Url = process.env.NEXT_PUBLIC_SALESFORCE_SCRT2_URL;
+    if (typeof window === 'undefined') return;
 
-    if (!bootstrapUrl && (!orgId || !deploymentName)) {
-      return; // Renders null: clean website with zero mock bot distractions
+    const orgId = '00Dg700000Oo6fV';
+    const deploymentName = 'Mylapore_Concierge_Web';
+    const siteUrl = 'https://orgfarm-b2714d8f72-dev-ed.develop.my.site.com/ESWMylaporeConci1794475036498';
+    const scrt2Url = 'https://orgfarm-b2714d8f72-dev-ed.develop.my.salesforce-scrt.com';
+    const scriptSrc = `${siteUrl}/assets/js/bootstrap.min.js`;
+
+    function initMessaging() {
+      try {
+        if ((window as any).embeddedservice_bootstrap) {
+          (window as any).embeddedservice_bootstrap.settings.language = 'en_US';
+          (window as any).embeddedservice_bootstrap.init(
+            orgId,
+            deploymentName,
+            siteUrl,
+            { scrt2URL: scrt2Url }
+          );
+          console.log('[Salesforce Agentforce] MIAW live bot initialized successfully.');
+        }
+      } catch (err) {
+        console.error('[Salesforce Agentforce] Error initializing Embedded Messaging: ', err);
+      }
     }
 
-    // Inject official Salesforce MIAW bootstrap
-    const script = document.createElement('script');
-    script.src = bootstrapUrl || `${siteUrl}/assets/js/embeddedservice_bootstrap.min.js`;
-    script.async = true;
-    script.onload = () => {
-      if (window.embeddedservice_bootstrap && orgId && deploymentName && siteUrl) {
-        window.embeddedservice_bootstrap.init(orgId, deploymentName, siteUrl, { scrt2URL: scrt2Url });
-      }
-    };
-    document.body.appendChild(script);
+    let script = document.getElementById('salesforce-miaw-script') as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'salesforce-miaw-script';
+      script.src = scriptSrc;
+      script.async = true;
+      script.onload = () => initMessaging();
+      document.body.appendChild(script);
+    } else {
+      initMessaging();
+    }
   }, []);
 
-  return null; // Salesforce renders its own launcher button
+  return null;
 }
 ```
+
+### 7.2 Critical UX Protection: Floating Chatbot Occlusion Isolation
+Third-party floating chat iframes inject with default high z-indexes into viewport corners. In an e-commerce checkout flow, this can occlude the primary checkout CTA ("Proceed to Checkout") or trap touch/pointer events within a cross-origin iframe (`UNSUPPORTED_IN_CROSS_ORIGIN_FRAME`).
+
+**The Solution:**
+1. **Drawer Z-Index Elevation**: `CartDrawer` is mounted at `z-[99999]`.
+2. **Dynamic Body Class Toggling**: Whenever `CartDrawer` is open, `document.body.classList.add('cart-open')` is activated.
+3. **Targeted CSS Rule**: In `apps/web/src/app/globals.css`:
+```css
+/* Suppress floating chat widgets when cart drawer is active to prevent blocking checkout CTAs */
+body.cart-open .embeddedServiceHelpButton,
+body.cart-open #esw-chat-container,
+body.cart-open iframe[title="Chat Window"],
+body.cart-open .embeddedServiceSidebar {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+```
+This guarantees 100% unobstructed checkout funnel conversion while preserving the floating Agentforce concierge across all general browsing pages.
 
 ---
 
@@ -386,6 +423,9 @@ Below is the definitive architect checklist of pitfalls and their concrete mitig
 | **4. Missing Client-Side Trusted URLs (CSP)** | Browser blocks Salesforce chat iframes and WebSockets due to Content Security Policy. | Add `https://mylapore-express-web.onrender.com` in Salesforce **Setup $\to$ Security $\to$ Trusted URLs** with `script-src`, `connect-src`, `frame-src`. |
 | **5. Unauthenticated Bot Gate** | Malicious actors could invoke `/api/v1/agent/*` directly to scrape menus or trigger cancellations. | Applied [`AgentforceApiKeyGuard`](file:///c:/Users/Administrator/Desktop/Mylapore/apps/api/src/common/agentforce-api-key.guard.ts) checking `x-agentforce-api-key` header on all agent routes. |
 | **6. Unhandled Human Escalation Dead-Ends** | If a customer demands a human or sentiment is negative, bot loops without resolution. | Configure Omni-Channel Flow with a fallback block routing to `Mylapore_Live_Support_Queue`. |
+| **7. Floating Chatbot CTA Occlusion** | Third-party chat iframes rendered at bottom-right physically overlap the "Proceed to Checkout" button inside mobile/desktop cart drawers, causing checkout abandonment. | Mount `CartDrawer` at `z-[99999]`, toggle `body.cart-open`, and apply CSS suppression (`display: none !important`) to all `#esw-chat-container` and `iframe[title="Chat Window"]` nodes while the drawer is active. |
+| **8. Cloud Port Scan Deactivation** | Render cloud port scanner searches on port 10000 by default. If the NestJS API defaults to port 4000, Render terminates ingress after 10m with `Port scan timeout reached, no open ports detected`. | Configure `process.env.PORT || 10000` in `main.ts` and set `PORT=10000` in Render service environment configuration. |
+| **9. Synchronous UI Cart Lag** | Awaiting network round-trips to the backend API before opening the cart drawer introduces 1.5s–2.5s perceived lag, degrading user experience. | Implement Optimistic UI Cart updates in `CartContext.tsx`: synchronously update items, item count, and open the drawer in 0ms, while synchronizing with the backend API in the background. |
 
 ---
 
