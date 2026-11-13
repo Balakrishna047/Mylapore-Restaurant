@@ -129,17 +129,11 @@ export default function CartDrawer() {
                 >
                   <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#FAF4E8] shrink-0 border border-[#E7DFD5]">
                     <img
-                      src={item.image || '/images/dishes/potato-kara-kari.webp'}
+                      src={item.image || '/images/placeholder-dish.svg'}
                       alt={item.name}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        if (target.src.endsWith('.jpg')) {
-                          target.src = target.src.replace(/\.jpg$/, '.webp');
-                        } else if (target.src.includes('/images/dishes/')) {
-                          target.src = target.src.replace('/images/dishes/', '/dish-photos/');
-                        } else {
-                          target.src = '/images/dishes/potato-kara-kari.webp';
-                        }
+                        target.src = '/images/placeholder-dish.svg';
                       }}
                       className="w-full h-full object-cover"
                     />

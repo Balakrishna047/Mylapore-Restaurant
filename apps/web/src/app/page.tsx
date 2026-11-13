@@ -283,11 +283,11 @@ function HomeContent() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { title: 'Best Sellers', count: '8 products', img: '/images/dishes/south-indian-veg-kurma.webp' },
-              { title: 'Paneer Favourites', count: '8 products', img: '/images/dishes/saag-paneer.webp' },
-              { title: 'Rice Bowls', count: '7 products', img: '/images/dishes/puliyodarai.webp' },
-              { title: 'Tea-time Snacks', count: '6 products', img: '/images/dishes/idli-milagai-podi.webp' },
-              { title: 'Breakfast & Tiffin', count: '6 products', img: '/images/dishes/crispy-dosa-batter.webp' }
+              { title: 'Best Sellers', count: '8 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794547963/mylapore-express/dishes/curries-south-indian-vegetable-kurma.webp' },
+              { title: 'Paneer Favourites', count: '8 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794547963/mylapore-express/dishes/curries-palak-saag-paneer.webp' },
+              { title: 'Rice Bowls', count: '7 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549448/mylapore-express/dishes/rice-temple-style-tamarind-puliyodarai.jpg' },
+              { title: 'Tea-time Snacks', count: '6 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794549448/mylapore-express/dishes/podis-gunpowder-idli-milagai-podi.jpg' },
+              { title: 'Breakfast & Tiffin', count: '6 products', img: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto/v1794547963/mylapore-express/dishes/batters-stone-ground-crispy-dosa-batter.webp' }
             ].map((col, idx) => (
               <div
                 key={idx}
@@ -299,11 +299,7 @@ function HomeContent() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src.endsWith('.webp')) {
-                      target.src = target.src.replace(/\.webp$/, '.jpg');
-                    } else {
-                      target.src = '/images/dishes/potato-kara-kari.webp';
-                    }
+                    target.src = '/images/placeholder-dish.svg';
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-3.5 text-white">

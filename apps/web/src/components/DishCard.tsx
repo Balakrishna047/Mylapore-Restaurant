@@ -27,7 +27,7 @@ interface DishCardProps {
 
 export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
   const { addItem, cart, updateQuantity } = useCart();
-  const [imgSrc, setImgSrc] = useState(dish.image || '/images/dishes/potato-kara-kari.webp');
+  const [imgSrc, setImgSrc] = useState(dish.image || '/images/placeholder-dish.svg');
   const [isAdding, setIsAdding] = useState(false);
 
   // Sync image source whenever dish prop updates (e.g. category filter or search)
@@ -35,22 +35,14 @@ export default function DishCard({ dish, viewMode = 'grid' }: DishCardProps) {
     if (dish?.image) {
       setImgSrc(dish.image);
     } else {
-      setImgSrc('/images/dishes/potato-kara-kari.webp');
+      setImgSrc('/images/placeholder-dish.svg');
     }
   }, [dish?.image]);
 
-  // Resilient multi-tier fallback for images (Cloudinary CDN -> Local WebP -> JPG -> Default)
+  // Graceful fallback: If Cloudinary fails or is offline, show styled SVG placeholder
   const handleImageError = () => {
-    if (imgSrc && imgSrc.startsWith('https://res.cloudinary.com/')) {
-      setImgSrc(`/images/dishes/${dish.slug || 'potato-kara-kari'}.webp`);
-    } else if (imgSrc && imgSrc.endsWith('.jpg')) {
-      setImgSrc(imgSrc.replace(/\.jpg$/, '.webp'));
-    } else if (imgSrc && imgSrc.startsWith('/images/dishes/')) {
-      setImgSrc(imgSrc.replace('/images/dishes/', '/dish-photos/'));
-    } else if (imgSrc && imgSrc.startsWith('/dish-photos/') && imgSrc.endsWith('.jpg')) {
-      setImgSrc(imgSrc.replace(/\.jpg$/, '.webp'));
-    } else if (imgSrc !== '/images/dishes/potato-kara-kari.webp') {
-      setImgSrc('/images/dishes/potato-kara-kari.webp');
+    if (imgSrc !== '/images/placeholder-dish.svg') {
+      setImgSrc('/images/placeholder-dish.svg');
     }
   };
 

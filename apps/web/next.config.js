@@ -24,15 +24,6 @@ const nextConfig = {
             value: 'public, max-age=31536000, immutable'
           }
         ]
-      },
-      {
-        source: '/dish-photos/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
       }
     ];
   },
@@ -41,10 +32,6 @@ const nextConfig = {
       {
         source: '/api/v1/:path*',
         destination: `${apiUrl}/:path*`
-      },
-      {
-        source: '/dish-photos/:path*',
-        destination: '/images/dishes/:path*'
       }
     ];
   }

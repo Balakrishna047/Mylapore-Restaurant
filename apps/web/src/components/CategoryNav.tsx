@@ -77,13 +77,7 @@ export default function CategoryNav({
                       alt={cat.name}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        if (target.src.endsWith('.jpg')) {
-                          target.src = target.src.replace(/\.jpg$/, '.webp');
-                        } else if (target.src.includes('/images/dishes/')) {
-                          target.src = target.src.replace('/images/dishes/', '/dish-photos/');
-                        } else {
-                          target.src = '/images/dishes/potato-kara-kari.webp';
-                        }
+                        target.src = '/images/placeholder-dish.svg';
                       }}
                       className="w-full h-full object-cover"
                     />
