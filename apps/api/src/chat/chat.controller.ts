@@ -10,16 +10,27 @@ import {
   BadRequestException
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiHeader } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 import { ChatService } from './chat.service';
 import { SessionLockGuard } from './session-lock.guard';
 
-class CreateSessionDto {
+export class CreateSessionDto {
+  @IsString()
+  @IsOptional()
   sessionToken?: string;
+
+  @IsString()
+  @IsOptional()
   outletId?: string;
 }
 
-class ExecuteTurnDto {
+export class ExecuteTurnDto {
+  @IsString()
+  @IsNotEmpty()
   message!: string;
+
+  @IsString()
+  @IsOptional()
   turnToken?: string;
 }
 
