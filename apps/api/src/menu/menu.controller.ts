@@ -7,6 +7,29 @@ import { MenuService } from './menu.service';
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
 
+  @Get()
+  @ApiOperation({ summary: 'Get menu items (root endpoint)' })
+  @ApiQuery({ name: 'category', required: false })
+  @ApiQuery({ name: 'dietary', required: false })
+  @ApiQuery({ name: 'spiceLevel', required: false })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiQuery({ name: 'q', required: false })
+  async getMenuRoot(
+    @Query('category') category?: string,
+    @Query('dietary') dietary?: string,
+    @Query('spiceLevel') spiceLevel?: string,
+    @Query('search') search?: string,
+    @Query('q') q?: string
+  ) {
+    return this.menuService.getItems({
+      categorySlug: category,
+      dietary,
+      spiceLevel,
+      search: search || q,
+      availableOnly: true
+    });
+  }
+
   @Get('categories')
   @ApiOperation({ summary: 'List all menu categories with icons and counts' })
   async getCategories() {
