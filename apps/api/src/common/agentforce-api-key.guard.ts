@@ -7,15 +7,17 @@ export class AgentforceApiKeyGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const apiKey =
       request.headers['x-agentforce-api-key'] ||
+      request.headers['x-gateway-auth'] ||
       (request.headers['authorization']?.startsWith('Bearer ')
         ? request.headers['authorization'].slice(7)
         : null);
 
     const validKey = process.env.AGENTFORCE_API_KEY || 'mylapore-agentforce-secret-key-2026';
+    const validGatewayAuth = process.env.X_GATEWAY_AUTH || 'mylapore-gateway-auth-token-2026';
 
-    if (!apiKey || apiKey !== validKey) {
+    if (!apiKey || (apiKey !== validKey && apiKey !== validGatewayAuth)) {
       throw new UnauthorizedException(
-        'Unauthorized: Invalid or missing x-agentforce-api-key header for Agentforce External Service.'
+        'Unauthorized: Invalid or missing x-agentforce-api-key or x-gateway-auth header for Agentforce External Service.'
       );
     }
 

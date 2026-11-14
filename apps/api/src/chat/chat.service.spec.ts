@@ -72,6 +72,7 @@ describe('ChatService (Chat BFF)', () => {
 
     displayBlockService = new DisplayBlockService(mockPrisma);
     chatService = new ChatService(mockPrisma, displayBlockService);
+    process.env.SALESFORCE_ENABLED = 'false';
   });
 
   it('should initialize a new guest session with deterministic welcome message and categories', async () => {
