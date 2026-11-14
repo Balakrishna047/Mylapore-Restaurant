@@ -15,6 +15,26 @@ import { AgentforceApiKeyGuard } from '../common/agentforce-api-key.guard';
 export class AgentController {
   constructor(private readonly agentService: AgentService) {}
 
+  @Post('menu/categories')
+  @ApiOperation({
+    summary: 'List published menu categories for the verified session outlet',
+    operationId: 'agentforceListMenuCategories'
+  })
+  @ApiResponse({ status: 200, description: 'Menu categories' })
+  async listMenuCategories(@Body() body: { outletId?: string }) {
+    return this.agentService.listMenuCategories(body);
+  }
+
+  @Get('menu/categories')
+  @ApiOperation({
+    summary: 'List published menu categories for the verified session outlet (GET)',
+    operationId: 'agentforceGetMenuCategories'
+  })
+  @ApiResponse({ status: 200, description: 'Menu categories' })
+  async getMenuCategories() {
+    return this.agentService.listMenuCategories({});
+  }
+
   @Post('menu/search')
   @ApiOperation({
     summary: 'Search menu for the verified session outlet',

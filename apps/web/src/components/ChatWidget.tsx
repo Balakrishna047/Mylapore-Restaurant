@@ -1,5 +1,3 @@
 'use client';
 
-export default function ChatWidget() {
-  return null;
-}
+export { default, ChatWidget } from './chatbot/ChatWidget';

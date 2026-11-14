@@ -23,6 +23,38 @@ export class AgentService {
     private outboxService: OutboxService
   ) {}
 
+  async listMenuCategories(params: { outletId?: string }) {
+    const correlationId = `corr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const categories = await this.prisma.menuCategory.findMany({
+      orderBy: { displayOrder: 'asc' },
+      include: {
+        _count: {
+          select: { menuItems: true }
+        }
+      }
+    });
+
+    const mapped = categories.map((cat) => ({
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug,
+      icon: cat.icon,
+      description: cat.description,
+      itemCount: cat._count.menuItems,
+      actionPayload: {
+        type: 'FILTER_CATEGORY',
+        categorySlug: cat.slug,
+        categoryName: cat.name
+      }
+    }));
+
+    return {
+      success: true,
+      categories: mapped,
+      correlationId
+    };
+  }
+
   async searchMenu(params: {
     outletId?: string;
     query?: string;

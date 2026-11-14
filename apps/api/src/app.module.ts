@@ -14,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { DeliveryModule } from './delivery/delivery.module';
 import { IntegrationsModule } from './integrations/integrations.module';
 import { AgentModule } from './agent/agent.module';
+import { ChatModule } from './chat/chat.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -36,7 +37,8 @@ import { HealthController } from './health.controller';
     SupportModule,
     AdminModule,
     IntegrationsModule,
-    AgentModule
+    AgentModule,
+    ChatModule
   ],
   controllers: [HealthController],
   providers: [

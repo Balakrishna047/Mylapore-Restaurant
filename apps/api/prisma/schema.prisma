@@ -276,3 +276,45 @@ model IntegrationEvent {
   @@index([status, nextRetryAt])
   @@index([aggregateType, aggregateId])
 }
+
+model ChatSession {
+  id            String             @id @default(uuid())
+  sessionToken  String             @unique
+  outletId      String             @default("outlet-mylapore-001")
+  status        String             @default("ACTIVE")
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  turns         ChatTurn[]
+  displayBlocks ChatDisplayBlock[]
+}
+
+model ChatTurn {
+  id            String             @id @default(uuid())
+  sessionId     String
+  session       ChatSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  turnNumber    Int
+  userQuery     String
+  agentText     String?
+  status        String             @default("COMPLETED")
+  turnToken     String
+  createdAt     DateTime           @default(now())
+  displayBlocks ChatDisplayBlock[]
+
+  @@unique([sessionId, turnNumber])
+}
+
+model ChatDisplayBlock {
+  id             String      @id @default(uuid())
+  sessionId      String
+  session        ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  turnId         String
+  turn           ChatTurn    @relation(fields: [turnId], references: [id], onDelete: Cascade)
+  requestId      String
+  catalogVersion String      @default("v1.0.0-pilot")
+  type           String      // category_buttons, menu_item_list, menu_item_detail
+  payload        String      // JSON stringified display payload
+  createdAt      DateTime    @default(now())
+  expiresAt      DateTime
+
+  @@index([sessionId, turnId, requestId, catalogVersion])
+}

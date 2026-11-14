@@ -40,6 +40,22 @@ describe('Agentforce Action Gateway & Restricted Actions', () => {
       },
       order: {
         findFirst: jest.fn()
+      },
+      idempotencyRecord: {
+        findUnique: jest.fn().mockResolvedValue(null),
+        create: jest.fn().mockResolvedValue({})
+      },
+      menuCategory: {
+        findMany: jest.fn().mockResolvedValue([
+          {
+            id: 'cat-1',
+            name: 'Breakfast Tiffins',
+            slug: 'breakfast-tiffins',
+            icon: '🥞',
+            description: 'Fresh tiffins',
+            _count: { menuItems: 4 }
+          }
+        ])
       }
     };
 

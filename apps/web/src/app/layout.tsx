@@ -11,6 +11,7 @@ import CartDrawer from '@/components/CartDrawer';
 import MobileCartBar from '@/components/MobileCartBar';
 import LocationModal from '@/components/LocationModal';
 import SalesforceChatEmbed from '@/components/SalesforceChatEmbed';
+import ChatWidget from '@/components/ChatWidget';
 
 export const metadata: Metadata = {
   title: 'Mylapore Express | Authentic Fresh South Indian Culinary E-Commerce',
@@ -50,6 +51,9 @@ export default function RootLayout({
                   <CartDrawer />
                   <MobileCartBar />
                   <LocationModal />
+
+                  {/* Native Grounded Mylapore Express v2.7 Agentforce Chatbot Suite */}
+                  <ChatWidget />
 
                   {/* Official Salesforce Agentforce Embedded Messaging (MIAW) Live Deployment */}
                   <SalesforceChatEmbed />

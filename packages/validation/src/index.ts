@@ -57,3 +57,89 @@ export const SupportMessageSchema = z.object({
   message: z.string().min(1, 'Message cannot be empty').max(1000),
   orderNumber: z.string().optional()
 });
+
+// Mylapore Express v2.7 Agentforce Chatbot Schemas
+export const CategoryButtonSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  slug: z.string(),
+  icon: z.string(),
+  itemCount: z.number().int().nonnegative(),
+  actionPayload: z.object({
+    type: z.literal('FILTER_CATEGORY'),
+    categorySlug: z.string(),
+    categoryName: z.string()
+  })
+});
+
+export const MenuItemCardDataSchema = z.object({
+  id: z.string(),
+  slug: z.string(),
+  name: z.string(),
+  description: z.string(),
+  imageUrl: z.string(),
+  priceFormatted: z.string(),
+  priceMinor: z.number().int().nonnegative(),
+  currency: z.string(),
+  categoryName: z.string(),
+  dietaryTags: z.array(z.string()),
+  spiceLevel: z.string(),
+  isBlastChilled: z.boolean(),
+  orderCountBadge: z.string().optional(),
+  actionPayload: z.object({
+    type: z.literal('VIEW_ITEM_DETAIL'),
+    itemId: z.string(),
+    itemSlug: z.string()
+  })
+});
+
+export const MenuItemDetailDataSchema = z.object({
+  id: z.string(),
+  slug: z.string(),
+  name: z.string(),
+  description: z.string(),
+  imageUrl: z.string(),
+  priceFormatted: z.string(),
+  priceMinor: z.number().int().nonnegative(),
+  currency: z.string(),
+  categoryName: z.string(),
+  dietaryTags: z.array(z.string()),
+  spiceLevel: z.string(),
+  allergens: z.array(z.string()),
+  ingredients: z.array(z.string()),
+  nutritionServing: z.string(),
+  reheatingInstructions: z.string(),
+  isBlastChilled: z.boolean()
+});
+
+export const ChatDisplayBlockSchema = z.object({
+  id: z.string().optional(),
+  turnId: z.string().optional(),
+  requestId: z.string().optional(),
+  catalogVersion: z.string().optional(),
+  type: z.enum(['category_buttons', 'menu_item_list', 'menu_item_detail']),
+  payload: z.union([
+    z.object({ categories: z.array(CategoryButtonSchema) }),
+    z.object({ items: z.array(MenuItemCardDataSchema), count: z.number() }),
+    MenuItemDetailDataSchema
+  ]),
+  createdAt: z.union([z.string(), z.date()]).optional(),
+  expiresAt: z.union([z.string(), z.date()]).optional()
+});
+
+export const ChatTurnResponseSchema = z.object({
+  turnId: z.string(),
+  turnNumber: z.number().int().positive(),
+  turnToken: z.string(),
+  agentText: z.string(),
+  displayBlocks: z.array(ChatDisplayBlockSchema)
+});
+
+export const ChatSessionResponseSchema = z.object({
+  sessionToken: z.string(),
+  sessionId: z.string(),
+  status: z.string(),
+  outletId: z.string(),
+  welcomeMessage: z.string(),
+  displayBlocks: z.array(ChatDisplayBlockSchema)
+});
