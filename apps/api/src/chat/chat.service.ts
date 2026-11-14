@@ -174,6 +174,87 @@ export class ChatService {
     }
   }
 
+  
+  private async querySalesforceAgent(userQuery: string): Promise<string | null> {
+    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
+    const clientId = process.env.SALESFORCE_CLIENT_ID;
+    const clientSecret = process.env.SALESFORCE_CLIENT_SECRET;
+    const agentId = process.env.SALESFORCE_AGENT_ID;
+
+    if (!instanceUrl || !clientId || !clientSecret || !agentId) {
+      return null;
+    }
+
+    try {
+      const tokenEndpoint = instanceUrl + '/services/oauth2/token';
+      const params = new URLSearchParams();
+      params.append('grant_type', 'client_credentials');
+      params.append('client_id', clientId);
+      params.append('client_secret', clientSecret);
+
+      const tokenRes = await fetch(tokenEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+        body: params.toString()
+      });
+
+      if (!tokenRes.ok) {
+        this.logger.warn('Salesforce OAuth failed with status: ' + tokenRes.status);
+        return null;
+      }
+      const tokenData = await tokenRes.json();
+      const token = tokenData.access_token;
+      if (!token) return null;
+
+      const sessionUrl = 'https://api.salesforce.com/einstein/ai-agent/v1/agents/' + agentId + '/sessions';
+      const sessionRes = await fetch(sessionUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          externalSessionKey: uuidv4(),
+          instanceConfig: { endpoint: instanceUrl },
+          streamingCapabilities: { chunkTypes: ['Text'] },
+          bypassUser: true
+        })
+      });
+
+      if (!sessionRes.ok) {
+        this.logger.warn('Salesforce Agent session start failed with status: ' + sessionRes.status);
+        return null;
+      }
+      const sessionData = await sessionRes.json();
+      const agentSessionId = sessionData.sessionId;
+      if (!agentSessionId) return null;
+
+      const msgUrl = 'https://api.salesforce.com/einstein/ai-agent/v1/sessions/' + agentSessionId + '/messages';
+      const msgRes = await fetch(msgUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          message: { sequenceId: 1, type: 'Text', text: userQuery }
+        })
+      });
+
+      if (!msgRes.ok) {
+        this.logger.warn('Salesforce Agent message failed with status: ' + msgRes.status);
+        return null;
+      }
+      const msgData = await msgRes.json();
+      return msgData.messages?.[0]?.message || null;
+    } catch (err) {
+      this.logger.warn('Salesforce Agent call failed: ' + err.message);
+      return null;
+    }
+  }
+
   private async processTurnIntent(
     sessionId: string,
     turnId: string,
@@ -182,11 +263,40 @@ export class ChatService {
   ): Promise<{ agentText: string; blocks: any[] }> {
     const q = query.toLowerCase().trim();
 
-    // 1. Direct Item Detail Intent Check
-    // If the query contains the name or slug of an existing menu item
     const allItems = await this.prisma.menuItem.findMany({
       include: { category: true }
     });
+
+    // MODE B: If Salesforce Agentforce is enabled, query Agentforce first
+    if (process.env.SALESFORCE_ENABLED === 'true') {
+      const sfResponse = await this.querySalesforceAgent(query);
+      if (sfResponse) {
+        const matchingItems = allItems.filter(
+          (i) =>
+            q.includes(i.name.toLowerCase()) ||
+            sfResponse.toLowerCase().includes(i.name.toLowerCase())
+        );
+
+        let blocks = [];
+        if (matchingItems.length > 0) {
+          blocks.push(this.displayBlockService.buildMenuItemListBlock(matchingItems.slice(0, 6)));
+        } else {
+          const categories = await this.prisma.menuCategory.findMany({
+            orderBy: { displayOrder: 'asc' },
+            include: { _count: { select: { menuItems: true } } }
+          });
+          blocks.push(this.displayBlockService.buildCategoryButtonsBlock(categories));
+        }
+
+        return {
+          agentText: sfResponse,
+          blocks
+        };
+      }
+    }
+
+    // 1. Direct Item Detail Intent Check
+    // If the query contains the name or slug of an existing menu item
 
     const matchedItem = allItems.find(
       (item) =>
