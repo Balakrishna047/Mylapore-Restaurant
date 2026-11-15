@@ -76,6 +76,7 @@ export class ChatService {
       sessionId: session.id,
       status: session.status,
       outletId: session.outletId,
+      executionMode: 'SIMPLE_MENU',
       welcomeMessage,
       displayBlocks: [categoryBlock]
     };
@@ -121,7 +122,7 @@ export class ChatService {
       // 25-second deadline control wrapper
       let timeoutHandle: NodeJS.Timeout | null = null;
       const turnExecutionPromise = this.processTurnIntent(session.id, createdTurn.id, requestId, userQuery);
-      const timeoutPromise = new Promise<{ agentText: string; blocks: any[] }>((_, reject) => {
+      const timeoutPromise = new Promise<{ agentText: string; blocks: any[]; executionMode: 'AGENTFORCE' | 'SIMPLE_MENU' }>((_, reject) => {
         timeoutHandle = setTimeout(
           () => reject(new Error('Agent turn processing timed out (25s deadline reached)')),
           24000
@@ -154,6 +155,7 @@ export class ChatService {
         turnNumber,
         turnToken,
         agentText: result.agentText,
+        executionMode: result.executionMode || 'SIMPLE_MENU',
         displayBlocks: persistedBlocks
       };
     } catch (err: any) {
@@ -260,7 +262,7 @@ export class ChatService {
     turnId: string,
     requestId: string,
     query: string
-  ): Promise<{ agentText: string; blocks: any[] }> {
+  ): Promise<{ agentText: string; blocks: any[]; executionMode: 'AGENTFORCE' | 'SIMPLE_MENU' }> {
     const q = query.toLowerCase().trim();
 
     const allItems = await this.prisma.menuItem.findMany({
@@ -290,7 +292,8 @@ export class ChatService {
 
         return {
           agentText: sfResponse,
-          blocks
+          blocks,
+          executionMode: 'AGENTFORCE'
         };
       }
     }
@@ -309,7 +312,8 @@ export class ChatService {
       const detailBlock = this.displayBlockService.buildMenuItemDetailBlock(matchedItem);
       return {
         agentText: `Here are the authentic culinary details for our **${matchedItem.name}** (${detailBlock.payload.priceFormatted}). Each batch is freshly prepared and blast-chilled to lock in authentic Mylapore temple flavors.`,
-        blocks: [detailBlock]
+        blocks: [detailBlock],
+        executionMode: 'SIMPLE_MENU'
       };
     }
 
@@ -334,7 +338,8 @@ export class ChatService {
       return {
         agentText:
           'Here are our curated culinary categories. Select any category to explore authentic dishes crafted with traditional Mylapore recipes:',
-        blocks: [categoryBlock]
+        blocks: [categoryBlock],
+        executionMode: 'SIMPLE_MENU'
       };
     }
 
@@ -357,7 +362,8 @@ export class ChatService {
       const listBlock = this.displayBlockService.buildMenuItemListBlock(items.slice(0, 8));
       return {
         agentText: `We have found ${items.length} authentic **${dietaryTag}** South Indian delicacies prepared under strict dietary guidelines:`,
-        blocks: [listBlock]
+        blocks: [listBlock],
+        executionMode: 'SIMPLE_MENU'
       };
     }
 
@@ -379,7 +385,8 @@ export class ChatService {
       );
       return {
         agentText: `Here are the authentic specials in **${matchedCategory.name}**:`,
-        blocks: [listBlock]
+        blocks: [listBlock],
+        executionMode: 'SIMPLE_MENU'
       };
     }
 
@@ -394,7 +401,8 @@ export class ChatService {
       const listBlock = this.displayBlockService.buildMenuItemListBlock(searchMatches.slice(0, 8));
       return {
         agentText: `Found ${searchMatches.length} delicious options matching your search:`,
-        blocks: [listBlock]
+        blocks: [listBlock],
+        executionMode: 'SIMPLE_MENU'
       };
     }
 
@@ -412,7 +420,8 @@ export class ChatService {
     return {
       agentText:
         'Namaskaram! At Mylapore Express, our kitchen prepares traditional South Indian delicacies including stone-ground idlis, crispy dosas, and heritage sweets. You can ask me about dietary options (Jain, Vegan), dish ingredients, spice levels, or choose a category below:',
-      blocks: [categoryBlock]
+      blocks: [categoryBlock],
+      executionMode: 'SIMPLE_MENU'
     };
   }
 

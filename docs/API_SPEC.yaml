@@ -14,6 +14,7 @@ security:
   - SessionCookie: []
 tags:
   - name: Catalog
+  - name: Chat
   - name: Cart
   - name: Checkout
   - name: Orders
@@ -276,6 +277,184 @@ paths:
       responses:
         "200": {description: Payment status, content: {application/json: {schema: {$ref: "#/components/schemas/PaymentStatus"}}}}
         "404": {$ref: "#/components/responses/NotFound"}
+  /chat/session:
+    post:
+      tags: [Chat]
+      summary: Initialize or resume guest chat session
+      description: Returns deterministic South Indian welcome greeting and category display block.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionToken: {type: string}
+                outletId: {type: string, default: "outlet-mylapore-001"}
+      responses:
+        "200":
+          description: Session created or resumed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [sessionToken, sessionId, status, welcomeMessage, displayBlocks]
+                properties:
+                  sessionToken: {type: string}
+                  sessionId: {type: string}
+                  status: {type: string}
+                  outletId: {type: string}
+                  executionMode: {type: string, enum: [AGENTFORCE, SIMPLE_MENU]}
+                  welcomeMessage: {type: string}
+                  displayBlocks: {type: array}
+
+  /chat/turn:
+    post:
+      tags: [Chat]
+      summary: Execute conversation turn
+      description: 24s deadline control, session mutex lock (HTTP 423), exact-turn correlation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userQuery]
+              properties:
+                sessionToken: {type: string}
+                userQuery: {type: string}
+      responses:
+        "200":
+          description: Turn executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [turnId, turnNumber, turnToken, agentText, displayBlocks]
+                properties:
+                  turnId: {type: string}
+                  turnNumber: {type: integer}
+                  turnToken: {type: string}
+                  agentText: {type: string}
+                  executionMode: {type: string, enum: [AGENTFORCE, SIMPLE_MENU]}
+                  displayBlocks: {type: array}
+        "400": {$ref: "#/components/responses/BadRequest"}
+        "423":
+          description: Session is busy processing another turn (Session Mutex Lock)
+        "500": {$ref: "#/components/responses/InternalError"}
+
+  /agent/browse-menu:
+    post:
+      tags: [Agent]
+      summary: List published menu categories or category items for Agentforce
+      parameters:
+        - name: X-Gateway-Auth
+          in: header
+          required: false
+          schema: {type: string}
+        - name: x-agentforce-api-key
+          in: header
+          required: false
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryId: {type: string}
+                dietary: {type: string}
+                spiceLevel: {type: string}
+      responses:
+        "200":
+          description: Categories or category items retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, count]
+                properties:
+                  success: {type: boolean}
+                  count: {type: integer}
+                  categories: {type: array}
+                  items: {type: array}
+        "401": {$ref: "#/components/responses/Unauthorized"}
+
+  /agent/search-menu:
+    post:
+      tags: [Agent]
+      summary: Natural language menu search for Agentforce
+      parameters:
+        - name: X-Gateway-Auth
+          in: header
+          required: false
+          schema: {type: string}
+        - name: x-agentforce-api-key
+          in: header
+          required: false
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query: {type: string}
+                dietary: {type: string}
+                spiceLevel: {type: string}
+                limit: {type: integer, default: 6}
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, count, items]
+                properties:
+                  success: {type: boolean}
+                  count: {type: integer}
+                  items: {type: array}
+        "401": {$ref: "#/components/responses/Unauthorized"}
+
+  /agent/item-details:
+    post:
+      tags: [Agent]
+      summary: Fetch exact recipe, ingredients, allergen warnings and reheating steps
+      parameters:
+        - name: X-Gateway-Auth
+          in: header
+          required: false
+          schema: {type: string}
+        - name: x-agentforce-api-key
+          in: header
+          required: false
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId: {type: string}
+                itemSlug: {type: string}
+      responses:
+        "200":
+          description: Item culinary details
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, item]
+                properties:
+                  success: {type: boolean}
+                  item: {type: object}
+        "401": {$ref: "#/components/responses/Unauthorized"}
+        "404": {$ref: "#/components/responses/NotFound"}
+
   /agent/sessions:
     post:
       tags: [Agent]
