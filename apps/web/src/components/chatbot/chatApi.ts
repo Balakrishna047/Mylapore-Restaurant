@@ -74,6 +74,7 @@ export interface InitSessionResponse {
   status: string;
   outletId: string;
   welcomeMessage: string;
+  executionMode?: 'AGENTFORCE' | 'SIMPLE_MENU';
   displayBlocks: ChatDisplayBlock[];
 }
 
@@ -82,6 +83,7 @@ export interface TurnResponse {
   turnNumber: number;
   turnToken: string;
   agentText: string;
+  executionMode?: 'AGENTFORCE' | 'SIMPLE_MENU';
   displayBlocks: ChatDisplayBlock[];
 }
 

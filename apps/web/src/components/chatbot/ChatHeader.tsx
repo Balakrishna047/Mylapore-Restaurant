@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Minus, RotateCcw, ShieldCheck } from 'lucide-react';
+import { X, Minus, RotateCcw } from 'lucide-react';
 
 interface ChatHeaderProps {
   onClose: () => void;
@@ -24,16 +24,19 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
           <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-amber-700 rounded-full" />
         </div>
         <div className="flex flex-col">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <h3 className="font-serif font-bold text-base tracking-wide text-white">
               Mylapore Concierge
             </h3>
-            <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-emerald-600 text-white px-2 py-0.5 rounded-full shadow-xs">
-              <ShieldCheck className="w-3 h-3" /> Grounded
+            <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-emerald-600 text-white px-2 py-0.5 rounded-full shadow-xs border border-emerald-400/50">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-200 animate-pulse" />
+              Salesforce Connected
             </span>
           </div>
-          <p className="text-xs text-amber-100/90 font-medium">
-            South Indian Culinary & Dietary Guide
+          <p className="text-xs text-amber-100/90 font-medium flex items-center gap-1.5">
+            <span>⚡ Einstein Agentforce AI</span>
+            <span>•</span>
+            <span>Grounded Catalog</span>
           </p>
         </div>
       </div>

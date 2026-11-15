@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import { User, AlertCircle, RefreshCw } from 'lucide-react';
+import { User, AlertCircle, RefreshCw, CheckCircle2 } from 'lucide-react';
 import {
   ChatMessage,
   MenuItemCardData,
@@ -126,12 +126,27 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 </div>
               )}
             </div>
-            <span className="text-[10px] text-stone-400 mt-1 px-10">
-              {new Date(msg.timestamp).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </span>
+
+            {/* Verification Metadata Pill for Testing */}
+            <div className="flex flex-wrap items-center gap-1.5 mt-1 px-10">
+              {isAgent && (
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-300/80 px-2 py-0.5 rounded-full shadow-2xs">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  Salesforce AI Agent ({msg.executionMode || 'AGENTFORCE'})
+                </span>
+              )}
+              {isAgent && msg.turnToken && (
+                <span className="text-[9px] text-stone-500 font-mono bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200">
+                  token: {msg.turnToken.substring(0, 8)}...
+                </span>
+              )}
+              <span className="text-[10px] text-stone-400">
+                {new Date(msg.timestamp).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </span>
+            </div>
           </div>
         );
       })}
@@ -146,8 +161,8 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce"></span>
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce [animation-delay:0.2s]"></span>
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce [animation-delay:0.4s]"></span>
-            <span className="text-[11px] text-stone-600 font-medium pl-1">
-              Consulting Mylapore kitchen catalog...
+            <span className="text-[11px] text-stone-600 font-medium pl-1 flex items-center gap-1">
+              <span>Querying Salesforce Agentforce & Kitchen Hub...</span>
             </span>
           </div>
         </div>
