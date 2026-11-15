@@ -38,7 +38,7 @@ export const ChatWidget: React.FC = () => {
             isMinimized
               ? 'bottom-6 right-6 w-80 h-14'
               : 'bottom-0 right-0 sm:bottom-6 sm:right-6 w-full sm:w-[420px] h-full sm:h-[620px] max-h-[100vh] sm:max-h-[85vh]'
-          } bg-white dark:bg-stone-900 rounded-none sm:rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden`}
+          } bg-[#FFFDF9] rounded-none sm:rounded-2xl shadow-2xl border border-amber-200/90 overflow-hidden`}
         >
           {/* Chat Header */}
           <ChatHeader
