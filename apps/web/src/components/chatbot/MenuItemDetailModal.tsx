@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { MenuItemDetailData } from './chat.types';
-import { X, Flame, AlertTriangle, Snowflake, Sparkles, Utensils } from 'lucide-react';
+import { X, Flame, AlertTriangle, Snowflake, Sparkles, Utensils, Plus, Check, ShoppingBag } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { useToast } from '@/context/ToastContext';
 
 interface MenuItemDetailModalProps {
   item: MenuItemDetailData | null;
@@ -10,7 +12,40 @@ interface MenuItemDetailModalProps {
 }
 
 export const MenuItemDetailModal: React.FC<MenuItemDetailModalProps> = ({ item, onClose }) => {
+  const { addItem, openCart } = useCart();
+  const { success } = useToast();
+  const [isAdding, setIsAdding] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
+
   if (!item) return null;
+
+  const handleAddToCart = async () => {
+    try {
+      setIsAdding(true);
+      const priceVal = item.priceMinor
+        ? item.priceMinor / 100
+        : parseFloat(item.priceFormatted?.replace(/[^0-9.]/g, '') || '0');
+
+      await addItem({
+        menuItemId: item.id,
+        quantity: 1,
+        name: item.name,
+        price: priceVal,
+        image: item.imageUrl,
+        spiceLevel: item.spiceLevel
+      });
+
+      setIsAdded(true);
+      if (success) {
+        success('Added to Cart', `${item.name} (${item.priceFormatted})`);
+      }
+      setTimeout(() => setIsAdded(false), 2000);
+    } catch (err) {
+      console.error('Error adding to cart from modal:', err);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-sm animate-in fade-in duration-200">
@@ -142,12 +177,36 @@ export const MenuItemDetailModal: React.FC<MenuItemDetailModalProps> = ({ item, 
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-amber-200 bg-[#FAF7F2] flex justify-end">
+        <div className="p-4 border-t border-amber-200 bg-[#FAF7F2] flex items-center justify-between gap-3">
           <button
+            type="button"
             onClick={onClose}
-            className="px-5 py-2 rounded-xl text-xs font-semibold bg-primary text-white hover:bg-primary-dark transition-colors shadow-xs active:scale-95"
+            className="px-4 py-2 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors"
           >
-            Close Details
+            Close
+          </button>
+
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            disabled={isAdding}
+            className={`flex-1 py-2 px-4 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 active:scale-95 disabled:opacity-50 ${
+              isAdded
+                ? 'bg-emerald-600 text-white'
+                : 'bg-primary hover:bg-primary-dark text-white'
+            }`}
+          >
+            {isAdded ? (
+              <>
+                <Check className="w-4 h-4 text-white" /> Added to Cart!
+              </>
+            ) : isAdding ? (
+              <span className="w-4 h-4 border-2 border-white/60 border-t-white rounded-full animate-spin" />
+            ) : (
+              <>
+                <ShoppingBag className="w-4 h-4" /> Add to Cart • {item.priceFormatted}
+              </>
+            )}
           </button>
         </div>
       </div>
