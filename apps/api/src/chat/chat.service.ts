@@ -273,11 +273,68 @@ export class ChatService {
     if (process.env.SALESFORCE_ENABLED === 'true') {
       const sfResponse = await this.querySalesforceAgent(query);
       if (sfResponse) {
-        const matchingItems = allItems.filter(
-          (i) =>
-            q.includes(i.name.toLowerCase()) ||
-            sfResponse.toLowerCase().includes(i.name.toLowerCase())
+        const textToMatch = `${q} ${sfResponse}`.toLowerCase();
+
+        // 1. Check if dietary query
+        let matchedDietaryItems: any[] = [];
+        if (textToMatch.includes('vegan')) {
+          matchedDietaryItems = allItems.filter((i) => {
+            try {
+              return JSON.parse(i.dietaryTags).includes('VEGAN');
+            } catch {
+              return i.dietaryTags.toUpperCase().includes('VEGAN');
+            }
+          });
+        } else if (textToMatch.includes('jain')) {
+          matchedDietaryItems = allItems.filter((i) => {
+            try {
+              return JSON.parse(i.dietaryTags).includes('JAIN');
+            } catch {
+              return i.dietaryTags.toUpperCase().includes('JAIN');
+            }
+          });
+        } else if (textToMatch.includes('gluten free') || textToMatch.includes('gluten-free')) {
+          matchedDietaryItems = allItems.filter((i) => {
+            try {
+              return JSON.parse(i.dietaryTags).includes('GLUTEN_FREE');
+            } catch {
+              return i.dietaryTags.toUpperCase().includes('GLUTEN_FREE');
+            }
+          });
+        }
+
+        // 2. Token-level & dish name matching
+        const matchingByName = allItems.filter((i) => {
+          const itemName = i.name.toLowerCase();
+          if (q.includes(itemName) || textToMatch.includes(itemName)) return true;
+          const words = itemName.split(/\s+/).filter((w) => w.length > 3);
+          return words.some((w) => textToMatch.includes(w));
+        });
+
+        // 3. Category matching if mentioned (tiffins -> batters, curries, rice, sambar, etc.)
+        let matchingByCategory: any[] = [];
+        const allCategories = await this.prisma.menuCategory.findMany({
+          include: { menuItems: { include: { category: true } } }
+        });
+
+        const matchedCategory = allCategories.find(
+          (c) =>
+            textToMatch.includes(c.name.toLowerCase()) ||
+            textToMatch.includes(c.slug.toLowerCase()) ||
+            textToMatch.includes(c.slug.replace('-', ' ')) ||
+            (textToMatch.includes('tiffin') && c.slug === 'batters')
         );
+
+        if (matchedCategory) {
+          matchingByCategory = matchedCategory.menuItems;
+        }
+
+        // Combine and deduplicate
+        const combinedMap = new Map();
+        [...matchingByName, ...matchedDietaryItems, ...matchingByCategory].forEach((item) => {
+          combinedMap.set(item.id, item);
+        });
+        const matchingItems = Array.from(combinedMap.values());
 
         let blocks = [];
         if (matchingItems.length > 0) {
