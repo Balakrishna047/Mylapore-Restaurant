@@ -285,102 +285,85 @@ export class ChatService {
       if (sfResponse) {
         const textToMatch = `${q} ${sfResponse}`.toLowerCase();
 
-        const STOP_WORDS = new Set([
-          'mylapore', 'express', 'south', 'indian', 'authentic', 'traditional',
-          'temple', 'special', 'fresh', 'batch', 'items', 'menu', 'dishes',
-          'available', 'order', 'tiffin', 'tiffins', 'here', 'with', 'served',
-          'options', 'food', 'have', 'would', 'like', 'details', 'about', 'some',
-          'these', 'want', 'more', 'know', 'other', 'varieties', 'includes',
-          'crispy', 'spiced', 'platter', 'platter'
-        ]);
+        // 1. Strict dietary filter if user explicitly asked for it
+        let dietaryFilter: string | null = null;
+        if (q.includes('jain')) dietaryFilter = 'JAIN';
+        else if (q.includes('vegan')) dietaryFilter = 'VEGAN';
+        else if (q.includes('gluten free') || q.includes('gluten-free')) dietaryFilter = 'GLUTEN_FREE';
 
-        // Category mapping keywords
-        const categoryKeywordMap: Record<string, string[]> = {
+        let pool = allItems;
+        if (dietaryFilter) {
+          pool = allItems.filter((item) => {
+            try {
+              const tags = JSON.parse(item.dietaryTags);
+              return tags.includes(dietaryFilter);
+            } catch {
+              return (item.dietaryTags || '').toUpperCase().includes(dietaryFilter!);
+            }
+          });
+        }
+
+        // 2. Category Keywords mapping
+        const categoryKeywords: Record<string, string[]> = {
+          sambar: ['sambar'],
           desserts: ['dessert', 'desserts', 'sweet', 'sweets', 'payasam', 'halwa', 'kesari', 'mysore pak'],
+          rasam: ['rasam'],
+          batters: ['batter', 'batters', 'dosa', 'dosas', 'idli', 'idly', 'idlis', 'vada', 'adai', 'tiffin', 'tiffins', 'breakfast'],
+          rice: ['rice', 'pongal', 'puliyodarai', 'khichdi', 'sadam', 'bisi bele'],
+          curries: ['curry', 'curries', 'kurma', 'kootu', 'poriyal', 'kara kari', 'chole', 'paneer', 'usili', 'vathal', 'kala chana', 'channa masala'],
+          chutneys: ['chutney', 'chutneys', 'pachadi', 'gunpowder', 'milagai podi'],
           beverages: ['beverage', 'beverages', 'drink', 'drinks', 'coffee', 'tea', 'milk', 'lassi', 'buttermilk', 'mor', 'decoction'],
-          rice: ['rice', 'pongal', 'bath', 'puliyodarai', 'khichdi', 'sadam', 'thayir', 'bisi bele'],
-          curries: ['curry', 'curries', 'kurma', 'kootu', 'poriyal', 'kara kari', 'masala', 'chole', 'paneer', 'usili', 'vathal'],
-          sambar: ['sambar', 'murungakkai', 'vengayam', 'arachuvitta'],
-          rasam: ['rasam', 'thakkali', 'milagu', 'poondu'],
-          chutneys: ['chutney', 'chutneys', 'pachadi', 'thengai', 'podi', 'gunpowder'],
-          batters: ['batter', 'batters', 'dosa', 'dosas', 'idli', 'idly', 'idlis', 'vada', 'adai', 'tiffin', 'tiffins'],
           specials: ['thali', 'feast', 'avial', 'weekend thali'],
           pickles: ['pickle', 'pickles', 'avakkai', 'inji', 'relish']
         };
 
-        // Determine which specific categories are relevant
-        const matchedCategorySlugs = new Set<string>();
-        for (const [slug, keywords] of Object.entries(categoryKeywordMap)) {
-          if (keywords.some((kw) => textToMatch.includes(kw))) {
-            matchedCategorySlugs.add(slug);
+        // Check if user query specifically asked for a category
+        let targetCategory: string | null = null;
+        for (const [cat, kws] of Object.entries(categoryKeywords)) {
+          if (kws.some((kw) => q.includes(kw))) {
+            targetCategory = cat;
+            break;
           }
         }
 
-        // Score each item from PostgreSQL
-        const scoredItems = allItems.map((item) => {
-          let score = 0;
-          const itemName = item.name.toLowerCase();
-          const categorySlug = item.category?.slug?.toLowerCase() || '';
+        // Score candidate items against query and Agentforce response
+        const scoredItems = pool.map((item) => {
+          let score = dietaryFilter ? 20 : 0;
+          const name = item.name.toLowerCase();
+          const categorySlug = (item.category?.slug || '').toLowerCase();
 
-          // Exact full dish name mentioned in user query or Agentforce response
-          if (q.includes(itemName) || textToMatch.includes(itemName)) {
-            score += 100;
-          }
+          // Exact full dish name in user query or Agentforce response
+          if (q.includes(name) || textToMatch.includes(name)) score += 100;
 
-          // Matched category relevance
-          if (matchedCategorySlugs.has(categorySlug)) {
-            score += 50;
-          }
+          // Target category match
+          if (targetCategory && categorySlug === targetCategory) score += 80;
 
-          // Meaningful dish word match (excluding stop words)
-          const words = itemName
-            .split(/[\s,()\-]+/)
-            .map((w) => w.trim().toLowerCase())
-            .filter((w) => w.length > 3 && !STOP_WORDS.has(w));
-
-          for (const word of words) {
-            if (q.includes(word)) {
-              score += 30; // Requested directly by user
-            } else if (textToMatch.includes(word)) {
-              score += 15; // Mentioned in Agentforce response
-            }
-          }
-
-          // Dietary tags match
-          if (textToMatch.includes('vegan')) {
-            try {
-              if (JSON.parse(item.dietaryTags).includes('VEGAN')) score += 20;
-            } catch {
-              if (item.dietaryTags.toUpperCase().includes('VEGAN')) score += 20;
-            }
-          }
-          if (textToMatch.includes('jain')) {
-            try {
-              if (JSON.parse(item.dietaryTags).includes('JAIN')) score += 20;
-            } catch {
-              if (item.dietaryTags.toUpperCase().includes('JAIN')) score += 20;
-            }
-          }
-          if (textToMatch.includes('gluten free') || textToMatch.includes('gluten-free')) {
-            try {
-              if (JSON.parse(item.dietaryTags).includes('GLUTEN_FREE')) score += 20;
-            } catch {
-              if (item.dietaryTags.toUpperCase().includes('GLUTEN_FREE')) score += 20;
-            }
-          }
+          // Specific South Indian dish terms
+          if (textToMatch.includes('idli') && (name.includes('idli') || name.includes('idly'))) score += 50;
+          if (textToMatch.includes('dosa') && name.includes('dosa')) score += 50;
+          if (textToMatch.includes('vada') && (name.includes('adai') || name.includes('chutney'))) score += 30;
+          if (textToMatch.includes('coffee') && name.includes('coffee')) score += 50;
+          if (textToMatch.includes('mysore pak') && name.includes('mysore pak')) score += 50;
+          if (textToMatch.includes('payasam') && name.includes('payasam')) score += 50;
+          if (textToMatch.includes('sambar') && name.includes('sambar')) score += 50;
+          if (textToMatch.includes('rasam') && name.includes('rasam')) score += 50;
+          if (textToMatch.includes('thali') && name.includes('thali')) score += 50;
+          if (textToMatch.includes('halwa') && name.includes('halwa')) score += 50;
+          if (textToMatch.includes('kesari') && name.includes('kesari')) score += 50;
 
           return { item, score };
         });
 
-        // Filter and sort items with positive relevance
         const matchingItems = scoredItems
           .filter((si) => si.score > 0)
           .sort((a, b) => b.score - a.score)
           .map((si) => si.item);
 
+        const finalItems = matchingItems.length > 0 ? matchingItems : pool;
+
         let blocks = [];
-        if (matchingItems.length > 0) {
-          blocks.push(this.displayBlockService.buildMenuItemListBlock(matchingItems.slice(0, 6)));
+        if (finalItems.length > 0) {
+          blocks.push(this.displayBlockService.buildMenuItemListBlock(finalItems.slice(0, 6)));
         } else {
           const categories = await this.prisma.menuCategory.findMany({
             orderBy: { displayOrder: 'asc' },

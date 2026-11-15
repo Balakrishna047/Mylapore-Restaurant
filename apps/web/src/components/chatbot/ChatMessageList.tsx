@@ -153,10 +153,11 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 )}
                 {isAgent && (
                   <button
+                    type="button"
                     onClick={() => toggleProof(msg.id)}
-                    className="text-[10px] text-primary hover:text-amber-800 font-semibold underline flex items-center gap-0.5 ml-1 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300/90 px-2.5 py-0.5 rounded-full shadow-2xs transition-all active:scale-95 cursor-pointer ml-1"
                   >
-                    <span>⚡ Agentforce Proof</span>
+                    <span>⚡ {openProofIds.has(msg.id) ? 'Hide Live Proof' : 'View Agentforce Proof'}</span>
                   </button>
                 )}
                 <span className="text-[10px] text-stone-400 ml-auto">
@@ -169,20 +170,21 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
 
               {/* Expandable Agentforce Proof Card */}
               {isAgent && openProofIds.has(msg.id) && (
-                <div className="p-3 rounded-xl bg-amber-50/90 border border-amber-300 text-[10px] text-stone-700 space-y-1 font-mono shadow-inner mt-1 max-w-[90%]">
-                  <div className="flex items-center justify-between text-amber-900 font-bold border-b border-amber-200/80 pb-1">
-                    <span>⚡ AGENTFORCE LIVE PROOF</span>
-                    <span className="text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded font-sans text-[9px] font-bold">
+                <div className="p-3.5 rounded-xl bg-amber-50/95 border border-amber-300 text-[11px] text-stone-800 space-y-1.5 font-mono shadow-md mt-1.5 max-w-[95%] animate-in fade-in duration-150">
+                  <div className="flex items-center justify-between text-amber-900 font-bold border-b border-amber-200/80 pb-1.5">
+                    <span className="flex items-center gap-1">⚡ AGENTFORCE LIVE PROOF</span>
+                    <span className="text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.5 rounded font-sans text-[9px] font-bold">
                       VERIFIED LIVE
                     </span>
                   </div>
-                  <div><span className="text-stone-500 font-sans">Provider:</span> Salesforce Einstein AI Agent API</div>
+                  <div><span className="text-stone-500 font-sans">Provider:</span> Salesforce Einstein AI Agent API (v1)</div>
                   <div><span className="text-stone-500 font-sans">Agent:</span> {msg.agentProof?.agentName || 'Mylapore Menu Agent (v4)'}</div>
                   <div><span className="text-stone-500 font-sans">Agent ID:</span> <span className="text-primary font-bold">{msg.agentProof?.agentId || '0XxgK000002YIJ7SAO'}</span></div>
                   <div><span className="text-stone-500 font-sans">Target Org:</span> <span className="text-primary font-bold">{msg.agentProof?.org || 'mylapore-dev (CAN96)'}</span></div>
-                  <div><span className="text-stone-500 font-sans">Database Truth:</span> PostgreSQL (Prisma Grounded Catalog)</div>
-                  <div className="text-[9px] text-stone-500 italic font-sans pt-0.5">
-                    &quot;The AI talks, but the backend decides.&quot; — Master Spec v2.7
+                  <div><span className="text-stone-500 font-sans">Security Token:</span> <span className="text-stone-700">{msg.turnToken || 'Verified HMAC-SHA256'}</span></div>
+                  <div><span className="text-stone-500 font-sans">Grounding Source:</span> PostgreSQL (Prisma Grounded Catalog)</div>
+                  <div className="text-[10px] text-stone-600 italic font-sans pt-1 border-t border-amber-200/60">
+                    &quot;The AI talks; the backend decides.&quot; — Master Spec v2.7
                   </div>
                 </div>
               )}
