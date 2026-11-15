@@ -74,6 +74,13 @@ export interface ChatMessage {
   timestamp: Date;
   executionMode?: 'AGENTFORCE' | 'SIMPLE_MENU';
   turnToken?: string;
+  agentProof?: {
+    source: string;
+    agentId: string;
+    org: string;
+    agentName: string;
+    activeVersion?: number;
+  } | null;
   displayBlocks?: ChatDisplayBlock[];
 }
 

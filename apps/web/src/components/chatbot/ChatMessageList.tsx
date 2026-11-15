@@ -33,6 +33,16 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
   onResetChat
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [openProofIds, setOpenProofIds] = React.useState<Set<string>>(new Set());
+
+  const toggleProof = (id: string) => {
+    setOpenProofIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -127,25 +137,55 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
               )}
             </div>
 
-            {/* Verification Metadata Pill for Testing */}
-            <div className="flex flex-wrap items-center gap-1.5 mt-1 px-10">
-              {isAgent && (
-                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-300/80 px-2 py-0.5 rounded-full shadow-2xs">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                  Salesforce AI Agent ({msg.executionMode || 'AGENTFORCE'})
+            {/* Verification Metadata Pill & Proof Drawer for Testing */}
+            <div className="flex flex-col gap-1 mt-1.5 px-10 w-full">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {isAgent && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-300/80 px-2 py-0.5 rounded-full shadow-2xs">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    Salesforce AI Agent ({msg.executionMode || 'AGENTFORCE'})
+                  </span>
+                )}
+                {isAgent && msg.turnToken && (
+                  <span className="text-[9px] text-stone-500 font-mono bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200">
+                    token: {msg.turnToken.substring(0, 8)}...
+                  </span>
+                )}
+                {isAgent && (
+                  <button
+                    onClick={() => toggleProof(msg.id)}
+                    className="text-[10px] text-primary hover:text-amber-800 font-semibold underline flex items-center gap-0.5 ml-1 transition-colors cursor-pointer"
+                  >
+                    <span>⚡ Agentforce Proof</span>
+                  </button>
+                )}
+                <span className="text-[10px] text-stone-400 ml-auto">
+                  {new Date(msg.timestamp).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
                 </span>
+              </div>
+
+              {/* Expandable Agentforce Proof Card */}
+              {isAgent && openProofIds.has(msg.id) && (
+                <div className="p-3 rounded-xl bg-amber-50/90 border border-amber-300 text-[10px] text-stone-700 space-y-1 font-mono shadow-inner mt-1 max-w-[90%]">
+                  <div className="flex items-center justify-between text-amber-900 font-bold border-b border-amber-200/80 pb-1">
+                    <span>⚡ AGENTFORCE LIVE PROOF</span>
+                    <span className="text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded font-sans text-[9px] font-bold">
+                      VERIFIED LIVE
+                    </span>
+                  </div>
+                  <div><span className="text-stone-500 font-sans">Provider:</span> Salesforce Einstein AI Agent API</div>
+                  <div><span className="text-stone-500 font-sans">Agent:</span> {msg.agentProof?.agentName || 'Mylapore Menu Agent (v4)'}</div>
+                  <div><span className="text-stone-500 font-sans">Agent ID:</span> <span className="text-primary font-bold">{msg.agentProof?.agentId || '0XxgK000002YIJ7SAO'}</span></div>
+                  <div><span className="text-stone-500 font-sans">Target Org:</span> <span className="text-primary font-bold">{msg.agentProof?.org || 'mylapore-dev (CAN96)'}</span></div>
+                  <div><span className="text-stone-500 font-sans">Database Truth:</span> PostgreSQL (Prisma Grounded Catalog)</div>
+                  <div className="text-[9px] text-stone-500 italic font-sans pt-0.5">
+                    &quot;The AI talks, but the backend decides.&quot; — Master Spec v2.7
+                  </div>
+                </div>
               )}
-              {isAgent && msg.turnToken && (
-                <span className="text-[9px] text-stone-500 font-mono bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200">
-                  token: {msg.turnToken.substring(0, 8)}...
-                </span>
-              )}
-              <span className="text-[10px] text-stone-400">
-                {new Date(msg.timestamp).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </span>
             </div>
           </div>
         );

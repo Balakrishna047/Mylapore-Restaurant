@@ -97,6 +97,7 @@ export function useMylaporeChat() {
           timestamp: new Date(),
           executionMode: turnResult.executionMode || 'AGENTFORCE',
           turnToken: turnResult.turnToken,
+          agentProof: turnResult.agentProof,
           displayBlocks: turnResult.displayBlocks
         };
 

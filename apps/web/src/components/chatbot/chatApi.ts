@@ -84,6 +84,13 @@ export interface TurnResponse {
   turnToken: string;
   agentText: string;
   executionMode?: 'AGENTFORCE' | 'SIMPLE_MENU';
+  agentProof?: {
+    source: string;
+    agentId: string;
+    org: string;
+    agentName: string;
+    activeVersion?: number;
+  } | null;
   displayBlocks: ChatDisplayBlock[];
 }
 
