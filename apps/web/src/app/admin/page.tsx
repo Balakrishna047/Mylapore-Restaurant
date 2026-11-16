@@ -103,7 +103,7 @@ export default function AdminKdsPage() {
 
   const isStaff = user && ['SUPER_ADMIN', 'RESTAURANT_ADMIN', 'KITCHEN_MANAGER'].includes(user.role);
 
-  const loadData = async () => {
+  const loadData = async (silent = false) => {
     if (!isStaff) {
       setLoading(false);
       setDashboard(null);
@@ -111,23 +111,23 @@ export default function AdminKdsPage() {
       return;
     }
     try {
-      setLoading(true);
-      const [dash, items, cats] = await Promise.all([
+      if (!silent && !dashboard) setLoading(true);
+      const promises: [Promise<any>, Promise<any>, Promise<any>, Promise<any>?] = [
         api.getAdminDashboard().catch(() => null),
-        api.getMenuItems(),
+        api.getMenuItems().catch(() => []),
         api.getCategories().catch(() => [])
-      ]);
-      if (dash) setDashboard(dash);
-      setDishes(items || []);
-      setCategories(cats || []);
-
+      ];
       if (user?.role === 'SUPER_ADMIN') {
-        const logs = await api.getAuditLogs().catch(() => []);
-        setAuditLogs(logs || []);
+        promises.push(api.getAuditLogs().catch(() => []));
       }
+      const [dash, items, cats, logs] = await Promise.all(promises);
+      if (dash) setDashboard(dash);
+      if (items) setDishes(items);
+      if (cats) setCategories(cats);
+      if (logs) setAuditLogs(logs);
     } catch (err: any) {
       console.error('Failed to load admin data:', err);
-      toast.error('Sync Notice', err.message || 'Could not refresh data.');
+      if (!silent) toast.error('Sync Notice', err.message || 'Could not refresh data.');
     } finally {
       setLoading(false);
     }
@@ -136,7 +136,7 @@ export default function AdminKdsPage() {
   useEffect(() => {
     loadData();
     const interval = setInterval(() => {
-      if (isStaff) loadData();
+      if (isStaff) loadData(true);
     }, 20000);
     return () => clearInterval(interval);
   }, [user]);
@@ -367,7 +367,7 @@ export default function AdminKdsPage() {
             )}
 
             <Button
-              onClick={loadData}
+              onClick={() => loadData(false)}
               variant="secondary"
               size="sm"
               isLoading={loading}

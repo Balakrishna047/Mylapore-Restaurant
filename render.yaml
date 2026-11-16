@@ -7,8 +7,8 @@ services:
     env: node
     plan: free
     region: oregon
-    buildCommand: pnpm install && pnpm build:api
-    startCommand: pnpm db:push:pg && pnpm db:seed && node apps/api/dist/main.js
+    buildCommand: pnpm install && pnpm build:api && pnpm db:push:pg && pnpm db:seed
+    startCommand: node apps/api/dist/main.js
     healthCheckPath: /api/v1/health
     envVars:
       - key: NODE_ENV

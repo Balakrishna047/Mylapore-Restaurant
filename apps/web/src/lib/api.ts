@@ -20,8 +20,37 @@ function getSessionToken(): string {
   return token;
 }
 
+// In-memory cache for fast read operations
+const apiCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL_MS = 25000; // 25 seconds fast cache
+
+export function clearApiCache(prefix?: string) {
+  if (!prefix) {
+    apiCache.clear();
+    return;
+  }
+  apiCache.forEach((_, key) => {
+    if (key.startsWith(prefix)) apiCache.delete(key);
+  });
+}
+
 // Resilient request client with automatic cold-start retry and direct fallback
-async function request<T>(endpoint: string, options: RequestInit = {}, retries = 2): Promise<T> {
+async function request<T>(
+  endpoint: string,
+  options: RequestInit = {},
+  retries = 1,
+  useCache = false
+): Promise<T> {
+  const isGet = !options.method || options.method.toUpperCase() === 'GET';
+
+  // Return from fast cache if valid
+  if (isGet && useCache) {
+    const cached = apiCache.get(endpoint);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+      return cached.data as T;
+    }
+  }
+
   const headers = {
     'Content-Type': 'application/json',
     'x-session-token': getSessionToken(),
@@ -46,7 +75,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}, retries =
         // 502 / 503 / 504 are temporary gateway/cold-start states on free-tier containers
         if ([502, 503, 504].includes(res.status)) {
           if (attempt < retries) {
-            await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)));
+            await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1)));
             continue;
           }
           lastError = new Error(`Backend service is warming up (${res.status}). Retrying...`);
@@ -60,14 +89,30 @@ async function request<T>(endpoint: string, options: RequestInit = {}, retries =
             errMsg = errData.message || errMsg;
             if (Array.isArray(errMsg)) errMsg = errMsg.join(', ');
           } catch {}
-          throw new Error(errMsg);
+          const error: any = new Error(errMsg);
+          error.status = res.status;
+
+          // Deterministic client errors (4xx) must NEVER be retried
+          if (res.status >= 400 && res.status < 500) {
+            throw error;
+          }
+          lastError = error;
+          break;
         }
 
-        return await res.json();
+        const data = await res.json();
+        if (isGet && useCache) {
+          apiCache.set(endpoint, { data, timestamp: Date.now() });
+        }
+        return data as T;
       } catch (err: any) {
         lastError = err;
+        // Never retry deterministic 4xx client errors (401, 403, 404, 400)
+        if (err.status && err.status >= 400 && err.status < 500) {
+          throw err;
+        }
         if (attempt < retries) {
-          await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1)));
+          await new Promise((resolve) => setTimeout(resolve, 600 * (attempt + 1)));
         }
       }
     }
@@ -76,11 +121,22 @@ async function request<T>(endpoint: string, options: RequestInit = {}, retries =
   throw lastError || new Error('Connection failed. Please try again.');
 }
 
+let keepAliveInterval: any = null;
+
 export function warmUpApi() {
   if (typeof window === 'undefined') return;
   try {
     fetch('/api/v1/health').catch(() => {});
   } catch {}
+
+  // Keep Render free services awake while user is browsing (every 4 min to beat 15 min sleep)
+  if (!keepAliveInterval) {
+    keepAliveInterval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        fetch('/api/v1/health').catch(() => {});
+      }
+    }, 240000);
+  }
 }
 
 export const api = {
@@ -88,7 +144,7 @@ export const api = {
   getRestaurantInfo: () => request<any>('/restaurants/info'),
 
   // Menu
-  getCategories: () => request<any[]>('/menu/categories'),
+  getCategories: () => request<any[]>('/menu/categories', {}, 1, true),
   getMenuItems: (params?: { category?: string; dietary?: string; spiceLevel?: string; search?: string }) => {
     const query = new URLSearchParams();
     if (params?.category) query.set('category', params.category);
@@ -96,9 +152,9 @@ export const api = {
     if (params?.spiceLevel) query.set('spiceLevel', params.spiceLevel);
     if (params?.search) query.set('search', params.search);
     const qs = query.toString();
-    return request<any[]>(`/menu/items${qs ? `?${qs}` : ''}`);
+    return request<any[]>(`/menu/items${qs ? `?${qs}` : ''}`, {}, 1, true);
   },
-  getMenuItem: (idOrSlug: string) => request<any>(`/menu/items/${idOrSlug}`),
+  getMenuItem: (idOrSlug: string) => request<any>(`/menu/items/${idOrSlug}`, {}, 1, true),
 
   // Cart
   getCart: () => request<any>('/cart'),
@@ -138,10 +194,22 @@ export const api = {
 
   // Admin & Operations
   getAdminDashboard: () => request<any>('/admin/dashboard'),
-  toggleStock: (itemId: string) => request<any>(`/admin/inventory/${itemId}/toggle`, { method: 'PATCH' }),
-  createMenuItem: (data: any) => request<any>('/admin/menu/items', { method: 'POST', body: JSON.stringify(data) }),
-  updateMenuItem: (id: string, data: any) => request<any>(`/admin/menu/items/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
-  deleteMenuItem: (id: string) => request<any>(`/admin/menu/items/${id}`, { method: 'DELETE' }),
+  toggleStock: async (itemId: string) => {
+    clearApiCache('/menu');
+    return request<any>(`/admin/inventory/${itemId}/toggle`, { method: 'PATCH' });
+  },
+  createMenuItem: async (data: any) => {
+    clearApiCache('/menu');
+    return request<any>('/admin/menu/items', { method: 'POST', body: JSON.stringify(data) });
+  },
+  updateMenuItem: async (id: string, data: any) => {
+    clearApiCache('/menu');
+    return request<any>(`/admin/menu/items/${id}`, { method: 'PATCH', body: JSON.stringify(data) });
+  },
+  deleteMenuItem: async (id: string) => {
+    clearApiCache('/menu');
+    return request<any>(`/admin/menu/items/${id}`, { method: 'DELETE' });
+  },
   getAuditLogs: () => request<any[]>('/admin/audit-logs'),
 
   // Simulated Payment confirmation helper
