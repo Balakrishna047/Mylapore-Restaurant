@@ -104,6 +104,12 @@ export default function AdminKdsPage() {
   const isStaff = user && ['SUPER_ADMIN', 'RESTAURANT_ADMIN', 'KITCHEN_MANAGER'].includes(user.role);
 
   const loadData = async () => {
+    if (!isStaff) {
+      setLoading(false);
+      setDashboard(null);
+      setDishes([]);
+      return;
+    }
     try {
       setLoading(true);
       const [dash, items, cats] = await Promise.all([
@@ -372,31 +378,35 @@ export default function AdminKdsPage() {
           </div>
         </div>
 
-        {/* Staff Authentication Banner (if not logged in) */}
-        {!isStaff && (
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-primary/30 shadow-md space-y-6 animate-in fade-in duration-200">
-            <div className="flex items-start gap-3">
-              <div className="p-3 bg-amber-100 rounded-2xl text-primary">
-                <ShieldCheck className="w-6 h-6" />
+        {/* ACCESS CONTROL: If NOT staff, show ONLY the Staff Sign-In & Access Barrier */}
+        {!isStaff ? (
+          <div className="bg-white p-6 sm:p-10 rounded-3xl border-2 border-primary/30 shadow-lg max-w-2xl mx-auto space-y-6 animate-in fade-in duration-200">
+            <div className="text-center space-y-2">
+              <div className="w-14 h-14 bg-amber-100 text-primary rounded-2xl flex items-center justify-center mx-auto shadow-xs">
+                <Lock className="w-7 h-7" />
               </div>
-              <div>
-                <h3 className="font-serif font-bold text-lg text-stone-900">
-                  Staff Authentication Required
-                </h3>
-                <p className="text-xs text-stone-600 mt-0.5">
-                  To update dish prices, add new items, modify blast-chilled tags, or advance kitchen tickets, please sign in with an authorized staff account.
-                </p>
-              </div>
+              <h2 className="font-serif font-bold text-2xl text-stone-900">
+                Staff Authentication Required
+              </h2>
+              <p className="text-xs text-stone-600 max-w-md mx-auto">
+                The restaurant kitchen queue, dish catalog, price editing, and stock controls are strictly restricted to authorized staff members.
+              </p>
+              {user && user.role === 'CUSTOMER' && (
+                <div className="p-3 bg-red-50 text-red-800 rounded-xl border border-red-200 text-xs">
+                  Logged in as customer (<span className="font-bold">{user.email}</span>). Customer accounts cannot access operational tools.
+                </div>
+              )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-              {/* Quick Demo One-Click Sign In */}
+            <div className="space-y-4 pt-2">
+              {/* Quick Demo One-Click Sign In for Reviewers & Managers */}
               <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-amber-200 space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-amber-900">
-                  ⚡ Quick Demo Access
+                <h4 className="text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <span>Authorized Staff One-Click Access</span>
                 </h4>
                 <p className="text-xs text-stone-600">
-                  One-click sign-in for testing admin capabilities and price editing:
+                  Select an authorized operational role to unlock the kitchen display and menu catalog:
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 pt-1">
                   <Button
@@ -421,7 +431,7 @@ export default function AdminKdsPage() {
               </div>
 
               {/* Standard Staff Credentials Form */}
-              <form onSubmit={handleStaffLogin} className="space-y-3">
+              <form onSubmit={handleStaffLogin} className="space-y-3 pt-2">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div>
                     <label className="block text-[11px] font-bold text-stone-700 mb-1">
@@ -460,10 +470,10 @@ export default function AdminKdsPage() {
               </form>
             </div>
           </div>
-        )}
-
-        {/* Tab Navigation */}
-        <div className="flex items-center gap-2 border-b border-amber-200/90 pb-3">
+        ) : (
+          <>
+            {/* Tab Navigation */}
+            <div className="flex items-center gap-2 border-b border-amber-200/90 pb-3">
           <button
             onClick={() => setActiveTab('KDS')}
             className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
@@ -1278,6 +1288,8 @@ export default function AdminKdsPage() {
               </form>
             </div>
           </div>
+        )}
+          </>
         )}
       </div>
     </div>
