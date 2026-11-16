@@ -82,6 +82,195 @@ export class AdminService {
     return updated;
   }
 
+  async createMenuItem(data: {
+    name: string;
+    description: string;
+    categoryId: string;
+    basePrice: number;
+    image: string;
+    spiceLevel?: string;
+    dietaryTags?: string[] | string;
+    allergens?: string[] | string;
+    ingredients?: string[] | string;
+    isBlastChilled?: boolean;
+    nutritionServing?: string;
+    reheatingInstructions?: string;
+  }) {
+    if (!data.name || !data.categoryId || data.basePrice === undefined || !data.image) {
+      throw new Error('Name, categoryId, basePrice, and image are required');
+    }
+
+    let slug = data.name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+    const existingSlug = await this.prisma.menuItem.findUnique({ where: { slug } });
+    if (existingSlug) {
+      slug = `${slug}-${Math.random().toString(36).substring(2, 6)}`;
+    }
+
+    const dietaryTags = Array.isArray(data.dietaryTags)
+      ? JSON.stringify(data.dietaryTags)
+      : typeof data.dietaryTags === 'string'
+      ? data.dietaryTags
+      : JSON.stringify(['VEGETARIAN']);
+
+    const allergens = Array.isArray(data.allergens)
+      ? JSON.stringify(data.allergens)
+      : typeof data.allergens === 'string'
+      ? data.allergens
+      : JSON.stringify([]);
+
+    const ingredients = Array.isArray(data.ingredients)
+      ? JSON.stringify(data.ingredients)
+      : typeof data.ingredients === 'string'
+      ? data.ingredients
+      : JSON.stringify([]);
+
+    const created = await this.prisma.menuItem.create({
+      data: {
+        slug,
+        name: data.name,
+        description: data.description || `${data.name} prepared freshly with authentic South Indian ingredients.`,
+        categoryId: data.categoryId,
+        basePrice: parseFloat(data.basePrice as any),
+        image: data.image,
+        spiceLevel: (data.spiceLevel || 'MEDIUM').toUpperCase(),
+        dietaryTags,
+        allergens,
+        ingredients,
+        isBlastChilled: data.isBlastChilled ?? true,
+        nutritionServing: data.nutritionServing || '1 serving',
+        reheatingInstructions: data.reheatingInstructions || 'Refrigerate at <=40°F (4°C). Reheat thoroughly before consuming.',
+        orderCountBadge: '100+ ordered',
+        rating: 5.0,
+        reviewCount: 15,
+        isAvailable: true
+      },
+      include: { category: true }
+    });
+
+    await this.prisma.auditLog.create({
+      data: {
+        action: 'CREATED_MENU_ITEM',
+        entity: 'MenuItem',
+        entityId: created.id,
+        payload: JSON.stringify({ name: created.name, basePrice: created.basePrice, slug: created.slug })
+      }
+    });
+
+    return created;
+  }
+
+  async updateMenuItem(
+    itemId: string,
+    data: {
+      name?: string;
+      description?: string;
+      categoryId?: string;
+      basePrice?: number;
+      image?: string;
+      spiceLevel?: string;
+      dietaryTags?: string[] | string;
+      allergens?: string[] | string;
+      ingredients?: string[] | string;
+      isBlastChilled?: boolean;
+      nutritionServing?: string;
+      reheatingInstructions?: string;
+      isAvailable?: boolean;
+    }
+  ) {
+    const item = await this.prisma.menuItem.findUnique({ where: { id: itemId } });
+    if (!item) throw new NotFoundException('Dish not found');
+
+    const updateData: any = {};
+    if (data.name !== undefined) updateData.name = data.name;
+    if (data.description !== undefined) updateData.description = data.description;
+    if (data.categoryId !== undefined) updateData.categoryId = data.categoryId;
+    if (data.basePrice !== undefined) updateData.basePrice = parseFloat(data.basePrice as any);
+    if (data.image !== undefined) updateData.image = data.image;
+    if (data.spiceLevel !== undefined) updateData.spiceLevel = data.spiceLevel.toUpperCase();
+    if (data.isBlastChilled !== undefined) updateData.isBlastChilled = data.isBlastChilled;
+    if (data.nutritionServing !== undefined) updateData.nutritionServing = data.nutritionServing;
+    if (data.reheatingInstructions !== undefined) updateData.reheatingInstructions = data.reheatingInstructions;
+    if (data.isAvailable !== undefined) updateData.isAvailable = data.isAvailable;
+
+    if (data.dietaryTags !== undefined) {
+      updateData.dietaryTags = Array.isArray(data.dietaryTags)
+        ? JSON.stringify(data.dietaryTags)
+        : data.dietaryTags;
+    }
+    if (data.allergens !== undefined) {
+      updateData.allergens = Array.isArray(data.allergens)
+        ? JSON.stringify(data.allergens)
+        : data.allergens;
+    }
+    if (data.ingredients !== undefined) {
+      updateData.ingredients = Array.isArray(data.ingredients)
+        ? JSON.stringify(data.ingredients)
+        : data.ingredients;
+    }
+
+    const updated = await this.prisma.menuItem.update({
+      where: { id: itemId },
+      data: updateData,
+      include: { category: true }
+    });
+
+    await this.prisma.auditLog.create({
+      data: {
+        action: 'UPDATED_MENU_ITEM',
+        entity: 'MenuItem',
+        entityId: item.id,
+        payload: JSON.stringify({
+          previousPrice: item.basePrice,
+          newPrice: updated.basePrice,
+          name: updated.name,
+          updatedFields: Object.keys(updateData)
+        })
+      }
+    });
+
+    return updated;
+  }
+
+  async deleteMenuItem(itemId: string) {
+    const item = await this.prisma.menuItem.findUnique({ where: { id: itemId } });
+    if (!item) throw new NotFoundException('Dish not found');
+
+    const ordersCount = await this.prisma.orderItem.count({ where: { menuItemId: itemId } });
+    if (ordersCount > 0) {
+      // Dish is referenced in order history: archive safely
+      const archived = await this.prisma.menuItem.update({
+        where: { id: itemId },
+        data: { isAvailable: false }
+      });
+      await this.prisma.auditLog.create({
+        data: {
+          action: 'ARCHIVED_MENU_ITEM',
+          entity: 'MenuItem',
+          entityId: itemId,
+          payload: JSON.stringify({ reason: 'Referenced in orders, marked out-of-stock' })
+        }
+      });
+      return { success: true, action: 'ARCHIVED', item: archived, message: 'Dish archived and marked unavailable to preserve customer order history.' };
+    }
+
+    await this.prisma.menuItem.delete({ where: { id: itemId } });
+    await this.prisma.auditLog.create({
+      data: {
+        action: 'DELETED_MENU_ITEM',
+        entity: 'MenuItem',
+        entityId: itemId,
+        payload: JSON.stringify({ name: item.name })
+      }
+    });
+
+    return { success: true, action: 'DELETED', message: 'Dish deleted successfully from menu.' };
+  }
+
   async getAuditLogs() {
     return this.prisma.auditLog.findMany({
       orderBy: { createdAt: 'desc' },

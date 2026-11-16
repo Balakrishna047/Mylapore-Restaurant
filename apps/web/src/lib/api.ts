@@ -139,6 +139,9 @@ export const api = {
   // Admin & Operations
   getAdminDashboard: () => request<any>('/admin/dashboard'),
   toggleStock: (itemId: string) => request<any>(`/admin/inventory/${itemId}/toggle`, { method: 'PATCH' }),
+  createMenuItem: (data: any) => request<any>('/admin/menu/items', { method: 'POST', body: JSON.stringify(data) }),
+  updateMenuItem: (id: string, data: any) => request<any>(`/admin/menu/items/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  deleteMenuItem: (id: string) => request<any>(`/admin/menu/items/${id}`, { method: 'DELETE' }),
   getAuditLogs: () => request<any[]>('/admin/audit-logs'),
 
   // Simulated Payment confirmation helper

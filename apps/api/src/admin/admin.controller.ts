@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { JwtAuthGuard } from '../common/jwt-auth.guard';
@@ -23,6 +23,27 @@ export class AdminController {
   @ApiOperation({ summary: 'Toggle dish 86 (out-of-stock) or restock' })
   async toggleStock(@Param('itemId') itemId: string) {
     return this.adminService.toggleDishStock(itemId);
+  }
+
+  @Post('menu/items')
+  @Roles('SUPER_ADMIN', 'RESTAURANT_ADMIN', 'KITCHEN_MANAGER')
+  @ApiOperation({ summary: 'Create a new menu dish item with pricing, image, and dietary tags' })
+  async createMenuItem(@Body() body: any) {
+    return this.adminService.createMenuItem(body);
+  }
+
+  @Patch('menu/items/:id')
+  @Roles('SUPER_ADMIN', 'RESTAURANT_ADMIN', 'KITCHEN_MANAGER')
+  @ApiOperation({ summary: 'Update dish price, image, name, dietary tags, spice level, or details' })
+  async updateMenuItem(@Param('id') id: string, @Body() body: any) {
+    return this.adminService.updateMenuItem(id, body);
+  }
+
+  @Delete('menu/items/:id')
+  @Roles('SUPER_ADMIN', 'RESTAURANT_ADMIN')
+  @ApiOperation({ summary: 'Delete or archive a menu dish item' })
+  async deleteMenuItem(@Param('id') id: string) {
+    return this.adminService.deleteMenuItem(id);
   }
 
   @Get('audit-logs')
