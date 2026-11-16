@@ -15,6 +15,9 @@ import * as crypto from 'crypto';
 export class ChatService {
   private readonly logger = new Logger(ChatService.name);
   private readonly hmacSecret = process.env.CHAT_HMAC_SECRET || 'mylapore-chat-secret-key-2026';
+  private cachedOAuthToken: string | null = null;
+  private tokenExpiresAt = 0;
+  private agentSessionMap = new Map<string, { agentSessionId: string; sequenceId: number; createdAt: number }>();
 
   constructor(
     private prisma: PrismaService,
@@ -187,14 +190,9 @@ export class ChatService {
   }
 
   
-  private async querySalesforceAgent(userQuery: string): Promise<string | null> {
-    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
-    const clientId = process.env.SALESFORCE_CLIENT_ID;
-    const clientSecret = process.env.SALESFORCE_CLIENT_SECRET;
-    const agentId = process.env.SALESFORCE_AGENT_ID;
-
-    if (!instanceUrl || !clientId || !clientSecret || !agentId) {
-      return null;
+  private async getSalesforceOAuthToken(instanceUrl: string, clientId: string, clientSecret: string): Promise<string | null> {
+    if (this.cachedOAuthToken && Date.now() < this.tokenExpiresAt) {
+      return this.cachedOAuthToken;
     }
 
     try {
@@ -218,29 +216,74 @@ export class ChatService {
       const token = tokenData.access_token;
       if (!token) return null;
 
-      const sessionUrl = 'https://api.salesforce.com/einstein/ai-agent/v1/agents/' + agentId + '/sessions';
-      const sessionRes = await fetch(sessionUrl, {
-        method: 'POST',
-        headers: {
-          Authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify({
-          externalSessionKey: uuidv4(),
-          instanceConfig: { endpoint: instanceUrl },
-          streamingCapabilities: { chunkTypes: ['Text'] },
-          bypassUser: true
-        })
-      });
+      this.cachedOAuthToken = token;
+      this.tokenExpiresAt = Date.now() + 110 * 60 * 1000;
+      return token;
+    } catch (err: any) {
+      this.logger.warn('Salesforce OAuth exception: ' + err.message);
+      return null;
+    }
+  }
 
-      if (!sessionRes.ok) {
-        this.logger.warn('Salesforce Agent session start failed with status: ' + sessionRes.status);
-        return null;
+  private async querySalesforceAgent(userQuery: string, sessionId?: string): Promise<string | null> {
+    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
+    const clientId = process.env.SALESFORCE_CLIENT_ID;
+    const clientSecret = process.env.SALESFORCE_CLIENT_SECRET;
+    const agentId = process.env.SALESFORCE_AGENT_ID;
+
+    if (!instanceUrl || !clientId || !clientSecret || !agentId) {
+      return null;
+    }
+
+    try {
+      const token = await this.getSalesforceOAuthToken(instanceUrl, clientId, clientSecret);
+      if (!token) return null;
+
+      let sessionInfo = sessionId ? this.agentSessionMap.get(sessionId) : null;
+      let agentSessionId = sessionInfo?.agentSessionId;
+      let sequenceId = 1;
+
+      if (!agentSessionId || !sessionInfo || Date.now() - sessionInfo.createdAt > 25 * 60 * 1000) {
+        const sessionUrl = 'https://api.salesforce.com/einstein/ai-agent/v1/agents/' + agentId + '/sessions';
+        const sessionRes = await fetch(sessionUrl, {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify({
+            externalSessionKey: uuidv4(),
+            instanceConfig: { endpoint: instanceUrl },
+            streamingCapabilities: { chunkTypes: ['Text'] },
+            bypassUser: true
+          })
+        });
+
+        if (!sessionRes.ok) {
+          if (sessionRes.status === 401) {
+            this.cachedOAuthToken = null;
+            this.tokenExpiresAt = 0;
+          }
+          this.logger.warn('Salesforce Agent session start failed with status: ' + sessionRes.status);
+          return null;
+        }
+
+        const sessionData = await sessionRes.json();
+        agentSessionId = sessionData.sessionId;
+        if (!agentSessionId) return null;
+
+        if (sessionId) {
+          this.agentSessionMap.set(sessionId, {
+            agentSessionId,
+            sequenceId: 1,
+            createdAt: Date.now()
+          });
+        }
+      } else {
+        sessionInfo.sequenceId += 1;
+        sequenceId = sessionInfo.sequenceId;
       }
-      const sessionData = await sessionRes.json();
-      const agentSessionId = sessionData.sessionId;
-      if (!agentSessionId) return null;
 
       const msgUrl = 'https://api.salesforce.com/einstein/ai-agent/v1/sessions/' + agentSessionId + '/messages';
       const msgRes = await fetch(msgUrl, {
@@ -251,17 +294,19 @@ export class ChatService {
           Accept: 'application/json'
         },
         body: JSON.stringify({
-          message: { sequenceId: 1, type: 'Text', text: userQuery }
+          message: { sequenceId, type: 'Text', text: userQuery }
         })
       });
 
       if (!msgRes.ok) {
+        if (sessionId) this.agentSessionMap.delete(sessionId);
         this.logger.warn('Salesforce Agent message failed with status: ' + msgRes.status);
         return null;
       }
+
       const msgData = await msgRes.json();
       return msgData.messages?.[0]?.message || null;
-    } catch (err) {
+    } catch (err: any) {
       this.logger.warn('Salesforce Agent call failed: ' + err.message);
       return null;
     }
@@ -281,7 +326,7 @@ export class ChatService {
 
     // MODE B: If Salesforce Agentforce is enabled, query Agentforce first
     if (process.env.SALESFORCE_ENABLED === 'true') {
-      const sfResponse = await this.querySalesforceAgent(query);
+      const sfResponse = await this.querySalesforceAgent(query, sessionId);
       if (sfResponse) {
         const textToMatch = `${q} ${sfResponse}`.toLowerCase();
 
