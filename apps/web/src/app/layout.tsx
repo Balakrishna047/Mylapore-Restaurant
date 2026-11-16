@@ -15,6 +15,15 @@ import ChatWidget from '@/components/ChatWidget';
 export const metadata: Metadata = {
   title: 'Mylapore Express | Authentic Fresh South Indian Culinary E-Commerce',
   description: 'Fresh from Mylapore, delivered with care. Blast-chilled preservative-free South Indian delicacies, dosas, curries, and batters.',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/images/logo.png', sizes: '190x190', type: 'image/png' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/images/logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +35,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/images/logo.png" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         {/* Preload the Hero Carousel LCP image for instantaneous visual paint */}

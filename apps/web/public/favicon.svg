@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#942B19" />
+      <stop offset="100%" stop-color="#701A0E" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB" />
+      <stop offset="25%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded squircle -->
+  <rect width="100" height="100" rx="24" fill="url(#bgGrad)" />
+  <rect x="2" y="2" width="96" height="96" rx="22" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-opacity="0.6" />
+
+  <!-- Authentic South Indian Mylapore Temple Gopuram Tower & Kalasam -->
+  <g filter="url(#glow)">
+    <!-- Kalasam Spire (Top sacred finial) -->
+    <circle cx="50" cy="18" r="3.5" fill="url(#goldGrad)" />
+    <path d="M47 21.5 L53 21.5 L51.5 25 L48.5 25 Z" fill="url(#goldGrad)" />
+
+    <!-- Gopuram Tier 1 (Apex) -->
+    <path d="M42 27 L58 27 L55 35 L45 35 Z" fill="url(#goldGrad)" />
+    <circle cx="50" cy="31" r="1.5" fill="#701A0E" />
+
+    <!-- Gopuram Tier 2 -->
+    <path d="M37 37 L63 37 L59 47 L41 47 Z" fill="url(#goldGrad)" />
+    <rect x="44" y="40" width="3" height="4" rx="0.5" fill="#701A0E" />
+    <rect x="49" y="39" width="2" height="5" rx="0.5" fill="#701A0E" />
+    <rect x="53" y="40" width="3" height="4" rx="0.5" fill="#701A0E" />
+
+    <!-- Gopuram Tier 3 -->
+    <path d="M31 49 L69 49 L65 61 L35 61 Z" fill="url(#goldGrad)" />
+    <rect x="38" y="52" width="3.5" height="5.5" rx="0.8" fill="#701A0E" />
+    <rect x="44.5" y="52" width="3.5" height="5.5" rx="0.8" fill="#701A0E" />
+    <rect x="52" y="52" width="3.5" height="5.5" rx="0.8" fill="#701A0E" />
+    <rect x="58.5" y="52" width="3.5" height="5.5" rx="0.8" fill="#701A0E" />
+
+    <!-- Gopuram Base / Grand Temple Portal Entrance -->
+    <path d="M25 63 L75 63 L72 80 L28 80 Z" fill="url(#goldGrad)" />
+    <!-- Arch Portal -->
+    <path d="M42 80 L42 70 Q50 64 58 70 L58 80 Z" fill="#701A0E" />
+
+    <!-- Foundation Steps / Traditional Plinth -->
+    <rect x="22" y="81" width="56" height="4.5" rx="1.5" fill="url(#goldGrad)" />
+  </g>
+</svg>
