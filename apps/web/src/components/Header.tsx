@@ -131,7 +131,7 @@ export default function Header() {
               {user && ['SUPER_ADMIN', 'RESTAURANT_ADMIN', 'KITCHEN_MANAGER'].includes(user.role) && (
                 <Link
                   href="/admin"
-                  className="px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-xl hover:opacity-90 transition-opacity"
+                  className="hidden md:inline-flex px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-xl hover:opacity-90 transition-opacity"
                 >
                   Kitchen KDS
                 </Link>
