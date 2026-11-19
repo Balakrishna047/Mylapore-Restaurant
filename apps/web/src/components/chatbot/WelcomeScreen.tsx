@@ -10,6 +10,7 @@ interface WelcomeScreenProps {
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSelectPrompt, disabled }) => {
   const starterChips = [
+    { label: '🍱 South Indian Meals', query: 'i want meals' },
     { label: '🥞 Breakfast Tiffins', query: 'Show Breakfast Tiffins' },
     { label: '🌱 Vegan Specials', query: 'Show vegan options' },
     { label: '✨ Jain Dishes', query: 'Show Jain options' },

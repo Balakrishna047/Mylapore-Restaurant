@@ -358,7 +358,7 @@ export class ChatService {
           curries: ['curry', 'curries', 'kurma', 'kootu', 'poriyal', 'kara kari', 'chole', 'paneer', 'usili', 'vathal', 'kala chana', 'channa masala'],
           chutneys: ['chutney', 'chutneys', 'pachadi', 'gunpowder', 'milagai podi'],
           beverages: ['beverage', 'beverages', 'drink', 'drinks', 'coffee', 'tea', 'milk', 'lassi', 'buttermilk', 'mor', 'decoction'],
-          specials: ['thali', 'feast', 'avial', 'weekend thali'],
+          specials: ['thali', 'thalis', 'feast', 'feasts', 'avial', 'weekend thali', 'meal', 'meals', 'full meal', 'full meals', 'lunch', 'dinner', 'combo', 'combos'],
           pickles: ['pickle', 'pickles', 'avakkai', 'inji', 'relish']
         };
 
@@ -392,7 +392,7 @@ export class ChatService {
           if (textToMatch.includes('payasam') && name.includes('payasam')) score += 50;
           if (textToMatch.includes('sambar') && name.includes('sambar')) score += 50;
           if (textToMatch.includes('rasam') && name.includes('rasam')) score += 50;
-          if (textToMatch.includes('thali') && name.includes('thali')) score += 50;
+          if ((textToMatch.includes('thali') || textToMatch.includes('meal') || textToMatch.includes('feast')) && (name.includes('thali') || name.includes('feast') || categorySlug === 'specials')) score += 100;
           if (textToMatch.includes('halwa') && name.includes('halwa')) score += 50;
           if (textToMatch.includes('kesari') && name.includes('kesari')) score += 50;
 
@@ -444,7 +444,36 @@ export class ChatService {
       };
     }
 
-    // 2. Categories Intent
+    // 2. Specific Meals & Festive Thali Intent (e.g. "i want meals", "meals", "show meals", "thali", "lunch", "dinner", "full meal")
+    const isMealsIntent = /\b(meal|meals|thali|thalis|lunch|dinner|feast|feasts|full meal|full meals|combo meals)\b/i.test(q);
+    if (isMealsIntent) {
+      const mealItems = allItems.filter((item) => {
+        const name = item.name.toLowerCase();
+        const catSlug = (item.category?.slug || '').toLowerCase();
+        return (
+          catSlug === 'specials' ||
+          name.includes('thali') ||
+          name.includes('feast') ||
+          (catSlug === 'rice' && (name.includes('bisi bele') || name.includes('puliyodarai') || name.includes('sadam') || name.includes('pongal')))
+        );
+      });
+
+      mealItems.sort((a, b) => {
+        if (a.name.toLowerCase().includes('thali')) return -1;
+        if (b.name.toLowerCase().includes('thali')) return 1;
+        return 0;
+      });
+
+      const listBlock = this.displayBlockService.buildMenuItemListBlock(mealItems.slice(0, 6));
+      return {
+        agentText:
+          'Here are our authentic **South Indian Meals & Festive Thali Feasts**! Our signature **Mylapore Grand Weekend Thali Feast** is a complete traditional multi-course meal featuring Poriyal, Kootu, Sambar, Rasam, Rice, Appalam, and Payasam—freshly cooked and blast-chilled to lock in authentic temple aromas:',
+        blocks: [listBlock],
+        executionMode: 'SIMPLE_MENU'
+      };
+    }
+
+    // 3. Categories Intent
     if (
       q.includes('category') ||
       q.includes('categories') ||
