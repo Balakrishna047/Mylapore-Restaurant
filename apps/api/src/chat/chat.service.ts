@@ -668,26 +668,76 @@ export class ChatService {
       }
     }
 
-    // 1. Direct Item Detail Intent Check
-    // If the query contains the name or slug of an existing menu item
-
-    const matchedItem = allItems.find(
-      (item) =>
-        q.includes(item.name.toLowerCase()) ||
-        q.includes(item.slug.toLowerCase()) ||
-        (q.startsWith('item:') && q.includes(item.id))
-    );
-
-    if (matchedItem && (q.includes('detail') || q.includes('ingredient') || q.includes('how') || q.includes('allergen') || q.includes('tell me about') || q.includes('price') || q.startsWith('item:'))) {
-      const detailBlock = this.displayBlockService.buildMenuItemDetailBlock(matchedItem);
+    // 1. Off-Menu Food & Non-Vegetarian Inquiries
+    const nonVegTerms = ['chicken', 'mutton', 'lamb', 'beef', 'pork', 'fish', 'seafood', 'prawn', 'shrimp', 'egg', 'eggs', 'non-veg', 'non veg', 'meat'];
+    if (nonVegTerms.some((term) => q.includes(term))) {
+      const categories = await this.prisma.menuCategory.findMany({
+        orderBy: { displayOrder: 'asc' },
+        include: { _count: { select: { menuItems: true } } }
+      });
       return {
-        agentText: `Here are the authentic culinary details for our **${matchedItem.name}** (${detailBlock.payload.priceFormatted}). Each batch is freshly prepared and blast-chilled to lock in authentic Mylapore temple flavors.`,
-        blocks: [detailBlock],
+        agentText:
+          '🌱 **100% Pure Vegetarian Kitchen Guarantee**:\n\n' +
+          'Namaskaram! Mylapore Express is a strictly **100% Pure Vegetarian** South Indian heritage kitchen. We do not prepare, handle, or store any meat, poultry, seafood, or eggs on our premises—guaranteeing zero cross-contamination.\n\n' +
+          'We invite you to explore our authentic plant-based and dairy-rich temple specialties, including our crispy dosas, rich kootus, and signature Mylapore Thali feasts!',
+        blocks: [this.displayBlockService.buildCategoryButtonsBlock(categories)],
         executionMode: 'SIMPLE_MENU'
       };
     }
 
-    // 2. Specific Meals & Festive Thali Intent (e.g. "i want meals", "meals", "show meals", "thali", "lunch", "dinner", "full meal")
+    const fastFoodTerms = ['pizza', 'burger', 'burgers', 'fries', 'french fries', 'pasta', 'taco', 'tacos', 'sandwich', 'hot dog', 'sushi', 'noodles', 'chinese', 'shawarma'];
+    if (fastFoodTerms.some((term) => q.includes(term))) {
+      const categories = await this.prisma.menuCategory.findMany({
+        orderBy: { displayOrder: 'asc' },
+        include: { _count: { select: { menuItems: true } } }
+      });
+      return {
+        agentText:
+          '🛕 **Authentic South Indian Heritage Cuisine**:\n\n' +
+          'Namaskaram! Mylapore Express exclusively crafts **traditional South Indian temple-style and home-cooked delicacies** (such as stone-ground Idlis, slow-simmered Sambars, Avial, Poriyal, and Degree Filter Coffee).\n\n' +
+          'We do not serve fast food or fusion dishes. Please explore our authentic South Indian categories below:',
+        blocks: [this.displayBlockService.buildCategoryButtonsBlock(categories)],
+        executionMode: 'SIMPLE_MENU'
+      };
+    }
+
+    // 2. Allergen & Cross-Contamination Inquiries
+    if (q.includes('peanut') || q.includes('allergy') || q.includes('allergies') || q.includes('nut') || q.includes('celiac')) {
+      return {
+        agentText:
+          '⚠️ **Allergen & Cross-Contamination Advisory**:\n\n' +
+          '• **Peanuts & Tree Nuts**: Certain South Indian dishes (such as *Puliyodarai* and *Chutneys*) contain peanuts and cashews. While we maintain strict kitchen sanitization between batches, our central facility processes tree nuts, peanuts, and sesame.\n' +
+          '• **Dairy**: Ghee and milk are used in our traditional sweets and filter coffee. Vegan dishes are cooked with pure cold-pressed sesame/groundnut oil with zero dairy.\n' +
+          '• **Gluten-Free**: Dishes like Idlis, Dosas, Sambars, and Rasam are naturally gluten-free. Note: Semolina (Rava Khichdi/Kesari) contains wheat.\n\n' +
+          'If you have severe life-threatening allergies, please inspect the ingredients list on each dish card before ordering.',
+        blocks: [],
+        executionMode: 'SIMPLE_MENU'
+      };
+    }
+
+    // 3. Direct Item Detail & Price Lookup Intent
+    for (const item of allItems) {
+      const fullName = item.name.toLowerCase();
+      const strippedName = fullName.replace(/mylapore\s+/g, '').replace(/\([^)]*\)/g, '').trim();
+      const slugName = item.slug.toLowerCase().replace(/-/g, ' ');
+
+      const isMatch =
+        q.includes(fullName) ||
+        (strippedName.length >= 4 && q.includes(strippedName)) ||
+        (slugName.length >= 4 && q.includes(slugName)) ||
+        (q.startsWith('item:') && q.includes(item.id));
+
+      if (isMatch && (q.includes('price') || q.includes('cost') || q.includes('how much') || q.includes('detail') || q.includes('ingredient') || q.includes('reheat') || q.includes('allergen') || q.startsWith('item:'))) {
+        const detailBlock = this.displayBlockService.buildMenuItemDetailBlock(item);
+        return {
+          agentText: `Here are the authentic culinary details for our **${item.name}** (${detailBlock.payload.priceFormatted}):\n\n${item.description}\n\n• **Price**: ${detailBlock.payload.priceFormatted}\n• **Spice Level**: ${item.spiceLevel || 'MEDIUM'}\n• **Dietary**: ${Array.isArray(detailBlock.payload.dietaryTags) ? detailBlock.payload.dietaryTags.join(', ') : item.dietaryTags}\n• **Freshness**: Blast-chilled to 38°F with 0% preservatives`,
+          blocks: [detailBlock],
+          executionMode: 'SIMPLE_MENU'
+        };
+      }
+    }
+
+    // 4. Specific Meals & Festive Thali Intent (e.g. "i want meals", "meals", "show meals", "thali", "lunch", "dinner", "full meal")
     const isMealsIntent = /\b(meal|meals|thali|thalis|lunch|dinner|feast|feasts|full meal|full meals|combo meals)\b/i.test(q);
     if (isMealsIntent) {
       const mealItems = allItems.filter((item) => {
@@ -716,7 +766,7 @@ export class ChatService {
       };
     }
 
-    // 3. Categories Intent
+    // 5. Categories Intent
     if (
       q.includes('category') ||
       q.includes('categories') ||
@@ -742,7 +792,7 @@ export class ChatService {
       };
     }
 
-    // 3. Dietary Filter Intent (Jain, Vegan, Gluten-Free)
+    // 6. Dietary Filter Intent (Jain, Vegan, Gluten-Free)
     let dietaryTag: string | null = null;
     if (q.includes('jain')) dietaryTag = 'JAIN';
     else if (q.includes('vegan')) dietaryTag = 'VEGAN';
@@ -766,7 +816,7 @@ export class ChatService {
       };
     }
 
-    // 4. Spice Level or Category Match
+    // 7. Category by Name/Slug Match
     const matchedCategory = (
       await this.prisma.menuCategory.findMany({
         include: { menuItems: { include: { category: true } } }
@@ -789,23 +839,72 @@ export class ChatService {
       };
     }
 
-    // 5. Keyword Dish Search (e.g. "dosa", "idli", "coffee", "rice", "vada", "sambar", "halwa")
-    const searchTerms = q.split(' ').filter((w) => w.length > 2);
-    const searchMatches = allItems.filter((item) => {
-      const text = `${item.name} ${item.description} ${item.ingredients}`.toLowerCase();
-      return searchTerms.some((term) => text.includes(term));
-    });
+    // 8. Ranked Keyword Dish Search with Stopwords Filtering
+    const STOPWORDS = new Set([
+      'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
+      'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
+      'to', 'was', 'were', 'will', 'with', 'i', 'me', 'my', 'we', 'our',
+      'you', 'your', 'can', 'could', 'would', 'should', 'do', 'does', 'did',
+      'have', 'having', 'get', 'got', 'order', 'ordering', 'buy', 'want',
+      'need', 'like', 'how', 'much', 'many', 'what', 'where', 'when', 'who',
+      'which', 'why', 'tell', 'show', 'give', 'please', 'food', 'dish',
+      'dishes', 'item', 'items', 'menu', 'restaurant', 'express', 'mylapore',
+      'authentic', 'traditional', 'south', 'indian', 'good', 'best', 'some',
+      'any', 'make', 'made', 'prepare', 'prepared', 'cooked', 'cook', 'there'
+    ]);
 
-    if (searchMatches.length > 0) {
-      const listBlock = this.displayBlockService.buildMenuItemListBlock(searchMatches.slice(0, 8));
-      return {
-        agentText: `Found ${searchMatches.length} delicious options matching your search:`,
-        blocks: [listBlock],
-        executionMode: 'SIMPLE_MENU'
-      };
+    const searchTokens = q
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length >= 3 && !STOPWORDS.has(w));
+
+    if (searchTokens.length > 0) {
+      const scored = allItems.map((item) => {
+        let score = 0;
+        const name = item.name.toLowerCase();
+        const catName = (item.category?.name || '').toLowerCase();
+        const catSlug = (item.category?.slug || '').toLowerCase();
+        const desc = item.description.toLowerCase();
+
+        for (const token of searchTokens) {
+          if ((token === 'idli' || token === 'idly') && (name.includes('idli') || name.includes('idly') || catSlug === 'batters')) {
+            score += 60;
+          }
+          if ((token === 'dosa' || token === 'dosas') && (name.includes('dosa') || catSlug === 'batters')) {
+            score += 60;
+          }
+          if (token === 'coffee' && name.includes('coffee')) {
+            score += 60;
+          }
+          if (name.includes(token)) {
+            score += 40;
+          }
+          if (catName.includes(token) || catSlug.includes(token)) {
+            score += 25;
+          }
+          if (desc.includes(token)) {
+            score += 5;
+          }
+        }
+        return { item, score };
+      });
+
+      const highMatches = scored
+        .filter((s) => s.score >= 25)
+        .sort((a, b) => b.score - a.score)
+        .map((s) => s.item);
+
+      if (highMatches.length > 0) {
+        const listBlock = this.displayBlockService.buildMenuItemListBlock(highMatches.slice(0, 8));
+        return {
+          agentText: `Found ${highMatches.length} delicious option${highMatches.length > 1 ? 's' : ''} matching your search:`,
+          blocks: [listBlock],
+          executionMode: 'SIMPLE_MENU'
+        };
+      }
     }
 
-    // 6. Natural Language Hospitality Fallback with Categories
+    // 9. Natural Language Hospitality Fallback with Categories
     const categories = await this.prisma.menuCategory.findMany({
       orderBy: { displayOrder: 'asc' },
       include: {
