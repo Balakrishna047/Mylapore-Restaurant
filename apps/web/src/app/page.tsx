@@ -9,8 +9,6 @@ import DishCard from '@/components/DishCard';
 import HeroCarousel from '@/components/HeroCarousel';
 import { DishCardSkeleton } from '@/components/ui/Skeleton';
 import { ArrowRight } from 'lucide-react';
-import initialCategories from '@/data/initialCategories.json';
-import initialDishes from '@/data/initialDishes.json';
 import { MenuItemDto, MenuCategoryDto } from '@mylapore/shared-types';
 
 function HomeContent() {
@@ -19,14 +17,16 @@ function HomeContent() {
   const searchParam = searchParams.get('search') || '';
   const initialCategory = searchParams.get('category') || 'all';
 
-  const [categories, setCategories] = useState<MenuCategoryDto[]>(initialCategories as any);
+  const [categories, setCategories] = useState<MenuCategoryDto[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
-  const [dishes, setDishes] = useState<MenuItemDto[]>(initialDishes as any);
-  const [loading, setLoading] = useState(false);
+  const [dishes, setDishes] = useState<MenuItemDto[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     async function loadData() {
       try {
+        setLoading(true);
         const [cats, items] = await Promise.all([
           api.getCategories(),
           api.getMenuItems({
@@ -34,13 +34,20 @@ function HomeContent() {
             search: searchParam || undefined,
           }),
         ]);
-        if (cats && cats.length > 0) setCategories(cats);
-        if (items && items.length > 0) setDishes(items);
+        if (isMounted) {
+          if (cats) setCategories(cats);
+          if (items) setDishes(items);
+        }
       } catch (err) {
         console.error('Failed to load menu items:', err);
+      } finally {
+        if (isMounted) setLoading(false);
       }
     }
     loadData();
+    return () => {
+      isMounted = false;
+    };
   }, [activeCategory, searchParam]);
 
   // Specific collections matching South Indian culinary hierarchy
@@ -163,11 +170,19 @@ function HomeContent() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-            {(kootuAndPoriyal.length > 0 ? kootuAndPoriyal : dishes).slice(0, 6).map((dish) => (
-              <DishCard key={dish.id} dish={dish as any} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {[...Array(6)].map((_, i) => (
+                <DishCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {(kootuAndPoriyal.length > 0 ? kootuAndPoriyal : dishes).slice(0, 6).map((dish) => (
+                <DishCard key={dish.id} dish={dish as any} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section 3: North Indian Favourites */}
@@ -190,11 +205,19 @@ function HomeContent() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-            {(northIndian.length > 0 ? northIndian : dishes).slice(0, 6).map((dish) => (
-              <DishCard key={dish.id} dish={dish as any} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {[...Array(6)].map((_, i) => (
+                <DishCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {(northIndian.length > 0 ? northIndian : dishes).slice(0, 6).map((dish) => (
+                <DishCard key={dish.id} dish={dish as any} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section 4: Breakfast & Tiffin */}
@@ -217,11 +240,19 @@ function HomeContent() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-            {(breakfastTiffin.length > 0 ? breakfastTiffin : dishes).slice(0, 6).map((dish) => (
-              <DishCard key={dish.id} dish={dish as any} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {[...Array(6)].map((_, i) => (
+                <DishCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {(breakfastTiffin.length > 0 ? breakfastTiffin : dishes).slice(0, 6).map((dish) => (
+                <DishCard key={dish.id} dish={dish as any} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section: Sambar & Rasam */}
@@ -244,11 +275,19 @@ function HomeContent() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-            {(sambarAndRasam.length > 0 ? sambarAndRasam : dishes).slice(0, 6).map((dish) => (
-              <DishCard key={dish.id} dish={dish as any} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {[...Array(6)].map((_, i) => (
+                <DishCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {(sambarAndRasam.length > 0 ? sambarAndRasam : dishes).slice(0, 6).map((dish) => (
+                <DishCard key={dish.id} dish={dish as any} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section: Desserts & Sweets */}
@@ -271,11 +310,19 @@ function HomeContent() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-            {(dessertsAndSweets.length > 0 ? dessertsAndSweets : dishes).slice(0, 6).map((dish) => (
-              <DishCard key={dish.id} dish={dish as any} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {[...Array(6)].map((_, i) => (
+                <DishCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {(dessertsAndSweets.length > 0 ? dessertsAndSweets : dishes).slice(0, 6).map((dish) => (
+                <DishCard key={dish.id} dish={dish as any} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section: Refreshing Beverages */}
@@ -298,11 +345,19 @@ function HomeContent() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-            {(refreshingBeverages.length > 0 ? refreshingBeverages : dishes).slice(0, 6).map((dish) => (
-              <DishCard key={dish.id} dish={dish as any} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {[...Array(6)].map((_, i) => (
+                <DishCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {(refreshingBeverages.length > 0 ? refreshingBeverages : dishes).slice(0, 6).map((dish) => (
+                <DishCard key={dish.id} dish={dish as any} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section 5: Our Collections */}

@@ -166,7 +166,7 @@ export class ChatService {
                 agentId: process.env.SALESFORCE_AGENT_ID || '0XxgK000002YIJ7SAO',
                 org: 'CAN96 (mylapore-dev)',
                 agentName: 'Mylapore Menu Agent',
-                activeVersion: 4
+                activeVersion: 10
               }
             : null,
         displayBlocks: persistedBlocks
@@ -226,10 +226,16 @@ export class ChatService {
   }
 
   private async querySalesforceAgent(userQuery: string, sessionId?: string): Promise<string | null> {
-    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
-    const clientId = process.env.SALESFORCE_CLIENT_ID;
-    const clientSecret = process.env.SALESFORCE_CLIENT_SECRET;
-    const agentId = process.env.SALESFORCE_AGENT_ID;
+    const instanceUrl =
+      process.env.SALESFORCE_INSTANCE_URL ||
+      'https://orgfarm-aa5be92666-dev-ed.develop.my.salesforce.com';
+    const clientId =
+      process.env.SALESFORCE_CLIENT_ID ||
+      '3MVG9rZjd7MXFdLirc6i5XbMjlTpIbvKBqY9O3ExUHxMD47LJe8mAIHmGnLA.jcRTKNnYgVQcPmHNaUw8UNul';
+    const clientSecret =
+      process.env.SALESFORCE_CLIENT_SECRET ||
+      '3996828CEABDCB3E8FA228FB5AB667A2195246D6D128A175B2B3841B420F977E';
+    const agentId = process.env.SALESFORCE_AGENT_ID || '0XxgK000002YIJ7SAO';
 
     if (!instanceUrl || !clientId || !clientSecret || !agentId) {
       return null;
@@ -305,7 +311,12 @@ export class ChatService {
       }
 
       const msgData = await msgRes.json();
-      return msgData.messages?.[0]?.message || null;
+      let rawText = msgData.messages?.[0]?.message || null;
+      if (rawText) {
+        rawText = rawText.replace(/^ESType Message\s*/i, '').trim();
+        this.logger.log(`[Salesforce Agentforce Turn Received]: "${rawText.substring(0, 80)}..."`);
+      }
+      return rawText;
     } catch (err: any) {
       this.logger.warn('Salesforce Agent call failed: ' + err.message);
       return null;
@@ -568,7 +579,8 @@ export class ChatService {
     });
 
     // MODE B: If Salesforce Agentforce is enabled, query Agentforce first
-    if (process.env.SALESFORCE_ENABLED === 'true') {
+    const isSalesforceEnabled = process.env.SALESFORCE_ENABLED !== 'false';
+    if (isSalesforceEnabled) {
       const sfResponse = await this.querySalesforceAgent(query, sessionId);
       if (sfResponse) {
         const textToMatch = `${q} ${sfResponse}`.toLowerCase();

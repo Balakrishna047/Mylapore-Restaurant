@@ -3,13 +3,51 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import carouselData from '@/data/carouselBanners.json';
+interface BannerItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  ctaLink: string;
+  cloudinaryUrl: string;
+  localUrl: string;
+}
+
+const DEFAULT_BANNERS: BannerItem[] = [
+  {
+    id: 'banner-freshly-cooked',
+    title: 'Freshly cooked, every day',
+    subtitle: 'Authentic South Indian • no preservatives',
+    ctaText: 'Browse the menu',
+    ctaLink: '/?category=all',
+    cloudinaryUrl: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto,w_1000/v1794550079/mylapore-express/banners/banner-freshly-cooked-dosa-idli-breakfast.jpg',
+    localUrl: '/images/placeholder-dish.svg',
+  },
+  {
+    id: 'banner-favourites',
+    title: 'Choose from your favourites',
+    subtitle: 'Everything you can order for your day, in one place',
+    ctaText: 'Order now',
+    ctaLink: '/?category=curries',
+    cloudinaryUrl: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto,w_1000/v1794550080/mylapore-express/banners/banner-festive-south-indian-thali-favourites.jpg',
+    localUrl: '/images/placeholder-dish.svg',
+  },
+  {
+    id: 'banner-pay-it-forward',
+    title: 'Pay it forward',
+    subtitle: 'Sponsor a meal for someone in need',
+    ctaText: 'Sponsor a meal',
+    ctaLink: '/support',
+    cloudinaryUrl: 'https://res.cloudinary.com/dwlh5wdsw/image/upload/f_auto,q_auto,w_1000/v1794550080/mylapore-express/banners/banner-pay-it-forward-tiffin-meals-charity.jpg',
+    localUrl: '/images/placeholder-dish.svg',
+  },
+];
 
 export default function HeroCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const banners = carouselData;
+  const banners = DEFAULT_BANNERS;
 
   const scrollToBanner = (index: number) => {
     if (!scrollContainerRef.current) return;
