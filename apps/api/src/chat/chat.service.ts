@@ -473,7 +473,9 @@ export class ChatService {
 
     // 2. Guarded Order Action Execution: Cancellation & Tracking
     const isCancelIntent = /\b(cancel|cancellation)\b/i.test(q);
-    const isTrackIntent = /\b(track|order status|where is my order|check order|order tracking)\b/i.test(q);
+    const isTrackIntent =
+      /\b(track|tracking|order status|where is my order|where's my order|where is my food|where's my food|where is the order|where is my delivery|check order|check my order|status of my order)\b/i.test(q) ||
+      (q.includes('where') && q.includes('order'));
     const orderNumMatch = q.match(/\b(myl-\d{4}-\d+|ord-[a-z0-9-]+)\b/i);
 
     if (isCancelIntent) {
@@ -527,16 +529,33 @@ export class ChatService {
       }
     }
 
-    if (isTrackIntent && orderNumMatch) {
-      const orderRef = orderNumMatch[0].toUpperCase();
-      const order = await this.prisma.order.findUnique({
-        where: { orderNumber: orderRef },
-        include: { items: true }
-      });
-      if (order) {
-        const itemsSummary = order.items.map((i) => `${i.quantity}x ${i.name}`).join(', ');
+    if (isTrackIntent) {
+      const orderRef = orderNumMatch ? orderNumMatch[0].toUpperCase() : null;
+      if (orderRef) {
+        const order = await this.prisma.order.findUnique({
+          where: { orderNumber: orderRef },
+          include: { items: true }
+        });
+        if (order) {
+          const itemsSummary = order.items.map((i) => `${i.quantity}x ${i.name}`).join(', ');
+          return {
+            agentText: `📦 **Real-Time Order Status** for **#${order.orderNumber}**:\n\n• **Stage**: **${order.status}**\n• **Delivery Slot**: ${order.deliverySlot}\n• **Items**: ${itemsSummary}\n• **Total**: $${order.total.toFixed(2)}\n\n${order.status === 'PREPARING' ? 'Our master chefs are currently preparing and blast-chilling your dishes to 38°F to seal in authentic aroma.' : ''}`,
+            blocks: [],
+            executionMode: 'SIMPLE_MENU'
+          };
+        } else {
+          return {
+            agentText: `🔍 **Order Not Found**: We could not locate an active order matching **#${orderRef}** in our system.\n\nPlease verify your order reference number (for example: \`MYL-2026-1001\` or \`ORD-MYL-101\`) or check your email receipt.`,
+            blocks: [],
+            executionMode: 'SIMPLE_MENU'
+          };
+        }
+      } else {
         return {
-          agentText: `📦 **Real-Time Order Status** for **#${order.orderNumber}**:\n\n• **Stage**: **${order.status}**\n• **Delivery Slot**: ${order.deliverySlot}\n• **Items**: ${itemsSummary}\n• **Total**: $${order.total.toFixed(2)}\n\n${order.status === 'PREPARING' ? 'Our master chefs are currently preparing and blast-chilling your dishes to 38°F to seal in authentic aroma.' : ''}`,
+          agentText:
+            '📦 **Real-Time Order Tracking & Status**:\n\n' +
+            'To check the live status of your order, please provide your **Order Reference Number** (for example: `#MYL-2026-1001` or `ORD-MYL-101`).\n\n' +
+            'You can find your order number in your confirmation email, SMS, or under the **Orders** section of your profile.',
           blocks: [],
           executionMode: 'SIMPLE_MENU'
         };
@@ -659,12 +678,19 @@ export class ChatService {
           .sort((a, b) => b.score - a.score)
           .map((si) => si.item);
 
-        const finalItems = matchingItems.length > 0 ? matchingItems : pool;
-
         let blocks = [];
-        if (finalItems.length > 0) {
-          blocks.push(this.displayBlockService.buildMenuItemListBlock(finalItems.slice(0, 6)));
-        } else {
+        if (matchingItems.length > 0) {
+          // If query or Agentforce response matched candidate menu dishes, attach up to 6 dish cards
+          blocks.push(this.displayBlockService.buildMenuItemListBlock(matchingItems.slice(0, 6)));
+        } else if (
+          targetCategory ||
+          textToMatch.includes('categor') ||
+          textToMatch.includes('menu') ||
+          textToMatch.includes('browse') ||
+          textToMatch.includes('what do you have') ||
+          textToMatch.includes('recommend')
+        ) {
+          // If the conversation is exploring categories, attach category buttons
           const categories = await this.prisma.menuCategory.findMany({
             orderBy: { displayOrder: 'asc' },
             include: { _count: { select: { menuItems: true } } }
