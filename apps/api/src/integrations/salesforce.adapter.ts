@@ -4,6 +4,8 @@ import { Injectable, Logger } from '@nestjs/common';
 export class SalesforceAdapter {
   private logger = new Logger(SalesforceAdapter.name);
   private isEnabled: boolean;
+  private cachedOAuthToken: string | null = null;
+  private tokenExpiresAt = 0;
 
   constructor() {
     this.isEnabled = process.env.SALESFORCE_ENABLED === 'true';
@@ -11,6 +13,40 @@ export class SalesforceAdapter {
       this.logger.log('Salesforce Service Cloud Integration active (OAuth Connected App)');
     } else {
       this.logger.log('Salesforce running in Simulated Mode (SALESFORCE_ENABLED=false)');
+    }
+  }
+
+  private async getOAuthToken(): Promise<string | null> {
+    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
+    const clientId = process.env.SALESFORCE_CLIENT_ID;
+    const clientSecret = process.env.SALESFORCE_CLIENT_SECRET;
+    if (!instanceUrl || !clientId || !clientSecret) return null;
+
+    if (this.cachedOAuthToken && Date.now() < this.tokenExpiresAt) {
+      return this.cachedOAuthToken;
+    }
+
+    try {
+      const tokenEndpoint = `${instanceUrl.replace(/\/+$/, '')}/services/oauth2/token`;
+      const params = new URLSearchParams();
+      params.append('grant_type', 'client_credentials');
+      params.append('client_id', clientId);
+      params.append('client_secret', clientSecret);
+
+      const res = await fetch(tokenEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      });
+
+      if (!res.ok) return null;
+      const data = await res.json();
+      this.cachedOAuthToken = data.access_token;
+      this.tokenExpiresAt = Date.now() + 110 * 60 * 1000;
+      return this.cachedOAuthToken;
+    } catch (err: any) {
+      this.logger.warn(`Failed to obtain OAuth token: ${err.message}`);
+      return null;
     }
   }
 
@@ -72,9 +108,44 @@ export class SalesforceAdapter {
     priority?: string;
     orderNumber?: string;
   }): Promise<{ salesforceCaseId: string }> {
-    const caseNumber = `500_SF_${Date.now().toString(36).toUpperCase()}`;
-    this.logger.log(`[Salesforce Case Created]: Case #${caseNumber} | Subject: "${caseData.subject}" | Priority: ${caseData.priority || 'Normal'}`);
-    return { salesforceCaseId: caseNumber };
+    const token = await this.getOAuthToken();
+    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
+
+    if (token && instanceUrl) {
+      try {
+        const caseEndpoint = `${instanceUrl.replace(/\/+$/, '')}/services/data/v62.0/sobjects/Case`;
+        const res = await fetch(caseEndpoint, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            Subject: caseData.subject,
+            Description: caseData.description,
+            SuppliedName: caseData.customerName,
+            SuppliedEmail: caseData.customerEmail,
+            Origin: 'Web Chat',
+            Priority: caseData.priority || 'Normal'
+          })
+        });
+
+        if (res.ok) {
+          const result = await res.json();
+          this.logger.log(`[Salesforce Live Case Created]: ${result.id} for ${caseData.customerEmail}`);
+          return { salesforceCaseId: result.id };
+        } else {
+          const errText = await res.text();
+          this.logger.warn(`[Salesforce Case Creation Failed]: Status ${res.status} - ${errText}`);
+        }
+      } catch (err: any) {
+        this.logger.warn(`Live Salesforce Case creation error: ${err.message}`);
+      }
+    }
+
+    const fallbackId = `500_SF_${Date.now().toString(36).toUpperCase()}`;
+    this.logger.log(`[Salesforce Fallback Case Created]: Case #${fallbackId} | Subject: "${caseData.subject}"`);
+    return { salesforceCaseId: fallbackId };
   }
 
   async syncAgentInteraction(data: {
