@@ -16,6 +16,7 @@ interface ChatInputProps {
 }
 
 const DEFAULT_PROMPTS: QuickPrompt[] = [
+  { label: '🍱 South Indian Meals', text: 'i want meals' },
   { label: '🥞 Breakfast Tiffins', text: 'Show Breakfast Tiffins' },
   { label: '🌱 Vegan Options', text: 'Show vegan options' },
   { label: '✨ Jain Specials', text: 'Show Jain options' },

@@ -57,14 +57,24 @@ export class SalesforceWebhookController {
   ) {
     const secret = process.env.SALESFORCE_WEBHOOK_SECRET || 'mylapore-salesforce-webhook-secret-2026';
 
-    // Verify HMAC-SHA256 signature if provided
-    if (signature) {
+    // In production, enforce x-salesforce-signature presence
+    if (process.env.NODE_ENV === 'production' && !signature) {
+      this.logger.warn('Salesforce webhook rejected: missing x-salesforce-signature header in production');
+      throw new UnauthorizedException('Missing required x-salesforce-signature header');
+    }
+
+    // Cryptographically verify HMAC-SHA256 signature with constant-time comparison
+    if (signature && !signature.startsWith('test_')) {
       const computed = crypto
         .createHmac('sha256', secret)
         .update(JSON.stringify(payload))
         .digest('hex');
-      if (computed !== signature && !signature.startsWith('test_')) {
-        this.logger.warn(`Signature mismatch on Salesforce webhook: received ${signature}, computed ${computed}`);
+
+      const sigBuffer = Buffer.from(signature, 'utf8');
+      const compBuffer = Buffer.from(computed, 'utf8');
+
+      if (sigBuffer.length !== compBuffer.length || !crypto.timingSafeEqual(sigBuffer, compBuffer)) {
+        this.logger.warn('Signature mismatch on Salesforce webhook');
         throw new UnauthorizedException('Invalid Salesforce webhook HMAC signature');
       }
     }

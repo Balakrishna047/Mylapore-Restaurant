@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useLocation } from '@/context/LocationContext';
 import {
   ChatMessage,
   ChatDisplayBlock,
@@ -10,6 +11,7 @@ import {
 import { chatApi, clearChatSessionToken } from './chatApi';
 
 export function useMylaporeChat() {
+  const { location } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
@@ -25,7 +27,8 @@ export function useMylaporeChat() {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await chatApi.initSession();
+      const outletId = location?.zipCode ? `outlet-${location.zipCode}` : 'outlet-mylapore-001';
+      const data = await chatApi.initSession(outletId);
       setSessionToken(data.sessionToken);
       setSessionId(data.sessionId);
 
