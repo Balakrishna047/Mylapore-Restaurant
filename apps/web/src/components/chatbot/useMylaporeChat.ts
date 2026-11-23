@@ -47,13 +47,12 @@ export function useMylaporeChat() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [location?.zipCode]);
 
   const openChat = useCallback(() => {
     setIsOpen(true);
     setIsMinimized(false);
-    if (!sessionToken && !initAttemptedRef.current) {
-      initAttemptedRef.current = true;
+    if (!sessionToken) {
       initSession();
     }
   }, [sessionToken, initSession]);
@@ -84,14 +83,39 @@ export function useMylaporeChat() {
 
       try {
         let currentToken = sessionToken;
+        const outletId = location?.zipCode ? `outlet-${location.zipCode}` : 'outlet-mylapore-001';
+
         if (!currentToken) {
-          const sessionData = await chatApi.initSession();
+          const sessionData = await chatApi.initSession(outletId);
           currentToken = sessionData.sessionToken;
           setSessionToken(currentToken);
           setSessionId(sessionData.sessionId);
         }
 
-        const turnResult = await chatApi.sendTurn(trimmed, currentToken);
+        let turnResult;
+        try {
+          turnResult = await chatApi.sendTurn(trimmed, currentToken);
+        } catch (turnErr: any) {
+          // Self-healing: if session expired, not found, or invalid token, re-initialize automatically
+          const errMsg = turnErr?.message || '';
+          if (
+            errMsg.includes('not found') ||
+            errMsg.includes('404') ||
+            errMsg.includes('initialize a new session') ||
+            errMsg.includes('Missing required x-chat-session-token')
+          ) {
+            console.warn('[MylaporeChat] Stale/invalid session detected. Auto-recovering fresh session...');
+            clearChatSessionToken();
+            const recoveryData = await chatApi.initSession(outletId);
+            currentToken = recoveryData.sessionToken;
+            setSessionToken(currentToken);
+            setSessionId(recoveryData.sessionId);
+            // Retry user turn with recovered session
+            turnResult = await chatApi.sendTurn(trimmed, currentToken);
+          } else {
+            throw turnErr;
+          }
+        }
 
         const agentMsg: ChatMessage = {
           id: turnResult.turnId,
@@ -112,7 +136,7 @@ export function useMylaporeChat() {
         setIsLoading(false);
       }
     },
-    [sessionToken, isLoading]
+    [sessionToken, isLoading, location?.zipCode]
   );
 
   const selectCategory = useCallback(

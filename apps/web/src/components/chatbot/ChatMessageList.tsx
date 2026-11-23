@@ -45,8 +45,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
   };
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
+    // Immediate scroll on mount/render
+    messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
+    // Delayed smooth scroll to account for dialog enter animations and image hydration
+    const timer = setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [messages.length, isLoading]);
 
   return (
     <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#FAF7F2]">

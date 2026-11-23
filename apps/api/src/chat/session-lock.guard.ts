@@ -51,14 +51,24 @@ export class SessionLockGuard implements CanActivate {
     });
 
     if (pendingTurn) {
-      throw new HttpException(
-        {
-          statusCode: HTTP_STATUS_LOCKED,
-          error: 'Locked',
-          message: 'A chat turn is currently processing in the background.'
-        },
-        HTTP_STATUS_LOCKED
-      );
+      const ageMs = Date.now() - new Date(pendingTurn.createdAt).getTime();
+      if (ageMs > 25000) {
+        // Turn exceeded 25s deadline and was orphaned/interrupted: auto-fail and unlock
+        await this.prisma.chatTurn.update({
+          where: { id: pendingTurn.id },
+          data: { status: 'FAILED' }
+        });
+        SessionLockGuard.activeSessions.delete(sessionToken);
+      } else {
+        throw new HttpException(
+          {
+            statusCode: HTTP_STATUS_LOCKED,
+            error: 'Locked',
+            message: 'A chat turn is currently processing in the background.'
+          },
+          HTTP_STATUS_LOCKED
+        );
+      }
     }
 
     return true;
