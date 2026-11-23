@@ -11,9 +11,9 @@ function getAuthHeader(): Record<string, string> {
 }
 
 function getSessionToken(): string {
-  if (typeof window === 'undefined') return 'guest_default';
+  if (typeof window === 'undefined') return '';
   let token = localStorage.getItem('mylapore_session_token');
-  if (!token) {
+  if (!token || token === 'guest_default') {
     token = 'guest_' + Math.random().toString(36).substring(2, 12);
     localStorage.setItem('mylapore_session_token', token);
   }

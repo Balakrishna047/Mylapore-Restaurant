@@ -4,11 +4,22 @@ import { CartService } from './cart.service';
 import { OptionalJwtAuthGuard } from '../common/jwt-auth.guard';
 import { CurrentUser } from '../common/current-user.decorator';
 import { AddToCartSchema, UpdateCartItemSchema } from '@mylapore/validation';
+import * as crypto from 'crypto';
 
 @ApiTags('Cart')
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
+
+  private resolveSessionToken(sessionToken?: string, userId?: string): string {
+    if (sessionToken && sessionToken.trim() !== '' && sessionToken !== 'guest_default') {
+      return sessionToken;
+    }
+    if (userId) {
+      return `user_session_${userId}`;
+    }
+    return `guest_${crypto.randomUUID()}`;
+  }
 
   @Get()
   @UseGuards(OptionalJwtAuthGuard)
@@ -18,7 +29,8 @@ export class CartController {
     @CurrentUser('id') userId?: string,
     @Headers('x-session-token') sessionToken?: string
   ) {
-    return this.cartService.getOrCreateCart(userId, sessionToken || 'guest_default');
+    const resolvedToken = this.resolveSessionToken(sessionToken, userId);
+    return this.cartService.getOrCreateCart(userId, resolvedToken);
   }
 
   @Post('items')
@@ -31,9 +43,10 @@ export class CartController {
     @Headers('x-session-token') sessionToken?: string
   ) {
     const validated = AddToCartSchema.parse(body);
+    const resolvedToken = this.resolveSessionToken(sessionToken, userId);
     return this.cartService.addItem({
       userId,
-      sessionToken: sessionToken || 'guest_default',
+      sessionToken: resolvedToken,
       menuItemId: validated.menuItemId,
       quantity: validated.quantity,
       variantId: validated.variantId,
@@ -52,7 +65,8 @@ export class CartController {
     @Headers('x-session-token') sessionToken?: string
   ) {
     const validated = UpdateCartItemSchema.parse(body);
-    return this.cartService.updateItemQuantity(itemId, validated.quantity, userId, sessionToken || 'guest_default');
+    const resolvedToken = this.resolveSessionToken(sessionToken, userId);
+    return this.cartService.updateItemQuantity(itemId, validated.quantity, userId, resolvedToken);
   }
 
   @Delete('items/:itemId')
@@ -63,7 +77,8 @@ export class CartController {
     @CurrentUser('id') userId?: string,
     @Headers('x-session-token') sessionToken?: string
   ) {
-    return this.cartService.removeItem(itemId, userId, sessionToken || 'guest_default');
+    const resolvedToken = this.resolveSessionToken(sessionToken, userId);
+    return this.cartService.removeItem(itemId, userId, resolvedToken);
   }
 
   @Post('merge')

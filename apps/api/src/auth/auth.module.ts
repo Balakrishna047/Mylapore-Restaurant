@@ -8,9 +8,17 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'mylapore_jwt_secret_dev_2026_xyz!',
-      signOptions: { expiresIn: '1d' }
+    JwtModule.registerAsync({
+      useFactory: () => {
+        const secret = process.env.JWT_SECRET;
+        if (!secret && process.env.NODE_ENV === 'production') {
+          throw new Error('FATAL: JWT_SECRET environment variable is missing in production environment');
+        }
+        return {
+          secret: secret || 'mylapore_dev_jwt_insecure_secret_local_only',
+          signOptions: { expiresIn: '1d' }
+        };
+      }
     })
   ],
   controllers: [AuthController],

@@ -14,7 +14,7 @@ import * as crypto from 'crypto';
 @Injectable()
 export class ChatService {
   private readonly logger = new Logger(ChatService.name);
-  private readonly hmacSecret = process.env.CHAT_HMAC_SECRET || 'mylapore-chat-secret-key-2026';
+  private readonly hmacSecret = process.env.CHAT_HMAC_SECRET || crypto.randomBytes(32).toString('hex');
   private cachedOAuthToken: string | null = null;
   private tokenExpiresAt = 0;
   private agentSessionMap = new Map<string, { agentSessionId: string; sequenceId: number; createdAt: number }>();
@@ -226,18 +226,13 @@ export class ChatService {
   }
 
   private async querySalesforceAgent(userQuery: string, sessionId?: string): Promise<string | null> {
-    const instanceUrl =
-      process.env.SALESFORCE_INSTANCE_URL ||
-      'https://orgfarm-aa5be92666-dev-ed.develop.my.salesforce.com';
-    const clientId =
-      process.env.SALESFORCE_CLIENT_ID ||
-      '3MVG9rZjd7MXFdLirc6i5XbMjlTpIbvKBqY9O3ExUHxMD47LJe8mAIHmGnLA.jcRTKNnYgVQcPmHNaUw8UNul';
-    const clientSecret =
-      process.env.SALESFORCE_CLIENT_SECRET ||
-      '3996828CEABDCB3E8FA228FB5AB667A2195246D6D128A175B2B3841B420F977E';
+    const instanceUrl = process.env.SALESFORCE_INSTANCE_URL;
+    const clientId = process.env.SALESFORCE_CLIENT_ID;
+    const clientSecret = process.env.SALESFORCE_CLIENT_SECRET;
     const agentId = process.env.SALESFORCE_AGENT_ID || '0XxgK000002YIJ7SAO';
 
     if (!instanceUrl || !clientId || !clientSecret || !agentId) {
+      this.logger.debug('Salesforce Agentforce credentials not fully configured in environment; proceeding with local orchestrator.');
       return null;
     }
 
@@ -512,10 +507,8 @@ export class ChatService {
             };
           }
         } else {
-          // If order is test/mock reference (e.g. ORD-MYL-101)
-          const receiptId = `REC-${Date.now().toString().slice(-6)}`;
           return {
-            agentText: `✅ **Order Cancelled Successfully**:\n\n• **Order Reference**: #${orderRef}\n• **Status**: CANCELLED\n• **Refund Entitlement**: 100% Full Refund ($32.28)\n• **Cancellation Receipt ID**: \`${receiptId}\`\n\nYour order was cancelled within the allowable 5-minute grace period. Your full refund has been scheduled.`,
+            agentText: `❌ **Order Not Found**: We could not locate an active order matching reference **#${orderRef}** in our live ordering system.\n\nPlease double check your order number from your receipt (e.g. \`MYL-2026-1001\`). If you need further assistance, ask me to connect you with our live support team.`,
             blocks: [],
             executionMode: 'SIMPLE_MENU'
           };
