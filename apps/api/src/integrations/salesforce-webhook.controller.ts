@@ -55,7 +55,12 @@ export class SalesforceWebhookController {
     @Body() payload: SalesforceWebhookPayload,
     @Headers('x-salesforce-signature') signature?: string
   ) {
-    const secret = process.env.SALESFORCE_WEBHOOK_SECRET || 'mylapore-salesforce-webhook-secret-2026';
+    const secret = process.env.SALESFORCE_WEBHOOK_SECRET;
+    if (!secret && process.env.NODE_ENV === 'production') {
+      this.logger.error('FATAL: SALESFORCE_WEBHOOK_SECRET environment variable is missing in production');
+      throw new UnauthorizedException('Webhook verification unavailable: secret unconfigured');
+    }
+    const effectiveSecret = secret || 'mylapore_dev_webhook_insecure_secret_local_only';
 
     // In production, enforce x-salesforce-signature presence
     if (process.env.NODE_ENV === 'production' && !signature) {
@@ -66,7 +71,7 @@ export class SalesforceWebhookController {
     // Cryptographically verify HMAC-SHA256 signature with constant-time comparison
     if (signature && !signature.startsWith('test_')) {
       const computed = crypto
-        .createHmac('sha256', secret)
+        .createHmac('sha256', effectiveSecret)
         .update(JSON.stringify(payload))
         .digest('hex');
 

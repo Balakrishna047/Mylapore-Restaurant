@@ -12,7 +12,7 @@ export class SupportController {
 
   @Post('chat')
   @UseGuards(OptionalJwtAuthGuard)
-  @ApiOperation({ summary: 'Chat with Agentforce AI Concierge' })
+  @ApiOperation({ summary: 'Chat with Agentforce AI Concierge (Deprecated: use /chat/turn)', deprecated: true })
   async chat(
     @Body() body: any,
     @CurrentUser('email') userEmail?: string
