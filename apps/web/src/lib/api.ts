@@ -186,9 +186,7 @@ export const api = {
     request<any>('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
   getMe: () => request<any>('/auth/me'),
 
-  // Support & Agentforce AI
-  chat: (message: string, orderNumber?: string) =>
-    request<any>('/support/chat', { method: 'POST', body: JSON.stringify({ message, orderNumber }) }),
+  // Support & Service Cloud
   createSupportTicket: (data: any) =>
     request<any>('/support/tickets', { method: 'POST', body: JSON.stringify(data) }),
 

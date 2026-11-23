@@ -28,7 +28,15 @@ services:
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
       - key: SALESFORCE_ENABLED
-        value: "false"
+        value: "true"
+      - key: SALESFORCE_INSTANCE_URL
+        value: "https://orgfarm-aa5be92666-dev-ed.develop.my.salesforce.com"
+      - key: SALESFORCE_AGENT_ID
+        value: "0XxgK000002YIJ7SAO"
+      - key: SALESFORCE_CLIENT_ID
+        sync: false
+      - key: SALESFORCE_CLIENT_SECRET
+        sync: false
 
   # ===============================================
   # Mylapore Express - Next.js Frontend Web Service
