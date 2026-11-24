@@ -22,7 +22,7 @@ interface CartContextType {
     image?: string;
     price?: number;
     variantName?: string;
-  }) => Promise<void>;
+  }, openDrawer?: boolean) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeItem: (itemId: string) => Promise<void>;
   applyCoupon: (code: string) => boolean;
@@ -61,19 +61,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
 
-  const addItem = async (itemData: {
-    menuItemId: string;
-    quantity: number;
-    variantId?: string;
-    spiceLevel?: string;
-    specialInstructions?: string;
-    name?: string;
-    image?: string;
-    price?: number;
-    variantName?: string;
-  }) => {
-    // 1. Instantly open drawer with 0ms lag
-    setIsOpen(true);
+  const addItem = async (
+    itemData: {
+      menuItemId: string;
+      quantity: number;
+      variantId?: string;
+      spiceLevel?: string;
+      specialInstructions?: string;
+      name?: string;
+      image?: string;
+      price?: number;
+      variantName?: string;
+    },
+    openDrawer: boolean = true
+  ) => {
+    // 1. Instantly open drawer with 0ms lag if requested (bypassed from inside chatbot concierge)
+    if (openDrawer) {
+      setIsOpen(true);
+    }
 
     // 2. Snapshot current cart for rollback if needed
     const prevCart = cart || { items: [], subtotal: 0, itemCount: 0 };

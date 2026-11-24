@@ -33,7 +33,7 @@ export const MenuItemDetailModal: React.FC<MenuItemDetailModalProps> = ({ item, 
         price: priceVal,
         image: item.imageUrl,
         spiceLevel: item.spiceLevel
-      });
+      }, false);
 
       setIsAdded(true);
       if (success) {

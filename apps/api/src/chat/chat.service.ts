@@ -435,14 +435,18 @@ export class ChatService {
       q.includes('delivery radius') ||
       q.includes('where do you deliver') ||
       q.includes('delivery area') ||
-      q.includes('delivery time')
+      q.includes('delivery time') ||
+      q.includes('delivery policy') ||
+      q.includes('how do you deliver') ||
+      q.includes('delivery fee')
     ) {
       return {
         agentText:
           '🚚 **Delivery Windows & Service Radius** (Salesforce Knowledge Grounded):\n\n' +
           '• **Service Radius**: We deliver up to 25 miles from our central kitchen hub in temperature-controlled refrigerated courier vans.\n' +
           '• **Daily Slots**: Lunch slot (11:30 AM – 1:30 PM) and Dinner slot (5:30 PM – 7:30 PM).\n' +
-          '• **Order Cutoff**: Orders placed by 10:00 AM qualify for same-day lunch delivery.',
+          '• **Order Cutoff**: Orders placed by 10:00 AM qualify for same-day lunch delivery.\n' +
+          '• **Cold-Chain Guarantee**: Every blast-chilled meal package is dispatched in insulated containers with food-safe gel ice packs.',
         blocks: [],
         executionMode: 'SIMPLE_MENU'
       };
@@ -469,8 +473,10 @@ export class ChatService {
     // 2. Guarded Order Action Execution: Cancellation & Tracking
     const isCancelIntent = /\b(cancel|cancellation)\b/i.test(q);
     const isTrackIntent =
-      /\b(track|tracking|order status|where is my order|where's my order|where is my food|where's my food|where is the order|where is my delivery|check order|check my order|status of my order)\b/i.test(q) ||
-      (q.includes('where') && q.includes('order'));
+      /\b(track|tracking|order status|status.*order|where is my order|where's my order|where is my food|where's my food|where is the order|where is my delivery|check order|check my order|status of my order)\b/i.test(q) ||
+      (q.includes('where') && q.includes('order')) ||
+      (q.includes('status') && q.includes('order')) ||
+      (q.includes('track') && q.includes('order'));
     const orderNumMatch = q.match(/\b(myl-\d{4}-\d+|ord-[a-z0-9-]+)\b/i);
 
     if (isCancelIntent) {

@@ -32,7 +32,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, onViewDetails 
         price: priceVal,
         image: item.imageUrl,
         spiceLevel: item.spiceLevel
-      });
+      }, false);
 
       setIsAdded(true);
       if (success) {
