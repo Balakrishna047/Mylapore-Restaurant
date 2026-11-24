@@ -82,8 +82,8 @@ export const ChatWidget: React.FC = () => {
           aria-label="Mylapore Express Culinary Chatbot"
           className={`fixed z-50 flex flex-col bg-[#FFFDF9] border border-amber-200/90 shadow-2xl overflow-hidden transition-all duration-200 ease-out ${
             isMinimized
-              ? 'bottom-6 right-6 w-80 h-14 rounded-2xl'
-              : 'inset-0 sm:inset-auto sm:bottom-6 sm:right-6 w-full sm:w-[420px] h-full sm:h-[620px] max-h-[100vh] sm:max-h-[85vh] rounded-none sm:rounded-2xl'
+              ? 'top-auto left-auto bottom-6 right-6 w-80 h-14 rounded-2xl'
+              : 'inset-0 sm:top-auto sm:left-auto sm:bottom-6 sm:right-6 w-full sm:w-[420px] h-full sm:h-[620px] max-h-[100vh] sm:max-h-[85vh] rounded-none sm:rounded-2xl'
           } ${
             isClosing
               ? 'opacity-0 scale-95 translate-y-3 sm:translate-y-4 pointer-events-none'

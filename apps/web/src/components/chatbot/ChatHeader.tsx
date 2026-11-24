@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Minus, RotateCcw } from 'lucide-react';
+import { X, Minus, Plus, RotateCcw } from 'lucide-react';
 
 interface ChatHeaderProps {
   onClose: () => void;
@@ -56,7 +56,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
           aria-label={isMinimized ? 'Expand' : 'Minimize'}
           className="p-1.5 rounded-lg hover:bg-white/20 hover:text-white transition-colors hidden sm:inline-flex"
         >
-          <Minus className="w-4 h-4" />
+          {isMinimized ? <Plus className="w-4 h-4" /> : <Minus className="w-4 h-4" />}
         </button>
         <button
           onClick={onClose}
